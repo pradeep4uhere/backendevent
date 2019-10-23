@@ -1,0 +1,89 @@
+@charset "utf-8";
+body 
+{
+font-family: 'Crimson Text', serif;
+font-family: 'Roboto', sans-serif;}
+
+
+h1, h2, h3, h4, h5, h6 p{
+ font-family: 'Crimson Text', serif;
+}
+
+.logo-width {
+    max-width: 40%;
+}
+.form-bg {
+  background: url("images/signin_bg.png") no-repeat center center;
+  background-size: cover;
+  position: relative;
+  height: 82vh;
+ }
+
+.p-5{
+	padding: 5px;
+}
+.footer-margin {
+    margin-top: 5px;
+}
+.p-right-25{
+	padding-right: 25px;
+}
+.m-l-5{margin-left:5px}
+.m-r-10{
+	margin-right: 10px;
+}
+
+
+/*****************Login style start*******************************/
+.LoginBox .login-box {
+  background-color: transparent;
+  font-weight: 500;
+}
+.LoginBox .login-box p {
+  padding: 0px;
+  margin-bottom: 5px;
+}
+.LoginBox .text-left {
+  text-align: left;
+  float: left;
+}
+.LoginBox .forgotLink {
+  float: right;
+  display: block;
+  color: #FFF;
+  text-decoration: underline;
+}
+.LoginBox .forgotLink a:hover {
+  background-color: #FFF;
+}
+.LoginBox .titleText {
+  font-size: 20px;
+}
+.LoginBox .loginBtn button {
+  border: none;
+  margin-top: 25px;
+}
+.LoginBox .newRudra {
+  margin-top: 40px;
+}
+.LoginBox .joinNow {
+  background-color: transparent;
+  border-radius: 0ch;
+  border: 1px solid #FFF;
+}
+.LoginBox .card,
+.LoginBox .card-header {
+  border: none;
+}
+
+
+/*****************Login Style Ends Now****************************/
+.bookNow{
+	padding: 5px;
+	color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+    padding: 4px;
+    font-size: 14px;
+    width: 98px;
+}
