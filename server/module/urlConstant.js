@@ -50,7 +50,9 @@ urlConstant = {
         ITINERARIES_DEPARTURE_API_REQUEST   :   config.API_HOST_URL+'/itinerarydeparture',
         ITINERARIES_DEPARTURE_DELETE        :   config.API_HOST_URL+'/departuredelete',
         ITINERARIES_DELETE                  :   config.API_HOST_URL+'/itinerarydelete',
-        
+        ITINERARIES_DAYS_GET_URL            :   config.API_HOST_URL+'/itinerarydayslist',
+        ITINERARIES_DAY_ADD_URL             :   config.API_HOST_URL+'/additinerarydays',
+        ITINERARIES_DAY_DELETE              :   config.API_HOST_URL+'/deleteitineraryday',
         
         
 

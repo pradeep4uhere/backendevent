@@ -5,6 +5,10 @@
  * @Created Date:: 07 May 2019
  */
 import React from 'react';
+// import { storiesOf } from '@storybook/react';
+// import { categoryName } from './_base';
+import Datatable from 'react-bs-datatable';
+
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
 import Constants  from '../../../config/Constants'
@@ -48,7 +52,7 @@ class AllItinerariesList extends React.Component{
         var id = idStrArr[0];
         var str = idStrArr[1];
         localStorage.setItem('redirectPage','');
-        if(str=='details'){
+        if(str==='details'){
             localStorage.setItem('event_id',id);
             this.setState({redirectPage:'eventdetails'});
             this.setState({redirectToReferrer:true});
@@ -205,7 +209,7 @@ class AllItinerariesList extends React.Component{
             <td><Moment format="DD-MMM-YYYY">{val.created_at}</Moment></td>
             <td>
                 <a title="View Itinerary Detail" href={"eventdetails?"+val.id} onClick={this.openModal} id={val.id+'|view'}><i className="fa fa-eye"></i></a>&nbsp;&nbsp;
-                <a title="View Itinerary Days" href={"eventlocation?"+val.id}><i className="fa fa-map"></i></a>&nbsp;&nbsp;
+                <a title="View Itinerary Days" href={"viewitinerariedays?"+val.id}><i className="fa fa-map"></i></a>&nbsp;&nbsp;
                 <a title="View Itinerary Gallery" href={"itinerariesgallery?"+val.id}><i className="fa fa-image"></i></a>&nbsp;&nbsp;
                 <a title="View Itinerary Departure Dates" href={"depaturetiming?"+val.id}><i className="glyphicon glyphicon-calendar"></i></a>&nbsp;&nbsp;
                 <a title="Edit Itinerary" href={"edititinerarie?"+val.id}><i className="fa fa-pencil"></i></a>&nbsp;&nbsp; 

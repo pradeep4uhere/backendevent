@@ -8,22 +8,11 @@ var fs = require('fs');
 var appRoot = require('app-root-path');
 const request = require('request-promise');
 var urlConstant = require('../module/urlConstant');
-const LIST_API_REQUEST 		        = urlConstant.EVENT_LIST_API_REQUEST;
-const UPDATE_API_REQUEST            = urlConstant.EVENT_UDPATE_API_POST;
-const ADD_API_REQUEST               = urlConstant.EVENT_ADD_API_REQUEST;
-const DETAILS_API_REQUEST           = urlConstant.EVENT_DETAILS_API_REQUEST;
 const EVENT_BANNER_API_POST         = urlConstant.EVENT_BANNER_API_POST;
-const EVENT_DETAILS_API_POST        = urlConstant.EVENT_DETAILS_API_POST;
 const EVENT_SAVE_DETAILS_API_POST   = urlConstant.EVENT_SAVE_DETAILS_API_POST;
-const EVENT_GET_DETAILS_API_POST    = urlConstant.EVENT_GET_DETAILS_API_POST;
-const EVENT_TIMING_UPDATE_API_POST  = urlConstant.EVENT_TIMING_UPDATE_API_POST;
-const EVENT_TIMING_DELETE_API_POST  = urlConstant.EVENT_TIMING_DELETE_API_POST;
-const EVENT_IMAGE_UPLOAD_API_POST   = urlConstant.EVENT_IMAGE_UPLOAD_API_POST;
 const EVENT_BANNER_UPLOAD_API_POST  = urlConstant.EVENT_BANNER_UPLOAD_API_POST;
 
-const EVENT_IAMGE_DEFAULT_API_POST  = urlConstant.EVENT_IAMGE_DEFAULT_API_POST;
 const EVENT_IAMGE_STATUS_API_POST   = urlConstant.EVENT_IAMGE_STATUS_API_POST;
-const EVENT_DELETE_API_POST         = urlConstant.EVENT_DELETE_API_POST;
  
 const ITINERARIES_GET_URL           = urlConstant.ITINERARIES_GET_URL;
 const ITINERARIES_ADD_URL           = urlConstant.ITINERARIES_ADD_URL;
@@ -34,6 +23,9 @@ const ITINERARIES_IAMGE_DELETE_API_POST   = urlConstant.ITINERARIES_IAMGE_DELETE
 const ITINERARIES_DEPARTURE_API_REQUEST   = urlConstant.ITINERARIES_DEPARTURE_API_REQUEST;
 const ITINERARIES_DEPARTURE_DELETE        = urlConstant.ITINERARIES_DEPARTURE_DELETE;
 const ITINERARIES_DELETE            =   urlConstant.ITINERARIES_DELETE;
+const ITINERARIES_DAYS_GET_URL      =   urlConstant.ITINERARIES_DAYS_GET_URL;
+const ITINERARIES_DAY_ADD_URL       =   urlConstant.ITINERARIES_DAY_ADD_URL;
+const ITINERARIES_DAY_DELETE        =   urlConstant.ITINERARIES_DAY_DELETE;
 
 
 
@@ -74,6 +66,49 @@ ItinerariesPortRouter.route('/additinerary').post(function (req, res,next) {
 	        console.log(err)
 	})
 });
+
+
+
+
+/**************ADD NEW EVENT API Start Here**********************************/
+ItinerariesPortRouter.route('/additinerarydays').post(function (req, res,next) {
+    var token        	= req.body.token;
+    var day        	    = req.body.event.day;
+    var place_name      = req.body.event.place_name;
+    var details         = req.body.event.details;
+    var status          = req.body.event.status;
+    var itinerary_id    = req.body.event.itinerary_id;
+    var postData ={
+        day         : day,
+        place_name  : place_name,
+        details     : details,
+        status      : status,
+        itinerary_id: itinerary_id,
+        token	    : token,
+    }
+   
+    console.log(postData);
+    const options = {
+        method: 'POST',
+        uri: ITINERARIES_DAY_ADD_URL,
+        body: postData,
+        json: true,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+        },
+    }
+    request(options)
+	    .then(function (response) {
+	        console.log(response)
+	        res.end(JSON.stringify(response));
+	    })
+	    .catch(function (err) {
+	        console.log(err)
+	})
+});
+
+
+
 
 
 
@@ -161,6 +196,44 @@ ItinerariesPortRouter.route('/allitinerary').post(function (req, res,next) {
 	        console.log(err)
 	})
 });
+
+
+
+/**************GET EVENT DETAILS API Start Here**********************************/
+ItinerariesPortRouter.route('/allitinerarydays').post(function (req, res,next) {
+    var token        	= req.body.token;
+    var event_id       = req.body.event_id;
+    var postData ={
+        token	    : token,
+        id          : event_id
+    }
+    const options = {
+            method: 'POST',
+            uri: ITINERARIES_DAYS_GET_URL,
+            body: postData,
+            json: true,
+            headers: {
+                'Authorization': 'Bearer ' + token,
+            },
+    }
+    console.log('========================================================');
+    console.log('======================Post Data=========================');
+    console.log(options);
+    console.log('========================================================');
+    
+    request(options)
+	    .then(function (response) {
+            console.log('========================================================');
+            console.log('===================Response Data========================');
+            console.log(response)
+            console.log('========================================================');
+	        res.end(JSON.stringify(response));
+	    })
+	    .catch(function (err) {
+	        console.log(err)
+	})
+});
+
 
 
 
@@ -527,6 +600,38 @@ ItinerariesPortRouter.route('/departuredelete').post(function (req, res,next) {
 	    console.log(err)
 	})
 });
+
+
+
+ItinerariesPortRouter.route('/deleteItinerarydays').post(function (req, res,next) {
+    console.log(req.body);    
+    var token        	= req.body.token;
+    var id        	    = req.body.id;
+    var postData ={
+            id          : id,
+            token	    : token,
+    }
+    console.log('======================Post Data=========================');
+    console.log(postData);
+    const options = {
+        method: 'POST',
+        uri: ITINERARIES_DAY_DELETE,
+        body: postData,
+        json: true,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+        },
+    }
+    request(options)
+	    .then(function (response) {
+	        console.log(response)
+	        res.end(JSON.stringify(response));
+	    })
+	    .catch(function (err) {
+	    console.log(err)
+	})
+});
+
 
 
 

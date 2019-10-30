@@ -7,7 +7,7 @@
 
 var config;
 config = {
-     API_HOST_URL  :   'http://127.0.0.1:8001/api/en/v1',
+     API_HOST_URL  :   'http://127.0.0.1:8000/api/en/v1',
 }
 module.exports = config;
 

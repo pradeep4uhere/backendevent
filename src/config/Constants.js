@@ -37,6 +37,9 @@ export const Constants = {
 	ITINERARIES_UPDATE_URL		: AppUrl+'/itineraries/itinerariesdepartureupdate', 
 	ITINERARy_DEPARTURE_DELETE_URL: AppUrl+'/itineraries/departuredelete', 
 	ITINERARY_DELETE_API		: AppUrl+'/itineraries/itinerariesdelete', 
+	ITINERARIES_DAYS_LIST_URL	: AppUrl+'/itineraries/allitinerarydays',	 
+	ITINERARIES_ADD_DAYS_URL	: AppUrl+'/itineraries/additinerarydays',	
+	ITINERARY_DAY_DELETE_API	: AppUrl+'/itineraries/deleteItinerarydays',
 	
 	EVENT_LIST_URL				: AppUrl+'/eventport/geteventlist',	    
 	EVENT_ADD_URL				: AppUrl+'/eventport/addevent',	    

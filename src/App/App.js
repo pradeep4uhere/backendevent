@@ -11,9 +11,11 @@ import EventGallery   from '../components/EventGallery';
 
 import AddItineraries from '../components/AddItineraries';
 import AllItineraries from '../components/ItinerariesList';
+import  ItinerariesDaysList from '../components/ItinerariesDaysList';
 import ItinerariesGallery from '../components/ItinerariesGallery';
 import ItinerariesDepatureTiming from '../components/ItinerariesDepatureTiming';
 import EditItineraries  from '../components/EditItineraries';
+import AddItinerariesDay from '../components/AddItinerariesDay';
 
 
 import AddDestination from '../components/AddDestination';
@@ -104,11 +106,12 @@ render() {
               <Route path="/orderinvoice/:id?" component={OrderInvoice}/>
               
               <Route path="/additineraries" component={AddItineraries}  />
+              <Route path="/viewitinerariedays/:id?" component={ItinerariesDaysList}  />
               <Route path="/edititinerarie/:id?" component={EditItineraries}  />
               <Route path="/allitineraries" component={AllItineraries}  />
               <Route path="/itinerariesgallery/:id?" component={ItinerariesGallery}/>
               <Route path="/depaturetiming/:id?" component={ItinerariesDepatureTiming}/>
-              
+              <Route path="/additineraryday/:id?" component={AddItinerariesDay}/>
               
 
               <Route path="/setting" component={Setting} exact />
