@@ -26,6 +26,9 @@ const ITINERARIES_DELETE            =   urlConstant.ITINERARIES_DELETE;
 const ITINERARIES_DAYS_GET_URL      =   urlConstant.ITINERARIES_DAYS_GET_URL;
 const ITINERARIES_DAY_ADD_URL       =   urlConstant.ITINERARIES_DAY_ADD_URL;
 const ITINERARIES_DAY_DELETE        =   urlConstant.ITINERARIES_DAY_DELETE;
+const ITINERARIES_DAY_IMAGE_UPLOAD  =   urlConstant.ITINERARIES_DAY_IMAGE_UPLOAD;
+const ITINERARIES_DAY_IAMGE_DEFAULT_API_POST = urlConstant.ITINERARIES_DAY_IAMGE_DEFAULT_API_POST;
+const ITINERARIES_DAY_IAMGE_DELETE_API_POST   = urlConstant.ITINERARIES_DAY_IAMGE_DELETE_API_POST;
 
 
 
@@ -431,6 +434,42 @@ ItinerariesPortRouter.route('/uploadimage').post(function (req, res,next) {
 });
 
 
+/**************Upload day new image API Start Here**********************************/
+ItinerariesPortRouter.route('/uploaddayimage').post(function (req, res,next) {
+    console.log(req.body);    
+    var token        	= req.body.token;
+    var id        	    = req.body.id;
+    var imageStr   	    = req.body.imageStr;
+    var postData ={
+            id          : id,
+            token	    : token,
+            imageStr    : imageStr
+    }
+    console.log('======================Post Data=========================');
+    console.log(postData);
+    const options = {
+        method: 'POST',
+        uri: ITINERARIES_DAY_IMAGE_UPLOAD,
+        body: postData,
+        json: true,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+        },
+    }
+    request(options)
+	    .then(function (response) {
+	        console.log(response)
+	        res.end(JSON.stringify(response));
+	    })
+	    .catch(function (err) {
+	    console.log(err)
+	})
+});
+
+
+
+
+
 
 
 
@@ -471,6 +510,36 @@ ItinerariesPortRouter.route('/eventbannerupload').post(function (req, res,next) 
 
 
 /**************ADD NEW EVENT API Start Here**********************************/
+ItinerariesPortRouter.route('/itinerarydayimagedelete').post(function (req, res,next) {
+    console.log(req.body);    
+    var token        	= req.body.token;
+    var id        	    = req.body.id;
+    var postData ={
+            id          : id,
+            token	    : token,
+    }
+    console.log('======================Post Data=========================');
+    console.log(postData);
+    const options = {
+        method: 'POST',
+        uri: ITINERARIES_DAY_IAMGE_DELETE_API_POST,
+        body: postData,
+        json: true,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+        },
+    }
+    request(options)
+	    .then(function (response) {
+	        console.log(response)
+	        res.end(JSON.stringify(response));
+	    })
+	    .catch(function (err) {
+	    console.log(err)
+	})
+});
+
+/**************ADD NEW EVENT API Start Here**********************************/
 ItinerariesPortRouter.route('/deleteitinerariesimage').post(function (req, res,next) {
     console.log(req.body);    
     var token        	= req.body.token;
@@ -502,6 +571,39 @@ ItinerariesPortRouter.route('/deleteitinerariesimage').post(function (req, res,n
 
 
 /**************ADD NEW EVENT API Start Here**********************************/
+ItinerariesPortRouter.route('/defaultdayimage').post(function (req, res,next) {
+    console.log(req.body);    
+    var token        	= req.body.token;
+    var id        	    = req.body.id;
+    var postData ={
+            id          : id,
+            token	    : token,
+    }
+    console.log('======================Post Data=========================');
+    console.log(postData);
+    const options = {
+        method: 'POST',
+        uri: ITINERARIES_DAY_IAMGE_DEFAULT_API_POST,
+        body: postData,
+        json: true,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+        },
+    }
+    request(options)
+	    .then(function (response) {
+	        console.log(response)
+	        res.end(JSON.stringify(response));
+	    })
+	    .catch(function (err) {
+	    console.log(err)
+	})
+});
+
+
+
+
+/**************ADD NEW EVENT API Start Here**********************************/
 ItinerariesPortRouter.route('/defaultimage').post(function (req, res,next) {
     console.log(req.body);    
     var token        	= req.body.token;
@@ -530,6 +632,10 @@ ItinerariesPortRouter.route('/defaultimage').post(function (req, res,next) {
 	    console.log(err)
 	})
 });
+
+
+
+
 
 
 

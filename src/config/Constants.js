@@ -40,6 +40,9 @@ export const Constants = {
 	ITINERARIES_DAYS_LIST_URL	: AppUrl+'/itineraries/allitinerarydays',	 
 	ITINERARIES_ADD_DAYS_URL	: AppUrl+'/itineraries/additinerarydays',	
 	ITINERARY_DAY_DELETE_API	: AppUrl+'/itineraries/deleteItinerarydays',
+	ITINERARIES_DAY_IMAGE_UPLOAD: AppUrl+'/itineraries/uploaddayimage',   
+	ITINERARIES_DAY_DEFAULT_IMAGE_API: AppUrl+'/itineraries/defaultdayimage', 
+	ITINERARIES_DELETE_DAY_IMAGE_API: AppUrl+'/itineraries/itinerarydayimagedelete', 
 	
 	EVENT_LIST_URL				: AppUrl+'/eventport/geteventlist',	    
 	EVENT_ADD_URL				: AppUrl+'/eventport/addevent',	    

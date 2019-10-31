@@ -158,7 +158,7 @@ class AllItinerariesDaysList extends React.Component{
             <td>{(val.status==1)?(<span className='badge bg-green' title="Active Itinerary" >Active</span>):(<span className='badge bg-red' title="InActive Itinerary">InActive</span>)}</td>
             <td><Moment format="DD-MMM-YYYY">{val.created_at}</Moment></td>
             <td>
-                <a title="View Itinerary Day Gallery" href={"itinerariesgallery?"+val.id}><i className="fa fa-image"></i></a>&nbsp;&nbsp;
+                <a title="View Itinerary Day Gallery" href={"itinerariesdaysgallery?"+val.id}><i className="fa fa-image"></i></a>&nbsp;&nbsp;
                 <a title="Edit Itinerary Day" href={"edititinerarie?"+val.id}><i className="fa fa-pencil"></i></a>&nbsp;&nbsp; 
                 <a title="Delete Itinerary Day" href="#" onClick={((e) => this.deleteForm(e, val.id))}><i className="fa fa-trash"></i></a></td>
         </tr>
