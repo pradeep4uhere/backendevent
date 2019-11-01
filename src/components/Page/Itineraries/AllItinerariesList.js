@@ -199,12 +199,14 @@ class AllItinerariesList extends React.Component{
        const { isMsg }         = this.state;
        const { classstr }      = this.state;
        const { message }       = this.state;
+       console.log("eventList++++++++++++++++++++++++",eventList)
        let optionItems = eventList.map((val,i) =>
         <tr>
             <td>{val.id}</td>
             <td>{val.title}</td>
-            <td>{this.stripHtml(val.description).substring(0,100)}</td>
-            <td>{this.stripHtml(val.addon).substring(0,100)}</td>
+            <td>{this.stripHtml(val.description).substring(0,50)}</td>
+            <td>{this.stripHtml(val.addon).substring(0,50)}</td>
+            <td>{(val.itinerary_gallery.length>0)?(<span className='badge bg-blue' title="Image Available" >[{val.itinerary_gallery.length}] Image Available</span>):(<span className='badge bg-red' title="Days Images Not Uploaded">No Image Uploaded</span>)}</td>
             <td>{(val.status==1)?(<span className='badge bg-green' title="Active Itinerary" >Active</span>):(<span className='badge bg-red' title="InActive Itinerary">InActive</span>)}</td>
             <td><Moment format="DD-MMM-YYYY">{val.created_at}</Moment></td>
             <td>
@@ -242,6 +244,7 @@ class AllItinerariesList extends React.Component{
                         <th>Itinerary Name</th>
                         <th>Description</th>
                         <th>AddOn</th>
+                        <th>Images</th>
                         <th>Status</th>
                         <th>Created On</th>
                         <th>Action</th>

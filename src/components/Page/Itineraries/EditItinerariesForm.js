@@ -41,6 +41,7 @@ class EditItinerariesForm extends React.Component{
         var description = event.target.description.value;
         var addon       = event.target.addon.value;
         var status      = event.target.status.value;
+        var id          = this.state.id;
 
         //Validation all the fields here
         if(title==''){
@@ -69,7 +70,8 @@ class EditItinerariesForm extends React.Component{
                     title       : title,
                     description : description,
                     addon       : addon,
-                    status      : status
+                    status      : status,
+                    id          : this.state.id
                 },
                 token       : token
             }

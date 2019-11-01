@@ -155,6 +155,7 @@ class AllItinerariesDaysList extends React.Component{
             <td>{this.stripHtml(val.day).substring(0,100)}</td>
             <td>{this.stripHtml(val.place_name).substring(0,100)}</td>
             <td>{this.stripHtml(val.details).substring(0,100)}</td>
+            <td>{(val.itinerary_day_gallery.length>0)?(<span className='badge bg-blue' title="Image Available" >[{val.itinerary_day_gallery.length}] Image Available</span>):(<span className='badge bg-red' title="Days Images Not Uploaded">No Image Uploaded</span>)}</td>
             <td>{(val.status==1)?(<span className='badge bg-green' title="Active Itinerary" >Active</span>):(<span className='badge bg-red' title="InActive Itinerary">InActive</span>)}</td>
             <td><Moment format="DD-MMM-YYYY">{val.created_at}</Moment></td>
             <td>
@@ -188,6 +189,7 @@ class AllItinerariesDaysList extends React.Component{
                         <th>Day</th>
                         <th>Place Name</th>
                         <th>Details</th>
+                        <th>Days Image</th>
                         <th>Status</th>
                         <th>Created On</th>
                         <th>Action</th>

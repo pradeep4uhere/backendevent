@@ -124,7 +124,7 @@ ItinerariesPortRouter.route('/updatetinerary').post(function (req, res,next) {
     var description     = req.body.event.description;
     var addon           = req.body.event.addon;
     var status          = req.body.event.status;
-    var id          = req.body.event.id;
+    var id              = req.body.event.id;
     var postData ={
         id          : id,
         title       : title,
