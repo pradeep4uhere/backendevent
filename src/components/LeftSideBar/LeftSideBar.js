@@ -102,7 +102,7 @@ class LeftSideBar extends React.Component{
             <li className="treeview">
               <a href="#">
                 <i className="fa fa-file-movie-o" />
-                <span>Event Management</span>
+                <span>Event & Theatre Management</span>
                 <span className="pull-right-container">
                   <i className="fa fa-angle-left pull-right" />
                 </span>
@@ -110,22 +110,12 @@ class LeftSideBar extends React.Component{
               <ul className="treeview-menu">
                 <li><a href={"/addevent"}><i className="fa fa-plus" />Add New Event</a></li>
                 <li><a href={"/eventlist"}><i className="fa fa-list" />All Event List</a></li>
-              </ul>
-            </li>
-            
-            <li className="treeview">
-              <a href="#">
-                <i className="glyphicon glyphicon-facetime-video" />
-                <span>Theatre Management</span>
-                <span className="pull-right-container">
-                  <i className="fa fa-angle-left pull-right" />
-                </span>
-              </a>
-              <ul className="treeview-menu">
                 <li><a href={"/addtheatre"}><i className="fa fa-plus" />Add Theatre</a></li>
                 <li><a href={"/alltheatre"}><i className="fa fa-list" />All Theatre</a></li>
               </ul>
             </li>
+            
+           
 
             <li className="treeview">
               <a href="#">
