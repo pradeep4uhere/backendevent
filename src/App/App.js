@@ -11,7 +11,7 @@ import EventGallery   from '../components/EventGallery';
 
 import AddItineraries from '../components/AddItineraries';
 import AllItineraries from '../components/ItinerariesList';
-import  ItinerariesDaysList from '../components/ItinerariesDaysList';
+import ItinerariesDaysList from '../components/ItinerariesDaysList';
 import ItinerariesGallery from '../components/ItinerariesGallery';
 import ItinerariesDayGallery from '../components/ItinerariesDayGallery';
 import ItinerariesDepatureTiming from '../components/ItinerariesDepatureTiming';
@@ -45,11 +45,13 @@ import ViedoList      from '../components/ViedoList';
 import MembershipList from '../components/MembershipList';
 
 import EventBooking   from '../components/EventBooking';
+import TravelBooking   from '../components/TravelBooking';
 import OrderDetails   from '../components/OrderDetails';
 import HomeBannerGallery from '../components/HomeBannerGallery';
 
 import UserOrderDetails   from '../components/UserOrderDetails';
 import OrderInvoice   from '../components/OrderInvoice';
+import TravelOrderInvoice from '../components/TravelOrderInvoice';
 
 
 
@@ -102,9 +104,12 @@ render() {
               <Route path="/homepagebanner/" component={HomeBannerGallery}/>
 
               <Route path="/allbooking" component={EventBooking} exact />
+              <Route path="/allebooking" component={TravelBooking} exact />
+
               <Route path="/order/:id?" component={OrderDetails}/>
               <Route path="/userorder/:id?" component={UserOrderDetails}/>
               <Route path="/orderinvoice/:id?" component={OrderInvoice}/>
+              <Route path="/eorderinvoice/:id?" component={TravelOrderInvoice}/>
               
               <Route path="/additineraries" component={AddItineraries}  />
               <Route path="/viewitinerariedays/:id?" component={ItinerariesDaysList}  />

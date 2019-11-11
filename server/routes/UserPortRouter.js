@@ -12,6 +12,7 @@ const USER_LIST_API_REQUEST 		= urlConstant.USER_LIST_API_REQUEST;
 const USER_UPDATE_API_REQUEST       = urlConstant.USER_UPDATE_API_REQUEST;
 const USER_ORDER_LIST_REQUEST       = urlConstant.USER_ORDER_LIST_REQUEST;
 const USER_ORDER_DETAILS_REQUEST    = urlConstant.USER_ORDER_DETAILS_REQUEST;
+const TRAVEL_ORDER_DETAILS_REQUEST  = urlConstant.TRAVEL_ORDER_DETAILS_REQUEST;
 /**************User List API Start Here**********************************/
 UserPortRouter.route('/getuserlist').post(function (req, res,next) {
     var token        	= req.body.token;
@@ -114,6 +115,37 @@ UserPortRouter.route('/usereventorderlist').post(function(req, res,next){
 	})
 });
 
+
+
+
+UserPortRouter.route('/travelorderdetails').post(function(req, res,next){
+    var token        	= req.body.token;
+    var id              = req.body.id;
+    var order_id        = req.body.order_id;
+    var postData ={
+            token	    : token,
+            id          : id,
+            order_id    : order_id
+    }
+    const options = {
+        method: 'POST',
+        uri: TRAVEL_ORDER_DETAILS_REQUEST,
+        body: postData,
+        json: true,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+        },
+    }
+    console.log(options);
+    request(options)
+	    .then(function (response) {
+	        console.log(response)
+	        res.end(JSON.stringify(response));
+	    })
+	    .catch(function (err) {
+	        console.log(err)
+	})
+});
 
 
 UserPortRouter.route('/userorderdetails').post(function(req, res,next){

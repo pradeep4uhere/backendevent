@@ -12,6 +12,7 @@ urlConstant = {
         USER_UPDATE_API_REQUEST	            : 	config.API_HOST_URL+'/updateuser',
         USER_ORDER_LIST_REQUEST             :   config.API_HOST_URL+'/usereventorderlist',
         USER_ORDER_DETAILS_REQUEST          :   config.API_HOST_URL+'/usereventorderdetails',
+        TRAVEL_ORDER_DETAILS_REQUEST        :   config.API_HOST_URL+'/usertravelorderdetails',
         
         EVENT_LIST_API_REQUEST	            : 	config.API_HOST_URL+'/geteventlist',
         EVENT_ADD_API_REQUEST               : 	config.API_HOST_URL+'/addevent',
@@ -90,5 +91,6 @@ urlConstant = {
         DESTINATION_IAMGE_DELETE_API_POST   :   config.API_HOST_URL+'/destinationimagedelete',
         DESTINATION_IAMGE_DEFAULT_API_POST  :   config.API_HOST_URL+'/destinationimagedefault',
         DESTINATION_IAMGE_STATUS_API_POST   :   config.API_HOST_URL+'/updatedestinationstatusimage',
+        GET_TRAVEL_ORDER_URL                :   config.API_HOST_URL+'/getalltravellorderlist',
 }
 module.exports = urlConstant;

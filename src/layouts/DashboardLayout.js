@@ -45,9 +45,13 @@ import EditPagePage         from '../components/Page/StaticPage/EditPagePage';
 import ViedoListPage        from '../components/Page/ViedoListPage';
 import MembershipListPage   from '../components/Page/MembershipListPage';
 import EventBookingPage     from '../components/Page/EventBookingPage'; 
+import TravelBookingPage    from '../components/Page/TravelBookingPage'; 
+
 import OrderDetailsPage     from '../components/Page/OrderDetailsPage';   
 import UserOrderDetailsPage from '../components/Page/UserOrderDetailsPage';   
 import OrderInvoicePage     from '../components/Page/OrderInvoicePage';   
+import TravelOrderInvoicePage   from '../components/Page/TravelOrderInvoicePage';   
+
 
 
 
@@ -105,6 +109,7 @@ class DashboardLayout extends React.Component{
               'ViedoListPage'     : <ViedoListPage/>, 
               'MembershipListPage': <MembershipListPage/>,
               'EventBookingPage'  : <EventBookingPage/>,
+              'TravelBookingPage' : <TravelBookingPage/>,
               'OrderDetailsPage'  : <OrderDetailsPage/>,
               'AddDestinationPage': <AddDestinationPage/>,
               'DestinationListPage':<DestinationListPage/>,
@@ -112,7 +117,8 @@ class DashboardLayout extends React.Component{
               'EditDestinationPage': <EditDestinationPage id={id}/>,
               'HomeBannerGalleryPage':<HomeBannerGalleryPage/>,
               'UserOrderDetailsPage':<UserOrderDetailsPage id={id}/>,
-              'OrderInvoicePage'  :<OrderInvoicePage id={id}/>
+              'OrderInvoicePage'  :<OrderInvoicePage id={id}/>,
+              'TravelOrderInvoicePage':<TravelOrderInvoicePage id={id}/>
               
 
             }[this.props.component]

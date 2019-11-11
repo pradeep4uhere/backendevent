@@ -29,6 +29,35 @@ const BANNER_IMAGE_UPLOAD_API_POST   = urlConstant.BANNER_IMAGE_UPLOAD_API_POST;
 const BANNER_IAMGE_DELETE_API_POST   = urlConstant.BANNER_IAMGE_DELETE_API_POST;
 const BANNER_IAMGE_DEFAULT_API_POST  = urlConstant.BANNER_IAMGE_DEFAULT_API_POST;
 const BANNER_IAMGE_STATUS_API_POST   = urlConstant.BANNER_IAMGE_STATUS_API_POST;
+const GET_TRAVEL_ORDER_LIST		     = urlConstant.GET_TRAVEL_ORDER_URL;
+
+
+
+GeneralPortRouter.route('/travellorderdata').post(function (req, res) {
+    var sess = {token: '',user: {}};
+	var token        	= req.body.token;
+    var postData 		={
+		token		 : token,
+    }
+    console.log(postData);
+    const options = {
+					    method: 'POST',
+					    uri: GET_TRAVEL_ORDER_LIST,
+					    body: postData,
+						json: true,
+				        headers: {
+			            'Authorization': 'Bearer ' + token,
+				        },
+				    }
+    request(options)
+	    .then(function (response) {
+	        console.log(response)
+	        res.end(JSON.stringify(response));
+	    })
+	    .catch(function (err) {
+	        console.log(err)
+	})
+});
 
 
 

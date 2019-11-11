@@ -15,6 +15,7 @@ export const Constants = {
 	USER_UPDATE_URL				: AppUrl+'/userport/updateuser',	
 	USER_EVENT_ORDER_LSIT_URL	: AppUrl+'/userport/usereventorderlist',	
 	GET_USER_ORDER_DETAILS_URL	: AppUrl+'/userport/userorderdetails',	
+	GET_TRAVEL_ORDER_DETAILS_URL: AppUrl+'/userport/travelorderdetails',	
 
 	GET_CITY_LIST_URL			: AppUrl+'/general/getcitylist',	
 
@@ -93,7 +94,8 @@ export const Constants = {
 
 	MEMBERSHIP_PLAN_LIST		: AppUrl+'/general/membershipplanlist'	,    
 
-	DASHBOARD_DATA				: AppUrl+'/general/getalldashboard'	,    
+	DASHBOARD_DATA				: AppUrl+'/general/getalldashboard'	,  
+	TRAVELL_BOOKING_DATA		: AppUrl+'/general/travellorderdata'	,   
 
 
 
