@@ -220,7 +220,7 @@ class AllLatestDestinationList extends React.Component{
             <td>{(val.status==1)?(<span className='label label-success'>Active</span>):(<span className='label label-danger'>In Active</span>)}</td>
             
             <td>
-                <a title="View Destination Page" href={"/destinationdetails/"+val.id}><i className="fa fa-eye"></i></a>&nbsp;&nbsp;
+                <a title="View Destination Page" href={Constants.APP_FRONT+"destinationdetails/"+val.id} target="_blank"><i className="fa fa-eye"></i></a>&nbsp;&nbsp;
                 <a title="Destination Gallery" href={"destinationgallery?"+val.id}><i className="fa fa-image"></i></a>&nbsp;&nbsp;
                 <a title="Edit Destination Page" href={"editdestination?"+val.id}><i className="fa fa-pencil"></i></a>&nbsp;&nbsp; 
                 <a title="Delete Destination Page" href="#" onClick={(e) => this.deletedestination(val.id)} id={val.id}><i className="fa fa-trash"></i></a></td>

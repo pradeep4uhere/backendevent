@@ -3,6 +3,7 @@ export const Constants = {
 	APP_NAME					: 'Rudra',
     APP_TAG	    				: 'XP',
 	APP_SALT					: 'MdtKyGbnrGT3wzxgkCPRO+wwfBGrlhMwGuOHX6xyFE0=',
+	APP_FRONT					: 'http://192.168.0.181:5000/',
 	GENERAL_SETTING_URL			: AppUrl+'/general/setting',	
 	GENERAL_SETTING_UPDATE_URL	: AppUrl+'/general/settingupdate',	
 	

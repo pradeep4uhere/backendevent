@@ -130,7 +130,7 @@ class AllTheatreList extends React.Component{
             <td>{(val.status==1)?(<span className='label label-success'>Active</span>):(<span className='label label-danger'>In Active</span>)}</td>
             <td><Moment format="DD-MMM-YYYY">{val.created_at}</Moment></td>
             <td>
-                <a href="#" onClick={this.openModal} id={val.id+'|view'} title="View Theatre"><i className="fa fa-eye"></i></a>&nbsp;&nbsp; 
+               
                 <a href={"edittheatre?"+val.id} title="Edit Theatre"><i className="fa fa-pencil"></i></a>&nbsp;&nbsp;
                 <a href={"addseat?"+val.id+'|1'} title="Add Seats"><i className="fa fa-wheelchair"></i></a>&nbsp;&nbsp;
                 <a href="#" title="Edit Delete"><i className="fa fa-trash-o"></i></a></td>

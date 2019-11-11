@@ -7,14 +7,42 @@
 import React from 'react';
 import Constants  from '../../config/Constants'
 import {Link } from "react-router-dom";
+import {$,jQuery} from 'jquery';
 const userProfileImg = Constants.IMG.USER_PROFILE
 class LeftSideBar extends React.Component{
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             clicked: false,
         };
+        
+       this.getUrlParams = this.getUrlParams.bind(this);
+        
     }
+
+    getUrlVars(){
+        var vars = [], hash;
+        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        for(var i = 0; i < hashes.length; i++)
+        {
+            hash = hashes[i].split('=');
+            vars.push(hash[0]);
+            vars[hash[0]] = hash[1];
+        }
+        return vars;
+    }
+
+    getUrlParams(str){
+      var string = document.location.toString() ;
+      var res = string.split("/");
+      var res = (res.indexOf(str) > -1);
+      return res;
+    }
+
+    componentDidMount() {
+      
+    }
+
     render(){
         return(
       <aside className="main-sidebar">
@@ -40,7 +68,7 @@ class LeftSideBar extends React.Component{
             </li>
             
            
-            <li className="treeview menu-open">
+            <li className={(((this.getUrlParams('setting') || this.getUrlParams('sittingtype') || this.getUrlParams('homepagebanner')))?("treeview active menu-open"):"treeview")}>
               <a href="#">
                 <i className="fa fa-gear" /> <span>Global Managment</span>
                 <span className="pull-right-container">
@@ -48,18 +76,18 @@ class LeftSideBar extends React.Component{
                 </span>
               </a>
               <ul className="treeview-menu">
-              <li><a href={"/setting"}><i className="fa fa-gear" /><span>General Setting</span></a></li>
-              <li><a href={"/sittingtype"}><i className="fa fa-wheelchair"/>Sitting Type</a></li>
-              <li><a href={"/homepagebanner"}><i className="fa fa-image"/>Banner Management</a></li>
+              <li className={(this.getUrlParams('setting')?("active"):"")}><a href={"/setting"}><i className="fa fa-gear" /><span>General Setting</span></a></li>
+              <li className={(this.getUrlParams('sittingtype')?("active"):"")}><a href={"/sittingtype"}><i className="fa fa-wheelchair"/>Sitting Type</a></li>
+              <li className={(this.getUrlParams('homepagebanner')?("active"):"")}><a href={"/homepagebanner"}><i className="fa fa-image"/>Banner Management</a></li>
                 {/* <li><a href="#"><i className="fa fa-scissors"/>Offers Type</a></li> */}
                 {/* <li><a href="#"><i className="fa fa-globe"/>Tax Type</a></li> */}
                 {/* <li><a href="#"><i className="fa fa-calendar-check-o" />Booking Status</a></li> */}
                 {/* <li><a href="#"><i className="fa fa-language"/>Language Type</a></li> */}
               </ul>
             </li>
-            <li><a href={"/membership"}><i className="fa fa-bookmark"/><span>Membership Plan</span></a></li>
+            <li className={(this.getUrlParams('membership')?("active"):"")}><a href={"/membership"}><i className="fa fa-bookmark"/><span>Membership Plan</span></a></li>
 
-            <li><a href={"/allpagelist"}><i className="fa fa-language"/><span>Static Pages</span></a></li>
+            <li className={(this.getUrlParams('allpagelist')?("active"):"")}><a href={"/allpagelist"}><i className="fa fa-language"/><span>Static Pages</span></a></li>
             
             
              {/* <li className="treeview menu-open">
@@ -76,7 +104,7 @@ class LeftSideBar extends React.Component{
               </ul>
             </li> */}
             
-            <li>
+            <li className={(this.getUrlParams('memberlist')?("active"):"")}>
               <a href="/memberlist">
                 <i className="fa fa-users" />
                 <span>User Management</span>
@@ -85,7 +113,7 @@ class LeftSideBar extends React.Component{
                 </span>
               </a>
             </li>
-            <li className="treeview">
+            <li className={(((this.getUrlParams('adddestination') || this.getUrlParams('alldestination')))?("treeview active menu-open"):"treeview")}>
               <a href="#">
                 <i className="fa fa-globe" />
                 <span>Destination Management</span>
@@ -94,12 +122,12 @@ class LeftSideBar extends React.Component{
                 </span>
               </a>
               <ul className="treeview-menu">
-                <li><a href={"/adddestination"}><i className="fa fa-plus" />Add Destination</a></li>
-                <li><a href={"/alldestination"}><i className="fa fa-list" />All Destination</a></li>
+                <li className={(this.getUrlParams('adddestination')?("active"):"")}><a href={"/adddestination"}><i className="fa fa-plus" />Add Destination</a></li>
+                <li className={(this.getUrlParams('alldestination')?("active"):"")}><a href={"/alldestination"}><i className="fa fa-list" />All Destination</a></li>
               </ul>
             </li>
             
-            <li className="treeview">
+            <li className={(((this.getUrlParams('addevent') || this.getUrlParams('eventlist') || this.getUrlParams('addtheatre') || this.getUrlParams('alltheatre')))?("treeview active menu-open"):"treeview")}>
               <a href="#">
                 <i className="fa fa-file-movie-o" />
                 <span>Event & Theatre Management</span>
@@ -108,16 +136,16 @@ class LeftSideBar extends React.Component{
                 </span>
               </a>
               <ul className="treeview-menu">
-                <li><a href={"/addevent"}><i className="fa fa-plus" />Add New Event</a></li>
-                <li><a href={"/eventlist"}><i className="fa fa-list" />All Event List</a></li>
-                <li><a href={"/addtheatre"}><i className="fa fa-plus" />Add Theatre</a></li>
-                <li><a href={"/alltheatre"}><i className="fa fa-list" />All Theatre</a></li>
+                <li className={(this.getUrlParams('addevent')?("active"):"")}><a href={"/addevent"}><i className="fa fa-plus" />Add New Event</a></li>
+                <li className={(this.getUrlParams('eventlist')?("active"):"")}><a href={"/eventlist"}><i className="fa fa-list" />All Event List</a></li>
+                <li className={(this.getUrlParams('addtheatre')?("active"):"")}><a href={"/addtheatre"}><i className="fa fa-plus" />Add Theatre</a></li>
+                <li className={(this.getUrlParams('alltheatre')?("active"):"")}><a href={"/alltheatre"}><i className="fa fa-list" />All Theatre</a></li>
               </ul>
             </li>
             
            
 
-            <li className="treeview">
+            <li className={(((this.getUrlParams('additineraries') || this.getUrlParams('allitineraries')))?("treeview active menu-open"):"treeview")}>
               <a href="#">
                 <i className="glyphicon glyphicon-globe" />
                 <span>Itineraries Management</span>
@@ -126,18 +154,24 @@ class LeftSideBar extends React.Component{
                 </span>
               </a>
               <ul className="treeview-menu">
-                <li><a href={"/additineraries"}><i className="fa fa-plus" />Add Itineraries</a></li>
-                <li><a href={"/allitineraries"}><i className="fa fa-list" />All Itineraries</a></li>
+                <li className={(this.getUrlParams('additineraries')?("active"):"")}><a href={"/additineraries"}><i className="fa fa-plus" />Add Itineraries</a></li>
+                <li className={(this.getUrlParams('allitineraries')?("active"):"")}><a href={"/allitineraries"}><i className="fa fa-list" />All Itineraries</a></li>
               </ul>
             </li>
-            <li>
-              <a href="allbooking">
-                <i className="glyphicon glyphicon-calendar" /> <span>Event Booking</span>
+            <li className={(this.getUrlParams('allbooking')?("treeview active menu-open"):"treeview")}>
+              <a href="#">
+                <i className="glyphicon glyphicon-globe" />
+                <span>Booking</span>
                 <span className="pull-right-container">
-                  <small className="label pull-right bg-green"></small>
+                  <i className="fa fa-angle-left pull-right" />
                 </span>
               </a>
+              <ul className="treeview-menu">
+                <li className={(this.getUrlParams('allbooking')?("active"):"")}><a href={"/allbooking"} ><i className="fa fa-list" />Event Booking</a></li>
+                <li className={(this.getUrlParams('allebooking')?("active"):"")}><a href={"/allebooking"}><i className="fa fa-list" />Travel Booking</a></li>
+              </ul>
             </li>
+          
             <li>
               <a href="allviedos">
                 <i className="glyphicon glyphicon-calendar" /> <span>Review Viedos</span>

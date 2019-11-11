@@ -107,7 +107,7 @@ class DashboardPage extends React.Component{
           <div className="small-box bg-aqua">
             <div className="inner">
               <h3>{this.state.dahsboardList.Count}</h3>
-              <p>Total Booking</p>
+              <p style={{"color":"#FFF"}}>Total Event Booking</p>
             </div>
             <div className="icon">
               <i className="ion ion-bag" />
@@ -121,7 +121,7 @@ class DashboardPage extends React.Component{
           <div className="small-box bg-green">
             <div className="inner">
               <h3>{priceType}{this.state.dahsboardList.TotalAmount}</h3>
-              <p>Order Payment</p>
+              <p style={{"color":"#FFF"}}>Event Order Payment</p>
             </div>
             <div className="icon">
               <i className="ion ion-stats-bars" />
@@ -135,7 +135,7 @@ class DashboardPage extends React.Component{
           <div className="small-box bg-yellow">
             <div className="inner">
               <h3>{this.state.dahsboardList.Users}</h3>
-              <p>User Registrations</p>
+              <p style={{"color":"#FFF"}}>User Registrations</p>
             </div>
             <div className="icon">
               <i className="ion ion-person-add" />
@@ -149,12 +149,40 @@ class DashboardPage extends React.Component{
           <div className="small-box bg-red">
             <div className="inner">
               <h3>{this.state.dahsboardList.Enquiry}</h3>
-              <p>Enquiry</p>
+              <p style={{"color":"#FFF"}}>Contact Us Enquiry</p>
             </div>
             <div className="icon">
               <i className="ion ion-pie-graph" />
             </div>
             <a href="#" className="small-box-footer">&nbsp;</a>
+          </div>
+        </div>
+        {/* ./col */}
+        <div className="col-lg-3 col-xs-6">
+          {/* small box */}
+          <div className="small-box bg-yellow">
+            <div className="inner">
+              <h3>{this.state.dahsboardList.Users}</h3>
+              <p style={{"color":"#FFF"}}>Travel Booking Order</p>
+            </div>
+            <div className="icon">
+              <i className="ion ion-person-add" />
+            </div>
+            <a href={"/memberlist"} className="small-box-footer">More info <i className="fa fa-arrow-circle-right" /></a>
+          </div>
+        </div>
+        {/* ./col */}
+        <div className="col-lg-3 col-xs-6">
+          {/* small box */}
+          <div className="small-box bg-aqua">
+            <div className="inner">
+              <h3>{priceType}{this.state.dahsboardList.TotalAmount}</h3>
+              <p style={{"color":"#FFF"}}>Travel Order Payment</p>
+            </div>
+            <div className="icon">
+              <i className="ion ion-stats-bars" />
+            </div>
+            <a href={"/allbooking"} className="small-box-footer">More info <i className="fa fa-arrow-circle-right" /></a>
           </div>
         </div>
         {/* ./col */}

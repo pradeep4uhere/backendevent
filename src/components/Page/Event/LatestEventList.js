@@ -217,7 +217,7 @@ class LatestEventList extends React.Component{
             <td>{(val.is_feature==1)?(<span className='label label-success' title="Feature Event"><i className="fa fa-star" ></i></span>):(<span className='label label-default' title="Not Feature Event" ><i className="fa fa-star" ></i></span>)}</td>
             <td><Moment format="DD-MMM-YYYY">{val.created_at}</Moment></td>
             <td>
-                <a title="View Event Detail" href={"eventdetails?"+val.id} onClick={this.openModal} id={val.id+'|view'}><i className="fa fa-eye"></i></a>&nbsp;&nbsp;
+                <a title="View Event Detail" href={Constants.APP_FRONT+'day-exp-detail/31-156'} target="_blank"><i className="fa fa-eye"></i></a>&nbsp;&nbsp;
                 <a title="View Event Location" href={"eventlocation?"+val.id}><i className="fa fa-map"></i></a>&nbsp;&nbsp;
                 <a title="View Event Gallery" href={"eventgallery?"+val.id}><i className="fa fa-image"></i></a>&nbsp;&nbsp;
                 <a title="View Event Timing" href={"eventtiming?"+val.id}><i className="fa fa-clock-o"></i></a>&nbsp;&nbsp;
