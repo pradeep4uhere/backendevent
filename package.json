@@ -30,7 +30,7 @@
     "jquery-sparkline": "^2.4.0",
     "json-stringify": "^1.0.0",
     "md5": "^2.2.1",
-    "mdbreact": "^4.20.0",
+    "mdbreact": "^4.22.0",
     "morgan": "^1.9.1",
     "mysql": "^2.17.1",
     "node-global-storage": "^1.2.3",

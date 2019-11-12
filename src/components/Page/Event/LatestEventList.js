@@ -14,6 +14,8 @@ import Modal from 'react-modal';
 import EventViewPage from '../../Page/Event/EventViewPage';
 import UserEditPage from '../../Page/User/UserEditPage';
 import Moment from 'react-moment';  
+import { MDBDataTable } from 'mdbreact';
+
 // import ReactTooltip from 'react-tooltip'
 const urlStr    = Constants.EVENT_LIST_URL;
 const urlDelStr = Constants.EVENT_DELETE_API;
@@ -23,6 +25,7 @@ class LatestEventList extends React.Component{
         super(props);
         this.state = {
             eventList    : [],
+            dataTable   : [],
             isMsg       : false,
             className   : '',
             user        : '',
@@ -98,7 +101,29 @@ class LatestEventList extends React.Component{
                 this.setState({
                     eventList    : response.data.data.event.data,
                     event       : response.data.data.event,
+                    dataTable   : response.data.data.dataTable,
                 });
+                 /************datatable Strat*************/
+                 this.state.dataTable.rows.map((val,i) =>{
+                    
+                    var dataStr = <div><a title="View Event Detail" href={Constants.APP_FRONT+'day-exp-detail/31-156'} target="_blank"><i className="fa fa-eye"></i></a>&nbsp;&nbsp;
+                    <a title="View Event Location" href={"eventlocation?"+val.id}><i className="fa fa-map"></i></a>&nbsp;&nbsp;
+                    <a title="View Event Gallery" href={"eventgallery?"+val.id}><i className="fa fa-image"></i></a>&nbsp;&nbsp;
+                    <a title="View Event Timing" href={"eventtiming?"+val.id}><i className="fa fa-clock-o"></i></a>&nbsp;&nbsp;
+                    <a title="Edit Event" href={"editevent?"+val.id}><i className="fa fa-pencil"></i></a>&nbsp;&nbsp; 
+                    <a title="Delete Event" href="#" onClick={((e) => this.deleteForm(e, val.id))}><i className="fa fa-trash"></i></a></div>;
+                    this.state.dataTable.rows[i].action = dataStr;
+
+                    var statusStr = (val.status==1)?(<span className='badge bg-green' title="Active Itinerary" >Active</span>):(<span className='badge bg-red' title="InActive Itinerary">InActive</span>)
+                    this.state.dataTable.rows[i].status = statusStr;
+
+
+                    var featureStr = (val.is_feature==1)?(<span className='label label-success' title="Feature Event"><i className="fa fa-star" ></i></span>):(<span className='label label-default' title="Not Feature Event" ><i className="fa fa-star" ></i></span>)
+                    this.state.dataTable.rows[i].is_feature = featureStr;
+
+                    this.setState({dataTable:this.state.dataTable});
+                });
+                /************datatable Ends*************/
                 $('#ipl-progress-indicator').hide();
           }
           else
@@ -205,6 +230,7 @@ class LatestEventList extends React.Component{
        const { isMsg }         = this.state;
        const { classstr }      = this.state;
        const { message }       = this.state;
+       const { dataTable }     = this.state;
        let optionItems = eventList.map((val,i) =>
         <tr>
             <td><a href="#">{val.id}</a></td>
@@ -244,7 +270,14 @@ class LatestEventList extends React.Component{
                 {/* /.box-header */}
                 <div className="box-body">
                 <div className="table-responsive">
-                <table id="example1" class="table table-bordered table-striped" style={{"font-size":"12px"}}>
+                <MDBDataTable
+                striped
+                bordered
+                hover
+                data={dataTable}
+                exportToCSV={true}
+                />
+                {/* <table id="example1" class="table table-bordered table-striped" style={{"font-size":"12px"}}>
                     <thead>
                     <tr>
                         <th>SN</th>
@@ -260,7 +293,7 @@ class LatestEventList extends React.Component{
                     <tbody>
                     {optionItems}
                     </tbody>
-                </table>
+                </table> */}
                 </div>
                 {/* /.table-responsive */}
                 </div>

@@ -24,7 +24,7 @@ class SittingTypePage extends React.Component{
                 <Breadcrum title="Sitting Type Managment" titleRight="All Seating List" url="sittinglist" />
                     <section className="content">
                     <div className="row">
-                    <div className="col-md-12">
+                    <div className="col-md-4">
                         <SittingForm/>
                         
                     </div>

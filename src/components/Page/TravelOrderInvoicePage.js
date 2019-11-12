@@ -258,7 +258,7 @@ class TravelOrderInvoicePage extends React.Component{
         {/* this row will not appear when printing */}
         <div className="row no-print">
           <div className="col-xs-12">
-            <a href="invoice-print.html" target="_blank" className="btn btn-default"><i className="fa fa-print" /> Print</a>
+            <a href="#" target="_blank" className="btn btn-default"><i className="fa fa-print" /> Print</a>
             <button type="button" className="btn btn-success pull-right"><i className="fa fa-credit-card" /> Submit Payment
             </button>
             <button type="button" className="btn btn-primary pull-right" style={{marginRight: '5px'}}>

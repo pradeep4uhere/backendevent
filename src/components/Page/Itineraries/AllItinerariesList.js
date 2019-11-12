@@ -8,7 +8,8 @@ import React from 'react';
 // import { storiesOf } from '@storybook/react';
 // import { categoryName } from './_base';
 import Datatable from 'react-bs-datatable';
-
+import DefaultTable from '../../Page/Itineraries/DefaultTable';
+import { MDBDataTable } from 'mdbreact';
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
 import Constants  from '../../../config/Constants'
@@ -23,6 +24,7 @@ class AllItinerariesList extends React.Component{
         super(props);
         this.state = {
             eventList    : [],
+            dataTable   : [],
             isMsg       : false,
             className   : '',
             user        : '',
@@ -93,9 +95,29 @@ class AllItinerariesList extends React.Component{
         .then((response) => {
           if(response.data.data.code==200) {
                 this.setState({
-                    eventList    : response.data.data.event.data,
+                    eventList   : response.data.data.event.data,
                     event       : response.data.data.event,
+                    dataTable   : response.data.data.dataTable,  
                 });
+                /************datatable Strat*************/
+                this.state.dataTable.rows.map((val,i) =>{
+                    
+                    var dataStr = <div><a title="View Itinerary Detail" href={Constants.APP_FRONT+'destinationexpdetails/'+val.id} target="_blank" ><i className="fa fa-eye"></i></a>&nbsp;&nbsp;<a title="View Itinerary Days" href={"viewitinerariedays?"+val.id}><i className="fa fa-map"></i></a>&nbsp;&nbsp;
+                    <a title="View Itinerary Gallery" href={"itinerariesgallery?"+val.id}><i className="fa fa-image"></i></a>&nbsp;&nbsp;
+                    <a title="View Itinerary Departure Dates" href={"depaturetiming?"+val.id}><i className="glyphicon glyphicon-calendar"></i></a>&nbsp;&nbsp;
+                    <a title="Edit Itinerary" href={"edititinerarie?"+val.id}><i className="fa fa-pencil"></i></a>&nbsp;&nbsp; 
+                    <a title="Delete Itinerary" href="#" onClick={((e) => this.deleteForm(e, val.id))}><i className="fa fa-trash"></i></a></div>;
+                    this.state.dataTable.rows[i].action = dataStr;
+
+                    var statusStr = (val.status==1)?(<span className='badge bg-green' title="Active Itinerary" >Active</span>):(<span className='badge bg-red' title="InActive Itinerary">InActive</span>)
+                    this.state.dataTable.rows[i].status = statusStr;
+
+                    var imageStr = (val.itinerary_gallery>0)?(<span className='badge bg-blue' title="Image Available" >[{val.itinerary_gallery}] Image Available</span>):(<span className='badge bg-red' title="Days Images Not Uploaded">No Image Uploaded</span>)
+                    this.state.dataTable.rows[i].itinerary_gallery = imageStr;
+
+                    this.setState({dataTable:this.state.dataTable});
+                });
+                /************datatable Ends*************/
                 $('#ipl-progress-indicator').hide();
           }
           else
@@ -142,6 +164,10 @@ class AllItinerariesList extends React.Component{
                     });        
                 }
         });
+
+
+         
+      
         this.setState({modalIsOpen: true});
     }
     
@@ -199,7 +225,9 @@ class AllItinerariesList extends React.Component{
        const { isMsg }         = this.state;
        const { classstr }      = this.state;
        const { message }       = this.state;
-       console.log("eventList++++++++++++++++++++++++",eventList)
+       const { dataTable }     = this.state;
+       console.log("eventList++++++++++++++++++++++++",dataTable.rows)
+       
        let optionItems = eventList.map((val,i) =>
         <tr>
             <td>{val.id}</td>
@@ -224,7 +252,8 @@ class AllItinerariesList extends React.Component{
         return(
             <div className="row">
               <div className="col-md-12">
-                {(isMsg)?(<div className={classstr}>{message}</div>):(<div></div>)}    
+                {(isMsg)?(<div className={classstr}>{message}</div>):(<div></div>)}  
+                
                 <div className="box box-info">
                 <div className="box-header with-border">
                 <h3 className="box-title">Latest Itinerary List</h3>
@@ -237,7 +266,15 @@ class AllItinerariesList extends React.Component{
                 {/* /.box-header */}
                 <div className="box-body">
                 <div className="table-responsive">
-                <table id="example1" class="table table-bordered table-striped" style={{"font-size":"12px"}}>
+                {/* <DefaultTable dataTable={dataTable}/>   */}
+                <MDBDataTable
+                striped
+                bordered
+                hover
+                data={dataTable}
+                exportToCSV={true}
+                />
+                {/* <table id="example1" class="table table-bordered table-striped" style={{"font-size":"12px"}}>
                     <thead>
                     <tr>
                         <th>SN</th>
@@ -253,11 +290,10 @@ class AllItinerariesList extends React.Component{
                     <tbody>
                     {optionItems}
                     </tbody>
-                </table>
+                </table> */}
                 </div>
                 {/* /.table-responsive */}
                 </div>
-               
                 </div>
                 </div>
                 </div>

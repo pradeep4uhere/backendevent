@@ -10,6 +10,8 @@ import { Redirect } from 'react-router-dom'
 import Constants  from '../../../config/Constants'
 import Message from '../../../components/Message';
 import $ from 'jquery';
+import { MDBDataTable } from 'mdbreact';
+
 // import ReactTooltip from 'react-tooltip'
 const urlStr    = Constants.DESTINATION_ALL_URL;
 const urlDeleteStr  = Constants.DESTINATION_DELETE_URL;
@@ -19,6 +21,7 @@ class AllLatestDestinationList extends React.Component{
         super(props);
         this.state = {
             eventList    : [],
+            dataTable   : [],
             isMsg       : false,
             className   : '',
             user        : '',
@@ -124,6 +127,23 @@ class AllLatestDestinationList extends React.Component{
                 this.setState({
                     eventList    : response.data.data,
                     event       : response.data.data,
+                    dataTable   : response.data.dataTable,  
+                });
+                this.state.dataTable.rows.map((val,i) =>{
+                    
+                    var dataStr = <div><a title="View Destination Page" href={Constants.APP_FRONT+"destinationdetails/"+val.id} target="_blank"><i className="fa fa-eye"></i></a>&nbsp;&nbsp;
+                                 <a title="Destination Gallery" href={"destinationgallery?"+val.id}><i className="fa fa-image"></i></a>&nbsp;&nbsp;
+                                 <a title="Edit Destination Page" href={"editdestination?"+val.id}><i className="fa fa-pencil"></i></a>&nbsp;&nbsp; 
+                                 <a title="Delete Destination Page" href="#" onClick={(e) => this.deletedestination(val.id)} id={val.id}><i className="fa fa-trash"></i></a></div>;
+                    this.state.dataTable.rows[i].action = dataStr;
+
+                    var statusStr = (val.status==1)?(<span className='badge bg-green' title="Active Itinerary" >Active</span>):(<span className='badge bg-red' title="InActive Itinerary">InActive</span>)
+                    this.state.dataTable.rows[i].status = statusStr;
+
+                    // var imageStr = (val.itinerary_gallery>0)?(<span className='badge bg-blue' title="Image Available" >[{val.itinerary_gallery}] Image Available</span>):(<span className='badge bg-red' title="Days Images Not Uploaded">No Image Uploaded</span>)
+                    // this.state.dataTable.rows[i].itinerary_gallery = imageStr;
+
+                    this.setState({dataTable:this.state.dataTable});
                 });
                 $('#ipl-progress-indicator').hide();
           }
@@ -204,28 +224,29 @@ class AllLatestDestinationList extends React.Component{
        const { isMsg }         = this.state;
        const { classstr }      = this.state;
        const { message }       = this.state;
+       const { dataTable }     = this.state;
 
-       let optionItems = eventList.map((val,i) =>
-        <tr>
-            <td><a href="#">{val.id}</a></td>
-            <td><a href="#" title="Click to Add Details" onClick={this.handleRouteClick} id={val.id+'|details'}>{val.title}</a></td>
-            <td><a data-tip={this.stripHtml(val.descriptions)}>{this.stripHtml(val.descriptions).substring(0,50)}</a>
-                {/* <ReactTooltip className='extraClass'  delayHide={500} type="success" effect="solid"/> */}
-            </td>
-            <td>{val.altitude}</td>
-            <td>{val.climate}</td>
-            <td>{val.population}</td>
-            <td>{this.stripHtml(val.shopping).substring(0,50)}</td>
-            <td>{this.stripHtml(val.cuisine).substring(0,50)}</td>
-            <td>{(val.status==1)?(<span className='label label-success'>Active</span>):(<span className='label label-danger'>In Active</span>)}</td>
+    //    let optionItems = eventList.map((val,i) =>
+    //     <tr>
+    //         <td><a href="#">{val.id}</a></td>
+    //         <td><a href="#" title="Click to Add Details" onClick={this.handleRouteClick} id={val.id+'|details'}>{val.title}</a></td>
+    //         <td><a data-tip={this.stripHtml(val.descriptions)}>{this.stripHtml(val.descriptions).substring(0,50)}</a>
+    //             {/* <ReactTooltip className='extraClass'  delayHide={500} type="success" effect="solid"/> */}
+    //         </td>
+    //         <td>{val.altitude}</td>
+    //         <td>{val.climate}</td>
+    //         <td>{val.population}</td>
+    //         <td>{this.stripHtml(val.shopping).substring(0,50)}</td>
+    //         <td>{this.stripHtml(val.cuisine).substring(0,50)}</td>
+    //         <td>{(val.status==1)?(<span className='label label-success'>Active</span>):(<span className='label label-danger'>In Active</span>)}</td>
             
-            <td>
-                <a title="View Destination Page" href={Constants.APP_FRONT+"destinationdetails/"+val.id} target="_blank"><i className="fa fa-eye"></i></a>&nbsp;&nbsp;
-                <a title="Destination Gallery" href={"destinationgallery?"+val.id}><i className="fa fa-image"></i></a>&nbsp;&nbsp;
-                <a title="Edit Destination Page" href={"editdestination?"+val.id}><i className="fa fa-pencil"></i></a>&nbsp;&nbsp; 
-                <a title="Delete Destination Page" href="#" onClick={(e) => this.deletedestination(val.id)} id={val.id}><i className="fa fa-trash"></i></a></td>
-        </tr>
-        );
+    //         <td>
+    //             <a title="View Destination Page" href={Constants.APP_FRONT+"destinationdetails/"+val.id} target="_blank"><i className="fa fa-eye"></i></a>&nbsp;&nbsp;
+    //             <a title="Destination Gallery" href={"destinationgallery?"+val.id}><i className="fa fa-image"></i></a>&nbsp;&nbsp;
+    //             <a title="Edit Destination Page" href={"editdestination?"+val.id}><i className="fa fa-pencil"></i></a>&nbsp;&nbsp; 
+    //             <a title="Delete Destination Page" href="#" onClick={(e) => this.deletedestination(val.id)} id={val.id}><i className="fa fa-trash"></i></a></td>
+    //     </tr>
+    //     );
         if (redirectToReferrer === true) {
             return <Redirect to={"/"+redirectPage}/>;
         }
@@ -245,8 +266,16 @@ class AllLatestDestinationList extends React.Component{
                 </div>
                 {/* /.box-header */}
                 <div className="box-body">
+                <MDBDataTable
+                striped
+                bordered
+                hover
+                data={dataTable}
+                exportToCSV={true}
+                />
                 <div className="table-responsive">
-                <table id="example1" class="table table-bordered table-striped" style={{"font-size":"12px"}}>
+                
+                {/* <table id="example1" class="table table-bordered table-striped" style={{"font-size":"12px"}}>
                     <thead>
                     <tr>
                         <th>SN</th>
@@ -265,7 +294,7 @@ class AllLatestDestinationList extends React.Component{
                     <tbody>
                     {optionItems}
                     </tbody>
-                </table>
+                </table> */}
                 </div>
                 {/* /.table-responsive */}
                 </div>

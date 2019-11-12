@@ -11,6 +11,7 @@ import Constants  from '../../../config/Constants'
 import Message from '../../../components/Message';
 import Moment from 'react-moment';  
 import $ from 'jquery';
+import { MDBDataTable } from 'mdbreact';
 //const urlStr1    = Constants.EVENT_LIST_URL;
 const urlStr    = Constants.THEATRE_LIST_URL;
 const token     = localStorage.getItem('token');
@@ -19,6 +20,7 @@ class AllTheatreList extends React.Component{
         super(props);
         this.state = {
             theatreList : [],
+            dataTable   : [],
             isMsg       : false,
             className   : '',
             user        : '',
@@ -72,7 +74,25 @@ class AllTheatreList extends React.Component{
                 this.setState({
                     theatreList : response.data.theatre.data,
                     theatre     : response.data.theatre,
+                    dataTable   : response.data.dataTable,
                 });
+                 /************datatable Strat*************/
+                 this.state.dataTable.rows.map((val,i) =>{
+                    
+                    var dataStr = <div><a href={"edittheatre?"+val.id} title="Edit Theatre"><i className="fa fa-pencil"></i></a>&nbsp;&nbsp;
+                                 <a href={"addseat?"+val.id+'|1'} title="Add Seats"><i className="fa fa-wheelchair"></i></a>&nbsp;&nbsp;
+                                 <a href="#" title="Edit Delete"><i className="fa fa-trash-o"></i></a></div>;
+                    this.state.dataTable.rows[i].action = dataStr;
+
+                    var statusStr = (val.status==1)?(<span className='badge bg-green' title="Active Itinerary" >Active</span>):(<span className='badge bg-red' title="InActive Itinerary">InActive</span>)
+                    this.state.dataTable.rows[i].status = statusStr;
+
+                    var imageStr = (val.itinerary_gallery>0)?(<span className='badge bg-blue' title="Image Available" >[{val.itinerary_gallery}] Image Available</span>):(<span className='badge bg-red' title="Days Images Not Uploaded">No Image Uploaded</span>)
+                    this.state.dataTable.rows[i].itinerary_gallery = imageStr;
+
+                    this.setState({dataTable:this.state.dataTable});
+                });
+                /************datatable Ends*************/
                 $('#ipl-progress-indicator').hide();
           }
           else
@@ -117,25 +137,26 @@ class AllTheatreList extends React.Component{
        const { actiontype  }        =  this.state;
        const { redirectToReferrer } =  this.state;
        const { redirectPage }       =  this.state;
+       const { dataTable }          =  this.state;
        console.log("theatreList==============="+this.state.theatreList);
 
-       let optionItems = theatreList.map((val,i) =>
-        <tr>
-            <td>{val.id}</td>
-            <td>{val.theater_name}</td>
-            <td>{val.address}</td>
-            <td>{val.company_name}</td>
-            <td>{val.contact_number}</td>
-            <td>{val.email_address}</td>
-            <td>{(val.status==1)?(<span className='label label-success'>Active</span>):(<span className='label label-danger'>In Active</span>)}</td>
-            <td><Moment format="DD-MMM-YYYY">{val.created_at}</Moment></td>
-            <td>
+    //    let optionItems = theatreList.map((val,i) =>
+    //     <tr>
+    //         <td>{val.id}</td>
+    //         <td>{val.theater_name}</td>
+    //         <td>{val.address}</td>
+    //         <td>{val.company_name}</td>
+    //         <td>{val.contact_number}</td>
+    //         <td>{val.email_address}</td>
+    //         <td>{(val.status==1)?(<span className='label label-success'>Active</span>):(<span className='label label-danger'>In Active</span>)}</td>
+    //         <td><Moment format="DD-MMM-YYYY">{val.created_at}</Moment></td>
+    //         <td>
                
-                <a href={"edittheatre?"+val.id} title="Edit Theatre"><i className="fa fa-pencil"></i></a>&nbsp;&nbsp;
-                <a href={"addseat?"+val.id+'|1'} title="Add Seats"><i className="fa fa-wheelchair"></i></a>&nbsp;&nbsp;
-                <a href="#" title="Edit Delete"><i className="fa fa-trash-o"></i></a></td>
-        </tr>
-        );
+    //             <a href={"edittheatre?"+val.id} title="Edit Theatre"><i className="fa fa-pencil"></i></a>&nbsp;&nbsp;
+    //             <a href={"addseat?"+val.id+'|1'} title="Add Seats"><i className="fa fa-wheelchair"></i></a>&nbsp;&nbsp;
+    //             <a href="#" title="Edit Delete"><i className="fa fa-trash-o"></i></a></td>
+    //     </tr>
+    //     );
         if (redirectToReferrer === true) {
             return <Redirect to={"/"+redirectPage}/>;
         }
@@ -155,7 +176,14 @@ class AllTheatreList extends React.Component{
                 {/* /.box-header */}
                 <div className="box-body">
                 <div className="table-responsive">
-                <table id="example1" class="table table-bordered table-striped" style={{"font-size":"12px"}}>
+                <MDBDataTable
+                striped
+                bordered
+                hover
+                data={dataTable}
+                exportToCSV={true}
+                />
+                {/* <table id="example1" class="table table-bordered table-striped" style={{"font-size":"12px"}}>
                     <thead>
                     <tr>
                         <th>SN</th>
@@ -172,7 +200,7 @@ class AllTheatreList extends React.Component{
                     <tbody style={{"font-size":"12px"}}>
                     {optionItems}
                     </tbody>
-                </table>
+                </table> */}
                 </div>
                 {/* /.table-responsive */}
                 </div>

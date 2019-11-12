@@ -13,7 +13,10 @@ import Modal from 'react-modal';
 import UserViewPage from '../Page/User/UserViewPage';
 import UserEditPage from '../Page/User/UserEditPage';
 import Moment from 'react-moment';  
+import { MDBDataTable } from 'mdbreact';
+
 const dateToFormat = '1976-04-19T12:59-0500';
+
 const urlStr    = Constants.USER_LIST_URL;
 const token     = localStorage.getItem('token');
 class LatestMemberList extends React.Component{
@@ -64,6 +67,18 @@ class LatestMemberList extends React.Component{
                 this.setState({
                     userList    : response.data.data.user.data,
                     user        : response.data.data.user,
+                    dataTable   : response.data.data.dataTable,  
+                });
+                this.state.dataTable.rows.map((val,i) =>{
+                    
+                    var dataStr = <div><a href={"/userorder?"+val.id} title="View User Booking"><i className="fa fa-shopping-cart"></i></a> &nbsp; 
+                    <a href="#" onClick={this.openModal} id={val.id+'|view'} title="View User Detail"><i className="fa fa-eye"></i></a> &nbsp; 
+                    <a title="Edit User" href="#" onClick={this.openModal} id={val.id+'|'+'edit'}><i className="fa fa-pencil"></i></a>  &nbsp; 
+                    <a href="#" title="Delete User"><i className="fa fa-trash"></i></a></div>;
+                    this.state.dataTable.rows[i].action = dataStr;
+                    var statusStr = (val.status==1)?(<span className='badge bg-green' title="Active Itinerary" >Active</span>):(<span className='badge bg-red' title="InActive Itinerary">InActive</span>)
+                    this.state.dataTable.rows[i].status = statusStr;
+                    this.setState({dataTable:this.state.dataTable});
                 });
                 $('#ipl-progress-indicator').hide();
           }
@@ -130,26 +145,27 @@ class LatestMemberList extends React.Component{
        const { user }           =  this.state; 
        const { userDetails }    =  this.state;
        const { actiontype  }    =  this.state;
-       let optionItems = userList.map((val,i) =>
-        <tr>
-            <td><a href="#">{val.id}</a></td>
-            <td>{this.capitalize(val.first_name)}&nbsp;{this.capitalize(val.last_name)}</td>
-            <td>{this.capitalize(val.username)}</td>
-            <td>{val.email}</td>
-            <td>{val.phone}</td>
-            <td>{val.street_address}</td>
-            <td>{val.city}</td>
-            <td>{val.postcode}</td>
-            <td>{(val.status==1)?(<span className='label label-success'>Active</span>):(<span className='label label-danger'>In Active</span>)}</td>
-            <td><Moment format="DD-MMM-YYYY">{val.created_at}</Moment></td>
-            <td>
-                <a href={"/userorder?"+val.id} title="View User Booking"><i className="fa fa-shopping-cart"></i></a> &nbsp; 
-                <a href="#" onClick={this.openModal} id={val.id+'|view'} title="View User Detail"><i className="fa fa-eye"></i></a> &nbsp; 
-                <a title="Edit User" href="#" onClick={this.openModal} id={val.id+'|'+'edit'}><i className="fa fa-pencil"></i></a>  &nbsp; 
-                <a href="#" title="Delete User"><i className="fa fa-trash"></i></a>
-            </td>
-        </tr>
-        );
+       const { dataTable }     = this.state;
+    //    let optionItems = userList.map((val,i) =>
+    //     <tr>
+    //         <td><a href="#">{val.id}</a></td>
+    //         <td>{this.capitalize(val.first_name)}&nbsp;{this.capitalize(val.last_name)}</td>
+    //         <td>{this.capitalize(val.username)}</td>
+    //         <td>{val.email}</td>
+    //         <td>{val.phone}</td>
+    //         <td>{val.street_address}</td>
+    //         <td>{val.city}</td>
+    //         <td>{val.postcode}</td>
+    //         <td>{(val.status==1)?(<span className='label label-success'>Active</span>):(<span className='label label-danger'>In Active</span>)}</td>
+    //         <td><Moment format="DD-MMM-YYYY">{val.created_at}</Moment></td>
+    //         <td>
+    //             <a href={"/userorder?"+val.id} title="View User Booking"><i className="fa fa-shopping-cart"></i></a> &nbsp; 
+    //             <a href="#" onClick={this.openModal} id={val.id+'|view'} title="View User Detail"><i className="fa fa-eye"></i></a> &nbsp; 
+    //             <a title="Edit User" href="#" onClick={this.openModal} id={val.id+'|'+'edit'}><i className="fa fa-pencil"></i></a>  &nbsp; 
+    //             <a href="#" title="Delete User"><i className="fa fa-trash"></i></a>
+    //         </td>
+    //     </tr>
+    //     );
 
         
         return(
@@ -183,7 +199,14 @@ class LatestMemberList extends React.Component{
                 <div className="box-body">
                 
                 <div className="table-responsive">
-                <table id="example1" class="table table-bordered table-striped">
+                <MDBDataTable
+                striped
+                bordered
+                hover
+                data={dataTable}
+                exportToCSV={true}
+                />
+                {/* <table id="example1" class="table table-bordered table-striped">
                     <thead>
                     <tr>
                         <th>SN</th>
@@ -202,7 +225,7 @@ class LatestMemberList extends React.Component{
                     <tbody>
                     {optionItems}
                     </tbody>
-                </table>
+                </table> */}
                 </div>
                 {/* /.table-responsive */}
                 </div>

@@ -39,6 +39,31 @@ class LeftSideBar extends React.Component{
       return res;
     }
 
+
+    getUrlParamss(str){
+      var string = document.location.toString() ;
+      var res = string.split("/");
+      var res = (res.indexOf(str) > -1);
+      if(!res){
+        if(str=='orderinvoice' || str=='eorderinvoice'){
+          var string = document.location.toString() ;
+          var res = string.split("/");
+          this.getUrlParamsWithParams(res[res.length-1]);
+        }else{
+          return false;    
+        }
+      }
+      return res;
+    }
+
+
+    getUrlParamsWithParams(str){
+      var string = document.location.toString() ;
+      var res = string.split("?");
+      var res = (res.indexOf(str) > -1);
+      return res;
+    }
+
     componentDidMount() {
       
     }
@@ -158,7 +183,7 @@ class LeftSideBar extends React.Component{
                 <li className={(this.getUrlParams('allitineraries')?("active"):"")}><a href={"/allitineraries"}><i className="fa fa-list" />All Itineraries</a></li>
               </ul>
             </li>
-            <li className={(this.getUrlParams('allbooking')?("treeview active menu-open"):"treeview")}>
+            <li className={(((this.getUrlParams('allbooking') || this.getUrlParams('allebooking') || this.getUrlParams('orderinvoice') || this.getUrlParams('eorderinvoice')))?("treeview active menu-open"):"treeview")}>
               <a href="#">
                 <i className="glyphicon glyphicon-globe" />
                 <span>Booking</span>
@@ -167,8 +192,8 @@ class LeftSideBar extends React.Component{
                 </span>
               </a>
               <ul className="treeview-menu">
-                <li className={(this.getUrlParams('allbooking')?("active"):"")}><a href={"/allbooking"} ><i className="fa fa-list" />Event Booking</a></li>
-                <li className={(this.getUrlParams('allebooking')?("active"):"")}><a href={"/allebooking"}><i className="fa fa-list" />Travel Booking</a></li>
+                <li className={((this.getUrlParams('allbooking') || this.getUrlParams('orderinvoice'))?("active"):"")}><a href={"/allbooking"} ><i className="fa fa-list" />Event Booking</a></li>
+                <li className={((this.getUrlParams('allebooking') || this.getUrlParams('eorderinvoice'))?("active"):"")}><a href={"/allebooking"}><i className="fa fa-list" />Travel Booking</a></li>
               </ul>
             </li>
           

@@ -10,7 +10,8 @@ import Constants  from '../../../config/Constants'
 import Message from '../../../components/Message';
 import $ from 'jquery';
 import Moment from 'react-moment';  
-import Setting from '../../../json/Setting.json'
+import Setting from '../../../json/Setting.json';
+import { MDBDataTable } from 'mdbreact';
 const urlDashboardDataUrl = Constants.TRAVELL_BOOKING_DATA;
 const token     = localStorage.getItem('token');
 class TravelBookingList extends React.Component{
@@ -18,6 +19,7 @@ class TravelBookingList extends React.Component{
         super(props);
         this.state = {
             dahsboardList  : [],
+            dataTable   : [],
             
         }
         this.getEventList       = this.getEventList.bind(this);
@@ -35,8 +37,24 @@ class TravelBookingList extends React.Component{
         .then((response) => {
           if(response.data.code==200) {
                 this.setState({
-                    dahsboardList:response.data.order
+                    dahsboardList:response.data.order,
+                    dataTable   : response.data.order.dataTable,
                 });
+                 /************datatable Strat*************/
+                 this.state.dataTable.rows.map((val,i) =>{
+                    
+                    var dataStr = <a href={"eorderinvoice?"+val.orderID}>{val.orderID}</a>;
+                    this.state.dataTable.rows[i].orderID = dataStr;
+
+                    var statusOfferStr = (val.is_offer_applied==1)?(<span className='badge bg-green' title="Active Itinerary" >Yes</span>):(<span className='badge bg-red' title="InActive Itinerary">No</span>)
+                    this.state.dataTable.rows[i].is_offer_applied = statusOfferStr;
+
+                    var statusStr = (val.order_status==="SUCCESS")?(<span className='badge bg-green' title="Active Itinerary" >{val.order_status}</span>):(<span className='badge bg-red' title="InActive Itinerary">{val.order_status}</span>)
+                    this.state.dataTable.rows[i].order_status = statusStr;
+                    
+                    this.setState({dataTable:this.state.dataTable});
+                });
+                /************datatable Ends*************/
           }
           else
           {
@@ -75,6 +93,7 @@ class TravelBookingList extends React.Component{
 
     render(){
         const {dahsboardList } =  this.state;
+        const { dataTable } = this.state;
         let orderList = "";
         if(this.state.dahsboardList.orderList){
           console.log("this is new ",this.state.dahsboardList.orderList);  
@@ -109,7 +128,14 @@ class TravelBookingList extends React.Component{
                 {/* /.box-header */}
                 <div className="box-body">
                 <div className="table-responsive">
-                <table id="example1" class="table table-bordered table-striped">
+                <MDBDataTable
+                striped
+                bordered
+                hover
+                data={dataTable}
+                exportToCSV={true}
+                />
+                {/* <table id="example1" class="table table-bordered table-striped">
                     <thead>
                     <tr>
                         <th>Order ID</th>
@@ -126,7 +152,7 @@ class TravelBookingList extends React.Component{
                         {orderList}
                     
                     </tbody>
-                </table>
+                </table> */}
                 </div>
                 {/* /.table-responsive */}
                 </div>

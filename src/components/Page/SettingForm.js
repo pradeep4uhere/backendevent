@@ -123,7 +123,7 @@ class SettingForm extends React.Component{
      let optionItems = this.state.setting.map((val,i) =>
         <div className="form-group">
               <label htmlFor="inputEmail3" className="col-sm-2 control-label">{val.title}</label>
-              <div className="col-sm-10">      
+              <div className="col-sm-6">      
                 <input onChange = { this.handleChange.bind(this)} type="text" name={val.options+"__"+val.id} className="form-control" id={i} placeholder={val.title} value={this.state.setting[i].options_value} />
               </div>
         </div>

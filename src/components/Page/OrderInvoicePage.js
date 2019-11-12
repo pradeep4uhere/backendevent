@@ -96,20 +96,20 @@ class OrderInvoicePage extends React.Component{
         if(this.state.eventList){
           console.log("this is new ",this.state.eventList);  
           orderList = this.state.eventList.map((val,i) =>
-            <tr>
-                <td><img src={val.EventImage.src} width={"50"}/></td>
-                <td>{val.Event.title}</td>
-                <td>{val.Seat.length}</td>
-                <td>{priceType}{val.event_seat.Price}</td>
-                <td>{val.event_seat.SeatType}</td>
-                <td>{
-                     val.Seat.length ? val.Seat.map((itemTestArray) =>
-                     (<span className="badge bg-green" style={{"margin":"1px"}}> {itemTestArray}</span>)) : '-'
-                    }
-                </td>
-                <td>{priceType}{val.Seat.length * val.event_seat.Price}</td>
+              <tr>
+                  <td><img src={(("EventImage" in val))?val.EventImage.src:''} width={"50"} alt="Image"/></td>
+                  <td>{(("Event" in val))?val.Event.title:''}</td>
+                  <td>{(("Event" in val))?val.Seat.length:''}</td>
+                  <td>{priceType}{val.event_seat.Price}</td>
+                  <td>{val.event_seat.SeatType}</td>
+                  <td>{
+                      val.Seat.length ? val.Seat.map((itemTestArray) =>
+                      (<span className="badge bg-green" style={{"margin":"1px"}}> {itemTestArray}</span>)) : '-'
+                      }
+                  </td>
+                  <td>{priceType}{val.Seat.length * val.event_seat.Price}</td>
             </tr>
-         );    
+          );    
         }
     return(
         <div className="content-wrapper">

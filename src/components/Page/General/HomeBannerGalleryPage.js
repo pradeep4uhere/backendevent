@@ -282,7 +282,7 @@ class HomeBannerGalleryPage extends React.Component{
                         withIcon={true}
                         buttonText='Choose images'
                         onChange={this.onDrop}
-                        imgExtension={['.jpg', '.gif', '.png', '.gif', '.jpeg']}
+                        imgExtension={['.jpg', ' .gif', ' .png', ' .gif', ' .jpeg']}
                         maxFileSize={5242880}
                         withPreview={true}
                     />

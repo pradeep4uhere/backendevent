@@ -167,6 +167,12 @@ class EventTimingPage extends React.Component{
         {
           this.setState({isMsg:true});
           this.setState({className:'error'});
+          this.setState({
+            message     : response.message,
+            classstr    : 'alert alert-danger',
+            className   : 'danger',
+            isMsg       : true,
+          });
         }
       })
       .catch((err) => {
