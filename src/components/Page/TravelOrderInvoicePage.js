@@ -121,7 +121,7 @@ class TravelOrderInvoicePage extends React.Component{
           subtotal          = this.state.orderDetails[0].subtotal;
           tax_amount        = this.state.orderDetails[0].tax_amount;
           offer_value       = this.state.orderDetails[0].offer_value;
-          user_id       = this.state.orderDetails[0].user_id;
+          user_id           = this.state.orderDetails[0].user_id;
 
           
 
