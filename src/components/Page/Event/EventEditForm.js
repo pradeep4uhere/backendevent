@@ -8,17 +8,13 @@ import React from 'react';
 import axios from 'axios'
 import $ from 'jquery';
 import Constants  from '../../../config/Constants'
-import Message from '../../../components/Message';
-import Gallery from 'react-grid-gallery';
-import ImageUploader from 'react-images-upload';
-//import ImageGallery from 'react-image-gallery';
-import "react-image-gallery/styles/css/image-gallery.css";
-import 'react-images-uploader/styles.css';
-import 'react-images-uploader/font.css';
+import CKEditor from 'ckeditor4-react';
+// import FroalaEditorView from 'react-froala-wysiwyg/FroalaEditorView';
 const urlSaveImgStr = Constants.EVENT_BANNER_IMAGE_UPLOAD;
 const urlStr = Constants.EVENT_UPDATE_URL;
 const urlEventStr    = Constants.EVENT_DETAILS_URL;
 const token     = localStorage.getItem('token');
+
 class EventEditForm extends React.Component{
     constructor(props) {
         super(props);
@@ -37,6 +33,8 @@ class EventEditForm extends React.Component{
             isOverlay       : true,
             event           : {},
             pictures        : [],
+            text            : '',
+            time            : '10:00',
             ImageGallery    : [
                 {
                         src: "https://c2.staticflickr.com/9/8817/28973449265_07e3aa5d2e_b.jpg",
@@ -49,13 +47,20 @@ class EventEditForm extends React.Component{
           ]
         };
         this.handleSubmit   = this.handleSubmit.bind(this);
+        this.handleChangeText   = this.handleChangeText.bind(this);
         this.handleChange   = this.handleChange.bind(this);
         this.getEventDetails= this.getEventDetails.bind(this);
-        this.onDrop         = this.onDrop.bind(this);
-        // this.getGalleryList = this.getGalleryList.bind(this); 
     }
 
-
+    handleChangeText(changeEvent) {
+       this.setState({ text: changeEvent.editor.getData() });
+       this.setState({
+        event : {
+            description : changeEvent.editor.getData()
+            }
+        });
+        
+      }
 
     handleChange(e) {
         var strid = e.target.id;
@@ -67,9 +72,10 @@ class EventEditForm extends React.Component{
                 });
         }
         if(strid=='description'){
+            var textStr = this.state.text;
             this.setState({
                 event : {
-                    description : e.target.value
+                    description : textStr
                 }
             });
         }
@@ -92,7 +98,7 @@ class EventEditForm extends React.Component{
         
         if(strid=='status'){
             this.setState({
-                theatre : {
+                event : {
                     status : e.target.value
                 }
             });
@@ -105,7 +111,7 @@ class EventEditForm extends React.Component{
         event.preventDefault();
         var id          = this.props.id;
         var title       = event.target.title.value;
-        var description = event.target.description.value;
+        var description = this.state.text;
         var durration   = event.target.durration.value;
         var status      = event.target.status.value;
         var is_feature  = event.target.is_feature.value;
@@ -179,51 +185,7 @@ class EventEditForm extends React.Component{
     }
 
 
-    onDrop(pictureFiles, pictureDataURLs) {
-        console.log(pictureFiles);
-		this.setState({
-            pictures: this.state.pictures.concat(pictureFiles),
-        });
-
-        const formData={
-            id : this.props.id,
-            token:token,
-            imageStr : pictureDataURLs
-        }
-        axios.post(urlSaveImgStr, formData)
-        .then((response) => {
-        if(response.data.data.code==200) {
-            this.setState({
-                message     : response.data.data.message,
-                classstr    : 'alert alert-success',
-                className   : 'success',
-                isMsg       : true,
-            });
-            $("#formTheatre").trigger("reset");
-            this.setState({
-                pictures: [],
-                ImageGallery:response.data.data.imagesList
-            });
-        }
-        else
-        {
-            this.setState({ 
-                message:response.data.message,
-                className   : 'error',
-                classstr    : 'alert alert-danger',
-                isMsg       : true,
-            });
-            
-        }
-        })
-        .catch((err) => {
-            console.log("Error: ", err);
-            this.setState({message:err});
-            this.setState({className:'error'});
-            this.setState({classstr: 'alert alert-danger'});
-        })
-        
-    }
+   
 
 
     getEventDetails(){
@@ -240,8 +202,10 @@ class EventEditForm extends React.Component{
           if(response.data[0].code==200) {
               this.setState({
                   event       : response.data[0].data,
-                  isOverlay  : false
+                  isOverlay   : false,
+                  text        : response.data[0].data.description,
               });
+              $("#descriptionss").val(this.state.text);
               $("#is_feature").val(this.state.event.is_feature);
               $("#status").val(this.state.event.status);
               $('.overlay').hide();
@@ -260,7 +224,10 @@ class EventEditForm extends React.Component{
 
     componentDidMount(){
         this.getEventDetails();
+        $("#descriptionss").val(this.state.text);
       }
+
+    
 
 
     render(){
@@ -277,6 +244,7 @@ class EventEditForm extends React.Component{
         const { isOverlay }     = this.state;
         const { event }         = this.state;
         const { ImageGallery }  = this.state;
+        const {text}            = this.state;
     
         console.log("this.event========");
         console.log(this.state.event);
@@ -300,9 +268,13 @@ class EventEditForm extends React.Component{
                     </div>
                     <div className={"form-group"+" "+hasDesError}>
                         <dt htmlFor="exampleInputPassword1">Description</dt>
-                        <textarea id="description" name="description" rows="10" cols="80"  className="form-control" value= {this.state.event.description} onChange = {this.handleChange.bind(this)}>
-                           
-                        </textarea>
+                        <CKEditor 
+                            id="descriptionss"  
+                            data={this.state.text}  
+                            type="classic"
+                            onChange={this.handleChangeText}
+                            
+                        />
                     </div>
 
                     <div className="bootstrap-timepicker">
@@ -310,7 +282,7 @@ class EventEditForm extends React.Component{
                     <dt>Event Durration:</dt>
                     <small>Total durration of the event in minutes only</small>
                     <div className="input-group">
-                        <input type="text" class="form-control timepicker" id="durration" name="durration"/>
+                        <input type="text" class="form-control timepicker" id="durration" name="durration" onChange={this.handleChange} value={this.state.event.durration}/>
                         <div className="input-group-addon">
                         <i className="fa fa-clock-o"></i>
                         </div>
@@ -319,7 +291,7 @@ class EventEditForm extends React.Component{
                     </div> 
                     <div className={"form-group"+" "+hasSError}>
                     <dt htmlFor="inputEmail3">Feature Event</dt>
-                            <select className="form-control" id="is_feature">
+                            <select className="form-control" id="is_feature" onChange={this.handleChange}>
                                 <option value="0">No</option>
                                 <option value="1">Yes</option>
                             </select>
@@ -327,7 +299,7 @@ class EventEditForm extends React.Component{
                      
                      <div className={"form-group"+" "+hasSError}>
                     <dt htmlFor="inputEmail3">Status</dt>
-                            <select className="form-control" id="status">
+                            <select className="form-control" id="status" onChange={this.handleChange}>
                                 <option value="1">Active</option>
                                 <option value="0">In Active</option>
                             </select>
@@ -351,3 +323,4 @@ class EventEditForm extends React.Component{
 }
 
 export default EventEditForm;
+

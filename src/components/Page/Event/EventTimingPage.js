@@ -16,8 +16,7 @@ import DoneImg from '../../../theme/dist/img/done.png';
 import SittingType from '../../../json/SittingType';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import "react-tabs/style/react-tabs.css";
-
-import CKEditor from '@ckeditor/ckeditor5-react';
+import CKEditor from 'ckeditor4-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 var serialize = require('form-serialize');
@@ -60,7 +59,12 @@ class EventTimingPage extends React.Component{
             price           : '',
           }],
           SittingType : SittingType,
-          showRemoveBtn:false
+          showRemoveBtn:false,
+          itinerary: 'Enter itinerary details here',
+          includes : 'Enter includes details here',
+          dincludes: 'Enter do not includes details here',
+          other    : 'Enter other details here',
+          titleText: 'Add'
         };
         this.getEventDetails  = this.getEventDetails.bind(this);
         this.getTheatreList   = this.getTheatreList.bind(this);
@@ -71,6 +75,12 @@ class EventTimingPage extends React.Component{
         this.addRow           = this.addRow.bind(this);
         this.removeRow        = this.removeRow.bind(this);
         this.handleChange     = this.handleChange.bind(this);
+        this.handleChangeTextItinerary = this.handleChangeTextItinerary.bind(this);
+        this.handleChangeTextIncludes  = this.handleChangeTextIncludes.bind(this);
+        this.handleChangeTextDincludes  = this.handleChangeTextDincludes.bind(this);
+        this.handleChangeTextOther  = this.handleChangeTextOther.bind(this);
+        
+
         
     }
 
@@ -181,6 +191,7 @@ class EventTimingPage extends React.Component{
       var event_id        = this.props.id;
       const form = event.currentTarget
       const body = serialize(form, {hash: true,empty:true})
+     
       const formData = {
           token           : tokenStr,
           event_id        : event_id,
@@ -190,6 +201,10 @@ class EventTimingPage extends React.Component{
           event_detail_id : event_detail_id,
           status          : status,
           id              : id,
+          itinerary       : this.state.itinerary,
+          includes        : this.state.includes,
+          dincludes       : this.state.dincludes,
+          other           : this.state.other,
           body            : body
       }
       axios.post(urlEventTimeUpdate, formData)
@@ -221,15 +236,15 @@ class EventTimingPage extends React.Component{
 
     //Open Modle box for user Either we can view or edit the user details here
     EditTime(e,obj) {
-      //console.log(obj.includes);
+      this.setState({titleText:'Update'});
       $('#event_detail_id').val(obj.event_detail_id);
       $('#theatre_id').val(obj.theatre_id);
       $('#event_start_time').val(obj.event_start_time);
       $('#event_end_time').val(obj.event_end_time);
-      $('#dincludes').val(obj.dincludes);
-      $('#includes').val(obj.includes);
-      $('#itinerary').val(obj.itinerary);
-      $('#other').val(obj.other);
+      this.setState({itinerary:obj.itinerary});
+      this.setState({includes:obj.includes});
+      this.setState({dincludes:obj.dincludes});
+      this.setState({other:obj.other});
       $('#status').val(obj.status);
       $('#id').val(obj.id);
       //Update the Price Object
@@ -337,6 +352,41 @@ class EventTimingPage extends React.Component{
     }
 
 
+    handleChangeTextItinerary(changeEvent) {
+      this.setState({
+            itinerary : changeEvent.editor.getData()
+       });
+     }
+
+
+     handleChangeTextIncludes(changeEvent) {
+      this.setState({
+          includes : changeEvent.editor.getData()
+       });
+     }
+
+
+     handleChangeTextDincludes(changeEvent) {
+      this.setState({
+          dincludes : changeEvent.editor.getData()
+       });
+     }
+
+
+     handleChangeTextOther(changeEvent) {
+      this.setState({
+          other : changeEvent.editor.getData()
+       });
+     }
+
+
+     
+
+     
+
+     
+
+
     
     render(){
       const { event } = this.state;
@@ -347,6 +397,7 @@ class EventTimingPage extends React.Component{
       const { event_detail }  = this.state;
       const { isOverlay }     = this.state;
       const { noRecords }     = this.state;
+      const { titleText }     = this.state;
       console.log(this.state);
       let timingOption = this.state.event_detail.map((val,i) =>
             val.event_timing.map((key,k)=> 
@@ -433,7 +484,7 @@ class EventTimingPage extends React.Component{
       return(
 
             <div className="content-wrapper">
-            <Breadcrum title="Edit Event Timing" titleRight='All Event List' url='eventlist' />
+            <Breadcrum title="Add/Update Event Timing" titleRight='All Event List' url='eventlist' />
             <SweetAlert
               dangerMode={true}
               showCancelButton={this.state.showCancelButton}
@@ -456,7 +507,7 @@ class EventTimingPage extends React.Component{
             <div className="overlay" show={isOverlay}><i className="fa fa-refresh fa-spin"></i></div>
               <div className="box-header with-border">
                 <i className="fa fa-clock-o" />
-                <h3 className="box-title">Event Timing List</h3>
+                <h3 className="box-title">Timing List For Event: {eventTitle}</h3>
               </div>
               <div className="box-body no-padding">
               <table className="table table-striped" style={{'font-size':'12px'}}>
@@ -480,7 +531,11 @@ class EventTimingPage extends React.Component{
             <div className="box box-solid">
               <div className="box-header with-border">
                 <i className="fa fa-pencil" />
-                <h3 className="box-title">Update Event Timing</h3>
+                <h3 className="box-title">{titleText} Event Timing
+                </h3>
+                <div class="box-tools pull-right">
+                <a href={"/eventtiming?"+this.state.eventId}><span class="label label-default">Add New Timing</span></a>
+                  </div>
               </div>
               {(isMsg)?(<div className={classstr}>{message}</div>):(<div></div>)}
               <form role="form" onSubmit={this.handleSubmit}  id="form-event">
@@ -550,33 +605,56 @@ class EventTimingPage extends React.Component{
                     <div className={"form-group col-md-12"}>
                     <hr/>
                     </div>
-                  
+                    
                     <div className={"form-group col-md-12"}>
-                    <label>Itinerary</label>
-                    <textarea id="itinerary" name="itinerary" rows="10" cols="80"  className="form-control" onChange = { this.handleChange.bind(this)}>
-                            Enter Itinerary of the event
-                        </textarea>
+                    <div className="nav-tabs-custom">
+                      <ul className="nav nav-tabs">
+                        <li className="active"><a href="#activity" data-toggle="tab" aria-expanded="true">Itinerary</a></li>
+                        <li className><a href="#timeline" data-toggle="tab" aria-expanded="false">Includes</a></li>
+                        <li className><a href="#settings" data-toggle="tab" aria-expanded="false">Doesn’t Includes</a></li>
+                        <li className><a href="#otherTab" data-toggle="tab" aria-expanded="false">Other Info</a></li>
+                      </ul>
+                      <div className="tab-content">
+                        <div className="tab-pane active" id="activity">
+                          <div className="post">
+                          <CKEditor 
+                              id="itinerary"  
+                              data={this.state.itinerary}  
+                              type="classic"
+                              onChange={this.handleChangeTextItinerary}
+                          />
+                          </div>
+                        </div>
+                        <div className="tab-pane" id="timeline">
+                          <CKEditor 
+                              id="includes"  
+                              data={this.state.includes}  
+                              type="classic"
+                              onChange={this.handleChangeTextIncludes}
+                              
+                          />
+                        </div>
+                        <div className="tab-pane" id="settings">
+                            <CKEditor 
+                                id="dincludes"  
+                                data={this.state.dincludes}  
+                                type="classic"
+                                onChange={this.handleChangeTextDincludes}
+                                
+                            />
+                        </div>
+                        <div className="tab-pane" id="otherTab">
+                                <CKEditor 
+                                id="other"  
+                                data={this.state.other}  
+                                type="classic"
+                                onChange={this.handleChangeTextOther}
+                                
+                            />
+                        </div>
+                      </div>
                     </div>
-                    <div className={"form-group col-md-12"}>
-                    <label>Includes</label>
-                    <textarea id="includes" name="includes" rows="10" cols="80"  className="form-control" onChange = { this.handleChange.bind(this)}>
-                            Enter Includes of the event
-                        </textarea>
-                    </div>
-                    <div className={"form-group col-md-12"}>
-                    <label>Doesn’t Includes</label>
-                    <textarea id="dincludes" name="dincludes" rows="10" cols="80"  className="form-control" onChange = { this.handleChange.bind(this)}>
-                            Enter Doesn’t Includes of the event
-                        </textarea>
-                    </div>
-                    <div className={"form-group col-md-12"}>
-                    <label>Other Info</label>
-                    <textarea id="other" name="other" rows="10" cols="80"  className="form-control" onChange = { this.handleChange.bind(this)}>
-                            Enter Other Info of the event
-                        </textarea>
-                    </div>
-                   
-                   
+                  </div>
                 </div>
                 <div class="box-footer">
                 <input type="hidden" id="id"  class="form-control" />
