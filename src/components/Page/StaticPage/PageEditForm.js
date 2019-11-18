@@ -9,9 +9,7 @@ import axios from 'axios'
 import $ from 'jquery';
 import Constants  from '../../../config/Constants'
 import Message from '../../../components/Message';
-import { SSL_OP_NO_SESSION_RESUMPTION_ON_RENEGOTIATION } from 'constants';
-import { platform } from 'os';
-import { useDropzone } from 'react-dropzone';
+import CKEditor from 'ckeditor4-react';
 const urlStr = Constants.PAGE_UPDATE_URL;
 const urlEventStr    = Constants.PAGE_DETAIL_URL;
 const token     = localStorage.getItem('token');
@@ -30,15 +28,20 @@ class PageEditForm extends React.Component{
             hasDesError     : '',
             hasSlugError       : '',
             hasSError       : '',
+            description     : '',
             isOverlay       : true,
             event           : {},
         };
         this.handleSubmit   = this.handleSubmit.bind(this);
         this.handleChange   = this.handleChange.bind(this);
         this.getEventDetails= this.getEventDetails.bind(this);
+        this.handleChangeText= this.handleChangeText.bind(this);
     }
 
 
+    handleChangeText(changeEvent) {
+        this.setState({ description: changeEvent.editor.getData() });
+    }
 
     handleChange(e) {
         var strid = e.target.id;
@@ -78,7 +81,7 @@ class PageEditForm extends React.Component{
         event.preventDefault();
         var id          = this.props.id;
         var title       = event.target.title.value;
-        var description = event.target.description.value;
+        var description = this.state.description;
         var slug   = event.target.slug.value;
         var status      = event.target.status.value;
 
@@ -162,6 +165,7 @@ class PageEditForm extends React.Component{
           if(response.data.code==200) {
               this.setState({
                   event       : response.data.page,
+                  description : response.data.page.description,
                   isOverlay  : false
               });
               $('.overlay').hide();
@@ -223,8 +227,13 @@ class PageEditForm extends React.Component{
                     </div>
                     <div className={"form-group"+" "+hasDesError}>
                         <dt htmlFor="exampleInputPassword1">Description</dt>
-                        <textarea id="description" name="description" rows="10" cols="80"  className="form-control" value= {this.state.event.description}>
-                        </textarea>
+                        <CKEditor 
+                            id="description"  
+                            data={this.state.description}  
+                            type="classic"
+                            onChange={this.handleChangeText}
+                            
+                        />
                     </div>
 
                   

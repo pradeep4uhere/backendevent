@@ -10,6 +10,8 @@ import $ from 'jquery';
 import { Redirect } from 'react-router-dom'
 import Constants  from '../../../config/Constants'
 import Message from '../../../components/Message';
+import CKEditor from 'ckeditor4-react';
+
 const urlEventStr    = Constants.ITINERARIES_URL;
 const urlStr = Constants.ITINERARY_UPDATE_URL;
 const token     = localStorage.getItem('token');
@@ -28,18 +30,22 @@ class EditItinerariesForm extends React.Component{
             hasDError       : '',
             hasSError       : '',
             latest_id       : '',
+            addon           : '',
+            description     : '',
             redirectUrl     : false,
             id              : this.props.id
         };
         this.handleSubmit   = this.handleSubmit.bind(this);
         this.getItinerariesDetails =  this.getItinerariesDetails.bind(this);
+        this.handleChangeAddOn      = this.handleChangeAddOn.bind(this);
+        this.handleChangeDescription= this.handleChangeDescription.bind(this);
     }
     /**********Login Form Handle********************/
     handleSubmit(event) {
         event.preventDefault();
         var title       = event.target.title.value;
-        var description = event.target.description.value;
-        var addon       = event.target.addon.value;
+        var description = this.state.description;
+        var addon       = this.state.addon;
         var status      = event.target.status.value;
         var id          = this.state.id;
 
@@ -132,12 +138,14 @@ class EditItinerariesForm extends React.Component{
           if(response.data[0].code==200) {
               this.setState({
                   event_detail: response.data[0].data,
-                  isOverlay  : false,  
+                  addon       : response.data[0].data.addon,
+                  description : response.data[0].data.description,
+                  isOverlay   : false,  
               });
               console.log(this.state.event_detail);
               $("#title").val(this.state.event_detail.title);
-              $("#description").val(this.state.event_detail.description);
-              $("#addon").val(this.state.event_detail.addon);
+              $("#description").val(this.state.description);
+              $("#addon").val(this.state.addon);
               $("#status").val(this.state.event_detail.status);
               $('.overlay').hide();
           }
@@ -158,6 +166,16 @@ class EditItinerariesForm extends React.Component{
         this.getItinerariesDetails();
       }
 
+      
+
+      handleChangeAddOn(changeEvent) {
+        this.setState({ addon: changeEvent.editor.getData() });
+       }
+
+
+       handleChangeDescription(changeEvent) {
+        this.setState({ description: changeEvent.editor.getData() });
+       }
       
     render(){
         const { MsgClass }      = this.state;
@@ -194,14 +212,24 @@ class EditItinerariesForm extends React.Component{
                     </div>
                     <div className={"form-group"+" "+hasDesError}>
                         <dt htmlFor="exampleInputPassword1">Description</dt>
-                        <textarea id="description" name="description" rows="10" cols="80"  className="form-control">
-                           
-                        </textarea>
+                        <CKEditor 
+                            id="addon"  
+                            data={this.state.description}  
+                            type="classic"
+                            onChange={this.handleChangeDescription}
+                            
+                        />
                     </div>
 
                     <div className={"form-group"+" "+hasDesError}>
                         <dt htmlFor="exampleInputPassword1">Add On</dt>
-                        <textarea id="addon" name="addon" rows="10" cols="80"  className="form-control"></textarea>
+                        <CKEditor 
+                            id="addon"  
+                            data={this.state.addon}  
+                            type="classic"
+                            onChange={this.handleChangeAddOn}
+                            
+                        />
                     </div>
 
                     

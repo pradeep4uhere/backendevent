@@ -356,6 +356,7 @@ EventPortRouter.route('/updateevent').post(function (req, res,next) {
     var id        	    = req.body.event.id;
     var title        	= req.body.event.title;
     var description     = req.body.event.description;
+    var long_description= req.body.event.long_description;
     var durration       = req.body.event.durration;
     var status          = req.body.event.status;
     var is_feature      = req.body.event.is_feature;
@@ -363,6 +364,7 @@ EventPortRouter.route('/updateevent').post(function (req, res,next) {
             id          : id,
             title       : title,
             description : description,
+            long_description:long_description,
             durration   : durration,
             status      : status,
             is_feature  : is_feature,

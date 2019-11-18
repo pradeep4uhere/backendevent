@@ -440,7 +440,9 @@ class EventTimingPage extends React.Component{
           <option value={val.id}>{val.event.title}</option>
         );
         eventTitle = this.state.event.data.title;
-        eventId = this.state.event_detail[0].id;
+        if(event_detail.length){
+          eventId = this.state.event_detail[0].id;
+        }
       }
       
       

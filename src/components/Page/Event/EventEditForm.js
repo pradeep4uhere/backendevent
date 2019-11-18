@@ -34,6 +34,7 @@ class EventEditForm extends React.Component{
             event           : {},
             pictures        : [],
             text            : '',
+            longdescription : '',
             time            : '10:00',
             ImageGallery    : [
                 {
@@ -50,6 +51,7 @@ class EventEditForm extends React.Component{
         this.handleChangeText   = this.handleChangeText.bind(this);
         this.handleChange   = this.handleChange.bind(this);
         this.getEventDetails= this.getEventDetails.bind(this);
+        this.handleChangeLongText =this.handleChangeLongText.bind(this); 
     }
 
     handleChangeText(changeEvent) {
@@ -62,6 +64,17 @@ class EventEditForm extends React.Component{
         
       }
 
+
+    handleChangeLongText(changeEvent) {
+        this.setState({ longdescription: changeEvent.editor.getData() });
+        this.setState({
+         event : {
+             longdescription : changeEvent.editor.getData()
+             }
+         });
+         
+       }
+
     handleChange(e) {
         var strid = e.target.id;
         if(strid=='title'){
@@ -71,14 +84,7 @@ class EventEditForm extends React.Component{
                     }
                 });
         }
-        if(strid=='description'){
-            var textStr = this.state.text;
-            this.setState({
-                event : {
-                    description : textStr
-                }
-            });
-        }
+      
         if(strid=='durration'){
             this.setState({
                 event : {
@@ -112,6 +118,7 @@ class EventEditForm extends React.Component{
         var id          = this.props.id;
         var title       = event.target.title.value;
         var description = this.state.text;
+        var longdescription = this.state.longdescription;
         var durration   = event.target.durration.value;
         var status      = event.target.status.value;
         var is_feature  = event.target.is_feature.value;
@@ -143,6 +150,7 @@ class EventEditForm extends React.Component{
                     id          : id,
                     title       : title,
                     description : description,
+                    long_description:longdescription,
                     durration   : durration,
                     is_feature  : is_feature,
                     status      : status
@@ -204,8 +212,10 @@ class EventEditForm extends React.Component{
                   event       : response.data[0].data,
                   isOverlay   : false,
                   text        : response.data[0].data.description,
+                  longdescription:response.data[0].data.long_description,
               });
               $("#descriptionss").val(this.state.text);
+              $("#longdescription").val(this.state.longdescription);
               $("#is_feature").val(this.state.event.is_feature);
               $("#status").val(this.state.event.status);
               $('.overlay').hide();
@@ -245,6 +255,7 @@ class EventEditForm extends React.Component{
         const { event }         = this.state;
         const { ImageGallery }  = this.state;
         const {text}            = this.state;
+        const {status}          = this.state;       
     
         console.log("this.event========");
         console.log(this.state.event);
@@ -276,6 +287,17 @@ class EventEditForm extends React.Component{
                             
                         />
                     </div>
+                    
+                    <div className={"form-group"+" "+hasDesError}>
+                        <dt htmlFor="exampleInputPassword1">Long Description</dt>
+                        <CKEditor 
+                            id="longdescription"  
+                            data={this.state.longdescription}  
+                            type="classic"
+                            onChange={this.handleChangeLongText}
+                            
+                        />
+                    </div>
 
                     <div className="bootstrap-timepicker">
                     <div className={"form-group"+" "+hasDError}>
@@ -299,9 +321,9 @@ class EventEditForm extends React.Component{
                      
                      <div className={"form-group"+" "+hasSError}>
                     <dt htmlFor="inputEmail3">Status</dt>
-                            <select className="form-control" id="status" onChange={this.handleChange}>
-                                <option value="1">Active</option>
+                            <select className="form-control" id="status" onChange={this.handleChange} value={status}>
                                 <option value="0">In Active</option>
+                                <option value="1" selected="selected">Active</option>
                             </select>
                      </div>
                       

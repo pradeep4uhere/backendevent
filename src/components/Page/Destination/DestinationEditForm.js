@@ -9,6 +9,7 @@ import axios from 'axios'
 import $ from 'jquery';
 import Constants  from '../../../config/Constants'
 import Message from '../../../components/Message';
+import CKEditor from 'ckeditor4-react';
 const urlStr        = Constants.DESTINATION_UPDATE_URL;
 const urlEventStr   = Constants.DESTINATION_DETAILS_URL;
 const token         = localStorage.getItem('token');
@@ -30,6 +31,10 @@ class DestinationEditForm extends React.Component{
             isOverlay       : true,
             event           : {},
             pictures        : [],
+            description     : '',
+            shopping        : '',
+            cuisine         : '',
+            more_information: '',
             ImageGallery    : [
                 {
                         src: "https://c2.staticflickr.com/9/8817/28973449265_07e3aa5d2e_b.jpg",
@@ -41,9 +46,14 @@ class DestinationEditForm extends React.Component{
                 }
           ]
         };
-        this.handleSubmit   = this.handleSubmit.bind(this);
-        this.handleChange   = this.handleChange.bind(this);
-        this.getEventDetails= this.getEventDetails.bind(this);
+        this.handleSubmit           = this.handleSubmit.bind(this);
+        this.handleChange           = this.handleChange.bind(this);
+        this.getEventDetails        = this.getEventDetails.bind(this);
+        this.handleChangeText       = this.handleChangeText.bind(this);
+        this.handleChangeShopping   = this.handleChangeShopping.bind(this);
+        this.handleChangeCuisine    = this.handleChangeCuisine.bind(this);
+        this.handleChangeMoreInformation= this.handleChangeMoreInformation.bind(this);
+        
     }
 
 
@@ -85,27 +95,7 @@ class DestinationEditForm extends React.Component{
                 }
             });
         }
-        if(strid=='shopping'){
-            this.setState({
-                event : {
-                   shopping : e.target.value
-                }
-            });
-        }
-        if(strid=='cuisine'){
-            this.setState({
-                event : {
-                    cuisine : e.target.value
-                }
-            });
-        }
-        if(strid=='more_information'){
-            this.setState({
-                event : {
-                    more_information : e.target.value
-                }
-            });
-        }
+       
         if(strid=='status'){
             this.setState({
                 theatre : {
@@ -122,13 +112,13 @@ class DestinationEditForm extends React.Component{
         console.log(this.state);
         var id              = this.props.id;
         var title           = event.target.title.value;
-        var descriptions    = event.target.description.value;
+        var descriptions    = this.state.description;
         var altitude        = event.target.altitude.value;
         var climate         = event.target.climate.value;
         var population      = event.target.population.value;
-        var shopping        = event.target.shopping.value;
-        var cuisine         = event.target.cuisine.value;
-        var more_information= event.target.more.value;
+        var shopping        = this.state.shopping;
+        var cuisine         = this.state.cuisine;
+        var more_information= this.state.more_information;
         var trip_type       = event.target.trip_type.value;
         var status          = event.target.status.value;
         // alert(descriptions/);
@@ -167,7 +157,7 @@ class DestinationEditForm extends React.Component{
                 population      : population,
                 shopping        : shopping,
                 cuisine         : cuisine,
-                more_information: more_information,
+                more            : more_information,
                 status          : status,
                 trip_type       : trip_type,
                 token           : token
@@ -225,6 +215,11 @@ class DestinationEditForm extends React.Component{
           if(response.data.code==200) {
               this.setState({
                   event       : response.data.data,
+                  description : response.data.data.descriptions,
+                  shopping    : response.data.data.shopping,
+                  cuisine     : response.data.data.cuisine,
+                  more_information: response.data.data.more_information,
+                  status : response.data.data.status,
                   isOverlay  : false
               });
               console.log(response.data.data);
@@ -244,6 +239,27 @@ class DestinationEditForm extends React.Component{
     componentDidMount(){
         this.getEventDetails();
       }
+
+
+    handleChangeText(changeEvent) {
+        this.setState({ description: changeEvent.editor.getData() });
+    }
+
+    handleChangeShopping(changeEvent) {
+        this.setState({ shopping: changeEvent.editor.getData() });
+    }
+
+    handleChangeCuisine(changeEvent){
+        this.setState({ cuisine: changeEvent.editor.getData() });
+    }
+
+
+    handleChangeMoreInformation(changeEvent){
+        this.setState({ more_information: changeEvent.editor.getData() });
+    }
+
+    
+    
 
 
     render(){
@@ -281,9 +297,14 @@ class DestinationEditForm extends React.Component{
                     </div>
                     <div className={"form-group"+" "+hasDesError}>
                         <dt htmlFor="exampleInputPassword1">Description</dt>
-                        <textarea id="description" name="description" rows="10" cols="80"  className="form-control" value= {this.state.event.descriptions} onChange = {this.handleChange.bind(this)}>
-                           
-                        </textarea>
+                        <CKEditor 
+                            id="description"  
+                            data={this.state.description}  
+                            type="classic"
+                            onChange={this.handleChangeText}
+                            
+                        />
+
                     </div>
                     <div className={"form-group"+" "+hasTError}>
                         <dt>Altitude</dt>
@@ -299,21 +320,34 @@ class DestinationEditForm extends React.Component{
                     </div>
                     <div className={"form-group"+" "+hasTError}>
                         <dt>Shopping</dt>
-                        <textarea id="shopping" name="shopping" rows="10" cols="80"  className="form-control" placeholder="Enter shopping details here" value= {this.state.event.shopping} onChange = {this.handleChange.bind(this)}>
+                        <CKEditor 
+                            id="shopping"  
+                            data={this.state.shopping}  
+                            type="classic"
+                            onChange={this.handleChangeShopping}
                             
-                        </textarea>
+                        />
                     </div>
                     <div className={"form-group"+" "+hasTError}>
                         <dt>Cuisine</dt>
-                        <textarea id="cuisine" name="cuisine" rows="10" cols="80"  className="form-control" placeholder=" Enter cuisine details here" value= {this.state.event.cuisine} onChange = {this.handleChange.bind(this)}>
-                           
-                        </textarea>
+                        <CKEditor 
+                            id="cuisine"  
+                            data={this.state.cuisine}  
+                            type="classic"
+                            onChange={this.handleChangeCuisine}
+                            
+                        />
                     </div>
                     <div className={"form-group"+" "+hasTError}>
                         <dt>More Information</dt>
-                        <textarea id="more" name="more" rows="10" cols="80"  className="form-control" placeholder="Enter more details here" value= {this.state.event.more_information} onChange = {this.handleChange.bind(this)}>
-                          
-                        </textarea>
+                        <CKEditor 
+                            id="more"  
+                            data={this.state.more_information}  
+                            type="classic"
+                            onChange={this.handleChangeMoreInformation}
+                            
+                        />
+                        
                     </div>
                     <div className={"form-group"+" "+hasSError}>
                     <dt htmlFor="inputEmail3">Trip Type</dt>
@@ -326,8 +360,8 @@ class DestinationEditForm extends React.Component{
                     
                     <div className={"form-group"+" "+hasSError}>
                     <dt htmlFor="inputEmail3">Status</dt>
-                            <select className="form-control" id="status">
-                                <option value="1">Active</option>
+                            <select className="form-control" id="status" value={this.state.status}>
+                                <option value="1" selected="selected">Active</option>
                                 <option value="0">In Active</option>
                             </select>
                      </div>

@@ -242,13 +242,14 @@ GeneralPortRouter.route('/updatedestination').post(function (req, res,next) {
             'Authorization': 'Bearer ' + token,
         },
     }
+     console.log(options);
     request(options)
 	    .then(function (response) {
 	        console.log(response)
 	        res.end(JSON.stringify(response));
 	    })
 	    .catch(function (err) {
-	    //console.log(err)
+	    console.log(err)
 	})
 });
 
