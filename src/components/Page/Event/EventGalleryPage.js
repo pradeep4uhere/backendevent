@@ -20,6 +20,7 @@ const urlSaveImgStr = Constants.IMAGE_UPLOAD;
 const urlDelImgStr  = Constants.EVENT_DELETE_IMAGE_API;  
 const urlDefaultStr = Constants.EVENT_DEFAULT_IMAGE_API;
 const urlStatusStr = Constants.EVENT_STATUS_IMAGE_API
+const urlFeatureStatusStr = Constants.EVENT_STATUS_FEATURE_IMAGE_API
 const token     = localStorage.getItem('token');
 
 class EventGalleryPage extends React.Component{
@@ -54,6 +55,7 @@ class EventGalleryPage extends React.Component{
         };
         this.onDrop         = this.onDrop.bind(this);
         this.getGalleryList = this.getGalleryList.bind(this); 
+        this.updateFeatureStatus = this.updateFeatureStatus.bind(this);
     }
 
 
@@ -215,6 +217,32 @@ class EventGalleryPage extends React.Component{
             console.log("Error: ", err);
         })
     }
+
+
+    
+    updateFeatureStatus(e,id) {
+        const formData={id : id,token:token,}
+        axios.post(urlFeatureStatusStr, formData)
+        .then((response) => {
+        if(response.data.data.code==200) {
+            this.setState({
+                message     : response.data.data.message,
+                className   : 'success',
+                classstr    : 'alert alert-success',
+                isMsg       : true,
+            });
+            this.getGalleryList();
+        }else{
+            this.setState({ 
+                message:response.data.data.message,
+                className   : 'error',
+                classstr    : 'alert alert-danger',
+                isMsg       : true,
+            });
+        }}).catch((err) => {
+            console.log("Error: ", err);
+        })
+    }
     
     render(){
         const { ImageGallery } = this.state;
@@ -226,17 +254,29 @@ class EventGalleryPage extends React.Component{
         let Option = this.state.ImageGallery.map((val,i) =>
         <tr>
         <td>{i+1}</td>
-        <td><img src={val.thumbnail} width={180}/></td>
-        <td><p className="pull-right mt-4" style={{"padding-top":"18%"}}>
+        <td><img src={val.thumbnail} width={160}/></td>
+        <td><p className="pull-right mt-4" style={{"padding-top":"5%"}}>
+        <div style={{"marginBottom":"5px"}}>
         {
-          (val.status==1)?(<a href="#" className="btn btn-success" onClick={((e) => this.updateStatus(e, val.id))}>Active</a>):(<a href="#" className="btn btn-warning" onClick={((e) => this.updateStatus(e, val.id))}>InActive</a>)
+          (val.is_feature==1)?(<a href="#" className="btn btn-info" style={{marginRight:"5px"}} onClick={((e) => this.updateFeatureStatus(e, val.id))}>Feature</a>):(<a href="#" className="btn btn-default" style={{marginRight:"5px"}} onClick={((e) => this.updateFeatureStatus(e, val.id))}>Feature</a>)
         }
-       &nbsp;
+        {
+          (val.status==1)?(<a href="#" className="btn btn-success" onClick={((e) => this.updateStatus(e, val.id))}>&nbsp;&nbsp;Active&nbsp;</a>):(<a href="#" className="btn btn-warning" onClick={((e) => this.updateStatus(e, val.id))}>InActive</a>)
+        }
+       </div>
+       <div style={{"marginBottom":"5px"}}>
+        
+       </div>
+       <div style={{"marginBottom":"5px"}}>
        {
-          (val.is_default==1)?(<a href="#" className="btn btn-success" onClick={((e) => this.makeDefault(e, val.id))}>Default</a>):(<a href="#" className="btn btn-warning" onClick={((e) => this.makeDefault(e, val.id))}>Default</a>)
+          (val.is_default==1)?(<a href="#" className="btn btn-success" style={{marginRight:"5px"}} onClick={((e) => this.makeDefault(e, val.id))}>&nbsp;Default</a>):(<a href="#" className="btn btn-warning"  style={{marginRight:"5px"}} onClick={((e) => this.makeDefault(e, val.id))}>&nbsp;Default</a>)
         }
-        &nbsp;  
-        <a href="#" className="btn btn-danger" onClick={((e) => this.deleteForm(e, val.id))}><i className="fa fa-trash"></i></a></p>
+        <a href="#" className="btn btn-danger" onClick={((e) => this.deleteForm(e, val.id))}>Remove</a>
+        </div>
+        <div style={{"marginBottom":"5px"}}>  
+        
+        </div>
+        </p>
         </td>
         </tr>
         );

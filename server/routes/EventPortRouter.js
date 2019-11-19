@@ -23,6 +23,7 @@ const EVENT_BANNER_UPLOAD_API_POST  = urlConstant.EVENT_BANNER_UPLOAD_API_POST;
 const EVENT_IAMGE_DELETE_API_POST   = urlConstant.EVENT_IAMGE_DELETE_API_POST;
 const EVENT_IAMGE_DEFAULT_API_POST  = urlConstant.EVENT_IAMGE_DEFAULT_API_POST;
 const EVENT_IAMGE_STATUS_API_POST   = urlConstant.EVENT_IAMGE_STATUS_API_POST;
+const EVENT_FEATURE_IAMGE_STATUS_API_POST = urlConstant.EVENT_FEATURE_IAMGE_STATUS_API_POST;
 const EVENT_DELETE_API_POST         = urlConstant.EVENT_DELETE_API_POST;
 
 
@@ -530,6 +531,37 @@ EventPortRouter.route('/defaulteventimage').post(function (req, res,next) {
 });
 
 
+
+
+/**************ADD NEW EVENT API Start Here**********************************/
+EventPortRouter.route('/updateeventfeaturestatusimage').post(function (req, res,next) {
+    console.log(req.body);    
+    var token        	= req.body.token;
+    var id        	    = req.body.id;
+    var postData ={
+            id          : id,
+            token	    : token,
+    }
+    console.log('======================Post Data=========================');
+    console.log(postData);
+    const options = {
+        method: 'POST',
+        uri: EVENT_FEATURE_IAMGE_STATUS_API_POST,
+        body: postData,
+        json: true,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+        },
+    }
+    request(options)
+	    .then(function (response) {
+	        console.log(response)
+	        res.end(JSON.stringify(response));
+	    })
+	    .catch(function (err) {
+	    console.log(err)
+	})
+});
 
 
 /**************ADD NEW EVENT API Start Here**********************************/

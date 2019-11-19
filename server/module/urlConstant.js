@@ -31,6 +31,7 @@ urlConstant = {
         EVENT_IAMGE_DELETE_API_POST         :   config.API_HOST_URL+'/eventimagedelete',
         EVENT_IAMGE_DEFAULT_API_POST        :   config.API_HOST_URL+'/eventimagedefault',
         EVENT_IAMGE_STATUS_API_POST         :   config.API_HOST_URL+'/updateeventstatusimage',
+        EVENT_FEATURE_IAMGE_STATUS_API_POST :   config.API_HOST_URL+'/updateeventstatusfeatureimage',
         EVENT_DELETE_API_POST               :   config.API_HOST_URL+'/deleteevent',
         
 

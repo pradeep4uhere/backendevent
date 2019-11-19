@@ -56,6 +56,7 @@ export const Constants = {
 	EVENT_DELETE_IMAGE_API		: AppUrl+'/eventport/deleteeventimage', 
 	EVENT_DEFAULT_IMAGE_API		: AppUrl+'/eventport/defaulteventimage', 
 	EVENT_STATUS_IMAGE_API		: AppUrl+'/eventport/updateeventstatusimage', 
+	EVENT_STATUS_FEATURE_IMAGE_API: AppUrl+'/eventport/updateeventfeaturestatusimage', 
 	EVENT_DELETE_API			: AppUrl+'/eventport/deleteevent', 
 
 	BANNER_IMAGE_UPLOAD			: AppUrl+'/general/banneruploadimage',
