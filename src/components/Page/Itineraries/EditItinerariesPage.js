@@ -23,7 +23,7 @@ class EditItinerariesPage extends React.Component{
         return(
                 <div className="content-wrapper">
                 {/* Import Breadcrup component boxes here */}
-                <Breadcrum title="Edit Itinerary " />
+                <Breadcrum title="Edit Itinerary " titleRight={'All Itineraries'} url={'allitineraries'}/>
                     <section className="content">
                     <div className="row">
                     <div className="col-md-12">

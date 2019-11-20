@@ -239,7 +239,7 @@ class EventTimingPage extends React.Component{
         );
         return(
             <div className="content-wrapper">
-            <Breadcrum title="All Viedos" titleRight='All Event List' url='eventlist' />
+            <Breadcrum title="All Videos" titleRight='All Event List' url='eventlist' />
             <section className="content">
             <div className="row">
              <div className="col-md-8">
@@ -259,7 +259,7 @@ class EventTimingPage extends React.Component{
             <div className="box box-solid">
               <div className="box-header with-border">
                 <i className="fa fa-text-width" />
-                <h3 className="box-title">Add Viedo</h3>
+                <h3 className="box-title">Add/Update Video</h3>
               </div>
               {(isMsg)?(<div className={classstr}>{message}</div>):(<div></div>)}
               <form role="form" onSubmit={this.handleSubmit}  id="form-event">

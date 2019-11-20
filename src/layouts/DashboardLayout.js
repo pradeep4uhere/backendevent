@@ -12,6 +12,9 @@ import EditItinerariesPage   from '../components/Page/Itineraries/EditItinerarie
 import ItinerariesListPage  from '../components/Page/Itineraries/ItinerariesList';
 import ItinerariesGalleryPage from '../components/Page/Itineraries/ItinerariesGalleryPage';
 import ItinerariesDepatureTimingPage from '../components/Page/Itineraries/ItinerariesDepatureTimingPage';
+import ItinerariesAddOnPage from '../components/Page/Itineraries/ItinerariesAddOnPage';
+import ItinerariesTermsPage from '../components/Page/Itineraries/ItinerariesTermsPage';
+
 import ItinerariesDaysListPage from '../components/Page/Itineraries/ItinerariesDaysListPage';
 import  AddItinerariesDayPage from '../components/Page/Itineraries/AddItinerariesDayPage';
 import ItinerariesDayGalleryPage from '../components/Page/Itineraries/ItinerariesDayGalleryPage';
@@ -89,6 +92,8 @@ class DashboardLayout extends React.Component{
               'ItinerariesGalleryPage':<ItinerariesGalleryPage id={id}/>,
               'ItinerariesDayGalleryPage':<ItinerariesDayGalleryPage id={id}/>,
               'ItinerariesDepatureTimingPage':<ItinerariesDepatureTimingPage id={id}/>,
+              'ItinerariesAddOnPage':<ItinerariesAddOnPage id={id}/>,
+              'ItinerariesTermsPage':<ItinerariesTermsPage id={id}/>,
               'ItinerariesDaysListPage':<ItinerariesDaysListPage id={id}/>,
               'AddItinerariesDayPage':<AddItinerariesDayPage id={id}/>,
               'EventAddPage'      : <EventAddPage   /> ,

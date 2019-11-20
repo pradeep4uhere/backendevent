@@ -103,6 +103,8 @@ class AllItinerariesList extends React.Component{
                 this.state.dataTable.rows.map((val,i) =>{
                     
                     var dataStr = <div><a title="View Itinerary Detail" href={Constants.APP_FRONT+'destinationexpdetails/'+val.id} target="_blank" ><i className="fa fa-eye"></i></a>&nbsp;&nbsp;<a title="View Itinerary Days" href={"viewitinerariedays?"+val.id}><i className="fa fa-map"></i></a>&nbsp;&nbsp;
+                    <a title="Add Itinerary Addon" href={"itinerariesaddon?"+val.id}><i className="fa fa-file"></i></a>&nbsp;&nbsp;
+                    <a title="Add Itinerary Terms & Conditions" href={"itinerariestrems?"+val.id}><i className="fa fa-gear"></i></a>&nbsp;&nbsp;
                     <a title="View Itinerary Gallery" href={"itinerariesgallery?"+val.id}><i className="fa fa-image"></i></a>&nbsp;&nbsp;
                     <a title="View Itinerary Departure Dates" href={"depaturetiming?"+val.id}><i className="glyphicon glyphicon-calendar"></i></a>&nbsp;&nbsp;
                     <a title="Edit Itinerary" href={"edititinerarie?"+val.id}><i className="fa fa-pencil"></i></a>&nbsp;&nbsp; 
@@ -243,7 +245,8 @@ class AllItinerariesList extends React.Component{
                 <a title="View Itinerary Gallery" href={"itinerariesgallery?"+val.id}><i className="fa fa-image"></i></a>&nbsp;&nbsp;
                 <a title="View Itinerary Departure Dates" href={"depaturetiming?"+val.id}><i className="glyphicon glyphicon-calendar"></i></a>&nbsp;&nbsp;
                 <a title="Edit Itinerary" href={"edititinerarie?"+val.id}><i className="fa fa-pencil"></i></a>&nbsp;&nbsp; 
-                <a title="Delete Itinerary" href="#" onClick={((e) => this.deleteForm(e, val.id))}><i className="fa fa-trash"></i></a></td>
+                <a title="Delete Itinerary" href="#" onClick={((e) => this.deleteForm(e, val.id))}><i className="fa fa-trash"></i></a>
+           </td>
         </tr>
         );
         if (redirectToReferrer === true) {
@@ -258,9 +261,7 @@ class AllItinerariesList extends React.Component{
                 <div className="box-header with-border">
                 <h3 className="box-title">Latest Itinerary List</h3>
                 <div className="box-tools pull-right">
-                <button type="button" className="btn btn-box-tool" data-widget="collapse"><i className="fa fa-minus" />
-                </button>
-                <button type="button" className="btn btn-box-tool" data-widget="remove"><i className="fa fa-times" /></button>
+                <a href={'/additineraries'} className="btn btn-danger pull-right"><i className="fa fa-plus"></i>&nbsp;Add New Itinerary</a>
                 </div>
                 </div>
                 {/* /.box-header */}

@@ -15,6 +15,7 @@ const EVENT_BANNER_UPLOAD_API_POST  = urlConstant.EVENT_BANNER_UPLOAD_API_POST;
 const EVENT_IAMGE_STATUS_API_POST   = urlConstant.EVENT_IAMGE_STATUS_API_POST;
  
 const ITINERARIES_GET_URL           = urlConstant.ITINERARIES_GET_URL;
+const ITINERARIES_ADDON_ADD_URL     = urlConstant.ITINERARIES_ADDON_URL;
 const ITINERARIES_ADD_URL           = urlConstant.ITINERARIES_ADD_URL;
 const ITINERARIES_LIST_URL	        = urlConstant.ITINERARIES_ALL_LIST_URL;
 const ITINERARIES_IMAGE_UPLOAD      = urlConstant.ITINERARIES_IMAGE_UPLOAD;
@@ -22,6 +23,7 @@ const ITINERARIES_IAMGE_DEFAULT_API_POST  = urlConstant.ITINERARIES_IAMGE_DEFAUL
 const ITINERARIES_IAMGE_DELETE_API_POST   = urlConstant.ITINERARIES_IAMGE_DELETE_API_POST;
 const ITINERARIES_DEPARTURE_API_REQUEST   = urlConstant.ITINERARIES_DEPARTURE_API_REQUEST;
 const ITINERARIES_DEPARTURE_DELETE        = urlConstant.ITINERARIES_DEPARTURE_DELETE;
+const ITINERARIES_ADDON_DELETE      =   urlConstant.ITINERARIES_ADDON_DELETE;
 const ITINERARIES_DELETE            =   urlConstant.ITINERARIES_DELETE;
 const ITINERARIES_DAYS_GET_URL      =   urlConstant.ITINERARIES_DAYS_GET_URL;
 const ITINERARIES_DAY_ADD_URL       =   urlConstant.ITINERARIES_DAY_ADD_URL;
@@ -112,6 +114,45 @@ ItinerariesPortRouter.route('/additinerarydays').post(function (req, res,next) {
 
 
 
+
+/**************ADD NEW EVENT API Start Here**********************************/
+ItinerariesPortRouter.route('/updatetineraryaddon').post(function (req, res,next) {
+    var token        	= req.body.token;
+    var title        	= req.body.title;
+    var description     = req.body.description;
+    var type            = req.body.type;
+    var status          = req.body.status;
+    var id              = req.body.id;
+    var itinerary_id    = req.body.itinerary_id;
+    var postData ={
+        id          : id,
+        title       : title,
+        description : description,
+        status      : status,
+        token	    : token,
+        type        : type,
+        itinerary_id: itinerary_id
+    }
+   
+    console.log(postData);
+    const options = {
+        method: 'POST',
+        uri: ITINERARIES_ADDON_ADD_URL,
+        body: postData,
+        json: true,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+        },
+    }
+    request(options)
+	    .then(function (response) {
+	        console.log(response)
+	        res.end(JSON.stringify(response));
+	    })
+	    .catch(function (err) {
+	        console.log(err)
+	})
+});
 
 
 
@@ -673,6 +714,40 @@ ItinerariesPortRouter.route('/updateeventstatusimage').post(function (req, res,n
 
 
 
+
+
+
+
+
+/**************ADD NEW EVENT API Start Here**********************************/
+ItinerariesPortRouter.route('/addondelete').post(function (req, res,next) {
+    console.log(req.body);    
+    var token        	= req.body.token;
+    var id        	    = req.body.id;
+    var postData ={
+            id          : id,
+            token	    : token,
+    }
+    console.log('======================Post Data=========================');
+    console.log(postData);
+    const options = {
+        method: 'POST',
+        uri: ITINERARIES_ADDON_DELETE,
+        body: postData,
+        json: true,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+        },
+    }
+    request(options)
+	    .then(function (response) {
+	        console.log(response)
+	        res.end(JSON.stringify(response));
+	    })
+	    .catch(function (err) {
+	    console.log(err)
+	})
+});
 
 
 

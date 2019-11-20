@@ -43,7 +43,8 @@ urlConstant = {
         BANNER_IAMGE_STATUS_API_POST        :   config.API_HOST_URL+'/updatebannerstatusimage',
 
         
-        ITINERARIES_GET_URL			        :   config.API_HOST_URL+'/getitinerary',	
+        ITINERARIES_GET_URL			        :   config.API_HOST_URL+'/getitinerary',
+        ITINERARIES_ADDON_URL               :   config.API_HOST_URL+'/updateitineraryaddon',	
         ITINERARIES_ADD_URL			        :   config.API_HOST_URL+'/additinerary',	
         ITINERARIES_ALL_LIST_URL            :   config.API_HOST_URL+'/allitinerary',
         ITINERARIES_IMAGE_UPLOAD            :   config.API_HOST_URL+'/itineraryimageupload',	
@@ -51,6 +52,7 @@ urlConstant = {
         ITINERARIES_IAMGE_DELETE_API_POST   :   config.API_HOST_URL+'/itineraryimagedelete',
         ITINERARIES_DEPARTURE_API_REQUEST   :   config.API_HOST_URL+'/itinerarydeparture',
         ITINERARIES_DEPARTURE_DELETE        :   config.API_HOST_URL+'/departuredelete',
+        ITINERARIES_ADDON_DELETE            :   config.API_HOST_URL+'/itineraryaddondelete',
         ITINERARIES_DELETE                  :   config.API_HOST_URL+'/itinerarydelete',
         ITINERARIES_DAYS_GET_URL            :   config.API_HOST_URL+'/itinerarydayslist',
         ITINERARIES_DAY_ADD_URL             :   config.API_HOST_URL+'/additinerarydays',
