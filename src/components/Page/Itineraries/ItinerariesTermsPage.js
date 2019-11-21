@@ -284,7 +284,7 @@ class ItinerariesTermsPage extends React.Component{
       return(
 
             <div className="content-wrapper">
-            <Breadcrum title="Add Itinerary Terms & Conditions" titleRight='All Itinerary List' url='allitineraries' />
+            <Breadcrum title="Add Travel Experience Terms & Conditions" titleRight='All Travel Experience List' url='allitineraries' />
             <SweetAlert
               dangerMode={true}
               showCancelButton={this.state.showCancelButton}
@@ -307,7 +307,7 @@ class ItinerariesTermsPage extends React.Component{
             <div className="overlay" show={isOverlay}><i className="fa fa-refresh fa-spin"></i></div>
               <div className="box-header with-border">
               <i className="glyphicon glyphicon-calendar"></i>
-                <h3 className="box-title">{this.state.itinerariesName} Itinerary Addon List</h3>
+                <h3 className="box-title">{this.state.itinerariesName} Travel Experience Addon List</h3>
               </div>
               <div className="box-body no-padding">
               <table className="table table-striped" style={{'font-size':'12px'}}>

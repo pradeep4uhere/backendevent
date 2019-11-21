@@ -221,7 +221,7 @@ class ItinerariesDepatureTimingPage extends React.Component{
           this.setState({ 
             sATitle : 'Deleted !',
             sAClass : 'Success',
-            sAText  : 'Itineriy departure Timing Deleted!',
+            sAText  : 'Travel Experience departure Timing Deleted!',
             sAImg   : DoneImg,
             show    : true,
             event_detail_id:'',
@@ -275,7 +275,7 @@ class ItinerariesDepatureTimingPage extends React.Component{
       return(
 
             <div className="content-wrapper">
-            <Breadcrum title="Edit Itinerary Departure Date" titleRight='All Itinerary List' url='allitineraries' />
+            <Breadcrum title="Edit Travel Experience Departure Date" titleRight='All Travel Experience List' url='allitineraries' />
             <SweetAlert
               dangerMode={true}
               showCancelButton={this.state.showCancelButton}
@@ -298,7 +298,7 @@ class ItinerariesDepatureTimingPage extends React.Component{
             <div className="overlay" show={isOverlay}><i className="fa fa-refresh fa-spin"></i></div>
               <div className="box-header with-border">
               <i className="glyphicon glyphicon-calendar"></i>
-                <h3 className="box-title">{this.state.itinerariesName} Itinerary Departure List</h3>
+                <h3 className="box-title">{this.state.itinerariesName} Travel Experience Departure List</h3>
               </div>
               <div className="box-body no-padding">
               <table className="table table-striped" style={{'font-size':'12px'}}>
@@ -320,23 +320,23 @@ class ItinerariesDepatureTimingPage extends React.Component{
             <div className="box box-solid">
               <div className="box-header with-border">
                 <i className="fa fa-pencil" />
-                <h3 className="box-title">Add/Update Itinerary Departure</h3>
+                <h3 className="box-title">Add/Update Travel Experience Departure</h3>
               </div>
               {(isMsg)?(<div className={classstr}>{message}</div>):(<div></div>)}
               <form role="form" onSubmit={this.handleSubmit}  id="form-event">
                 <div className="box-body">
                     <div className={"form-group col-md-12"}>
-                        <dt>Itinerary Detail</dt>
+                        <dt>Travel Experience Detail</dt>
                         <input type="text" id="itinerary_name" className="form-control" value={this.state.itinerariesName} readOnly="readonly"/>
                         <input type="hidden" id="itinerary_id" className="form-control" value={this.state.itinerariesId} />
                     </div>
                     <div className={"form-group col-md-12"}>
-                        <dt>Itinerary Price</dt>
+                        <dt>Travel Experience Price</dt>
                         <input type="text" id="price" className="form-control" />
                     </div>
                     <div className="bootstrap-timepicker col-md-6">
                     <div className={"form-group"}>
-                    <dt>Itinerary Start Date:</dt>
+                    <dt>Travel Experience Start Date:</dt>
                     <div className="input-group">
                       
                       <div className="input-group-addon">
@@ -348,7 +348,7 @@ class ItinerariesDepatureTimingPage extends React.Component{
                     </div>
                     <div className="bootstrap-timepicker col-md-6">
                     <div className={"form-group"}>
-                    <dt>Itinerary End Date:</dt>
+                    <dt>Travel Experience End Date:</dt>
                     <div className="input-group">
                       <div className="input-group-addon">
                       <i className="glyphicon glyphicon-calendar"></i>

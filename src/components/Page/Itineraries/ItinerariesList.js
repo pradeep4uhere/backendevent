@@ -23,7 +23,7 @@ class ItinerariesList extends React.Component{
     return(
         <div className="content-wrapper">
         {/* Import Breadcrup component boxes here */}
-        <Breadcrum title="All Itineraries List" titleRight="Dashboard" url="/dashboard" />
+        <Breadcrum title="All Travel Experience List" titleRight="Dashboard" url="/dashboard" />
             <section className="content">
             <div className="row">
             <div className="col-md-12">

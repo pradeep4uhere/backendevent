@@ -243,7 +243,7 @@ class ItinerariesGalleryPage extends React.Component{
                 
                 <div className="content-wrapper">
                 {/* Import Breadcrup component boxes here */}
-                <Breadcrum title="Itinerary Image Gallery" titleRight='All Itineraries List' url='allitineraries' />
+                <Breadcrum title="Travel Experience Image Gallery" titleRight='All Travel Experience List' url='allitineraries' />
                     <section className="content">
                     <div className="row">
                     
@@ -273,7 +273,7 @@ class ItinerariesGalleryPage extends React.Component{
                     <div className="col-md-8">
                     <div className="box box-info">
                     <div className="box-header with-border">
-                    <h3 className="box-title">Upload New Image </h3>
+                    <h3 className="box-title">Upload New Image For Travel Experience</h3>
                     </div>
                     <div className="box-body">
                     <ImageUploader

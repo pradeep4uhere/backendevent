@@ -102,13 +102,14 @@ class AllItinerariesList extends React.Component{
                 /************datatable Strat*************/
                 this.state.dataTable.rows.map((val,i) =>{
                     
-                    var dataStr = <div><a title="View Itinerary Detail" href={Constants.APP_FRONT+'destinationexpdetails/'+val.id} target="_blank" ><i className="fa fa-eye"></i></a>&nbsp;&nbsp;<a title="View Itinerary Days" href={"viewitinerariedays?"+val.id}><i className="fa fa-map"></i></a>&nbsp;&nbsp;
-                    <a title="Add Itinerary Addon" href={"itinerariesaddon?"+val.id}><i className="fa fa-file"></i></a>&nbsp;&nbsp;
-                    <a title="Add Itinerary Terms & Conditions" href={"itinerariestrems?"+val.id}><i className="fa fa-gear"></i></a>&nbsp;&nbsp;
-                    <a title="View Itinerary Gallery" href={"itinerariesgallery?"+val.id}><i className="fa fa-image"></i></a>&nbsp;&nbsp;
-                    <a title="View Itinerary Departure Dates" href={"depaturetiming?"+val.id}><i className="glyphicon glyphicon-calendar"></i></a>&nbsp;&nbsp;
-                    <a title="Edit Itinerary" href={"edititinerarie?"+val.id}><i className="fa fa-pencil"></i></a>&nbsp;&nbsp; 
-                    <a title="Delete Itinerary" href="#" onClick={((e) => this.deleteForm(e, val.id))}><i className="fa fa-trash"></i></a></div>;
+                    var dataStr = <div><a title="View Travel Experience Detail" href={Constants.APP_FRONT+'destinationexpdetails/'+val.id} target="_blank" ><i className="fa fa-eye"></i></a>&nbsp;&nbsp;
+                    <a title="View Travel Experience Days" href={"viewitinerariedays?"+val.id}><i className="fa fa-map"></i></a>&nbsp;&nbsp;
+                    <a title="Add Travel Experience Addon" href={"itinerariesaddon?"+val.id}><i className="fa fa-file"></i></a>&nbsp;&nbsp;
+                    <a title="Add Travel Experience Terms & Conditions" href={"itinerariestrems?"+val.id}><i className="fa fa-gear"></i></a>&nbsp;&nbsp;
+                    <a title="View Travel Experience Gallery" href={"itinerariesgallery?"+val.id}><i className="fa fa-image"></i></a>&nbsp;&nbsp;
+                    <a title="View Travel Experience Departure Dates" href={"depaturetiming?"+val.id}><i className="glyphicon glyphicon-calendar"></i></a>&nbsp;&nbsp;
+                    <a title="Edit Travel Experience" href={"edititinerarie?"+val.id}><i className="fa fa-pencil"></i></a>&nbsp;&nbsp; 
+                    <a title="Delete Travel Experience" href="#" onClick={((e) => this.deleteForm(e, val.id))}><i className="fa fa-trash"></i></a></div>;
                     this.state.dataTable.rows[i].action = dataStr;
 
                     var statusStr = (val.status==1)?(<span className='badge bg-green' title="Active Itinerary" >Active</span>):(<span className='badge bg-red' title="InActive Itinerary">InActive</span>)
@@ -240,12 +241,12 @@ class AllItinerariesList extends React.Component{
             <td>{(val.status==1)?(<span className='badge bg-green' title="Active Itinerary" >Active</span>):(<span className='badge bg-red' title="InActive Itinerary">InActive</span>)}</td>
             <td><Moment format="DD-MMM-YYYY">{val.created_at}</Moment></td>
             <td>
-                <a title="View Itinerary Detail" href={Constants.APP_FRONT+'destinationexpdetails/'+val.id} target="_blank" ><i className="fa fa-eye"></i></a>&nbsp;&nbsp;
-                <a title="View Itinerary Days" href={"viewitinerariedays?"+val.id}><i className="fa fa-map"></i></a>&nbsp;&nbsp;
-                <a title="View Itinerary Gallery" href={"itinerariesgallery?"+val.id}><i className="fa fa-image"></i></a>&nbsp;&nbsp;
-                <a title="View Itinerary Departure Dates" href={"depaturetiming?"+val.id}><i className="glyphicon glyphicon-calendar"></i></a>&nbsp;&nbsp;
-                <a title="Edit Itinerary" href={"edititinerarie?"+val.id}><i className="fa fa-pencil"></i></a>&nbsp;&nbsp; 
-                <a title="Delete Itinerary" href="#" onClick={((e) => this.deleteForm(e, val.id))}><i className="fa fa-trash"></i></a>
+                <a title="View Travel Experience Detail" href={Constants.APP_FRONT+'destinationexpdetails/'+val.id} target="_blank" ><i className="fa fa-eye"></i></a>&nbsp;&nbsp;
+                <a title="View Travel Experience Days" href={"viewitinerariedays?"+val.id}><i className="fa fa-map"></i></a>&nbsp;&nbsp;
+                <a title="View Travel Experience Gallery" href={"itinerariesgallery?"+val.id}><i className="fa fa-image"></i></a>&nbsp;&nbsp;
+                <a title="View Travel Experience Departure Dates" href={"depaturetiming?"+val.id}><i className="glyphicon glyphicon-calendar"></i></a>&nbsp;&nbsp;
+                <a title="Edit Travel Experience" href={"edititinerarie?"+val.id}><i className="fa fa-pencil"></i></a>&nbsp;&nbsp; 
+                <a title="Delete Travel Experience" href="#" onClick={((e) => this.deleteForm(e, val.id))}><i className="fa fa-trash"></i></a>
            </td>
         </tr>
         );
@@ -259,9 +260,9 @@ class AllItinerariesList extends React.Component{
                 
                 <div className="box box-info">
                 <div className="box-header with-border">
-                <h3 className="box-title">Latest Itinerary List</h3>
+                <h3 className="box-title">Latest Travel Experience List</h3>
                 <div className="box-tools pull-right">
-                <a href={'/additineraries'} className="btn btn-danger pull-right"><i className="fa fa-plus"></i>&nbsp;Add New Itinerary</a>
+                <a href={'/additineraries'} className="btn btn-danger pull-right"><i className="fa fa-plus"></i>&nbsp;Add New Travel Experience</a>
                 </div>
                 </div>
                 {/* /.box-header */}

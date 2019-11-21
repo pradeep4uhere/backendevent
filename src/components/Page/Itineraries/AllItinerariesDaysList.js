@@ -160,7 +160,7 @@ class AllItinerariesDaysList extends React.Component{
             <td><Moment format="DD-MMM-YYYY">{val.created_at}</Moment></td>
             <td>
                 <a title="View Itinerary Day Gallery" href={"itinerariesdaysgallery?"+val.id}><i className="fa fa-image"></i></a>&nbsp;&nbsp;
-                <a title="Edit Itinerary Day" href={"edititinerarie?"+val.id}><i className="fa fa-pencil"></i></a>&nbsp;&nbsp; 
+                <a title="Edit Itinerary Day" href={"edititinerarieday?"+val.id}><i className="fa fa-pencil"></i></a>&nbsp;&nbsp; 
                 <a title="Delete Itinerary Day" href="#" onClick={((e) => this.deleteForm(e, val.id))}><i className="fa fa-trash"></i></a></td>
         </tr>
         );
@@ -175,7 +175,7 @@ class AllItinerariesDaysList extends React.Component{
                 <div className="box-header with-border">
                 <h3 className="box-title">{titleName} Itinerary Days List</h3>
                 <div className="box-tools pull-right">
-                <a href={'/additineraryday?'+id} className="btn btn-box-tool"><i className="fa fa-plus" />&nbsp;Add New Itinerary Day</a>
+                <a href={'/additineraryday?'+id} className="btn btn-box-tool btn-danger"><i className="fa fa-plus" />&nbsp;Add New Itinerary Day</a>
                 </div>
                 </div>
                 {/* /.box-header */}

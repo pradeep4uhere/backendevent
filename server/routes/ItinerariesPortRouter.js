@@ -17,6 +17,8 @@ const EVENT_IAMGE_STATUS_API_POST   = urlConstant.EVENT_IAMGE_STATUS_API_POST;
 const ITINERARIES_GET_URL           = urlConstant.ITINERARIES_GET_URL;
 const ITINERARIES_ADDON_ADD_URL     = urlConstant.ITINERARIES_ADDON_URL;
 const ITINERARIES_ADD_URL           = urlConstant.ITINERARIES_ADD_URL;
+const ITINERARIES_DAY_UPDATE_URL    = urlConstant.ITINERARIES_DAY_UPDATE_URL;
+const ITINERARIES_DAY_GET_URL       = urlConstant.ITINERARIES_DAY_GET_URL;
 const ITINERARIES_LIST_URL	        = urlConstant.ITINERARIES_ALL_LIST_URL;
 const ITINERARIES_IMAGE_UPLOAD      = urlConstant.ITINERARIES_IMAGE_UPLOAD;
 const ITINERARIES_IAMGE_DEFAULT_API_POST  = urlConstant.ITINERARIES_IAMGE_DEFAULT_API_POST;
@@ -73,6 +75,46 @@ ItinerariesPortRouter.route('/additinerary').post(function (req, res,next) {
 });
 
 
+
+
+/**************ADD NEW EVENT API Start Here**********************************/
+ItinerariesPortRouter.route('/updateitinerarydays').post(function (req, res,next) {
+    var token        	= req.body.token;
+    var id        	    = req.body.event.id;
+    var day        	    = req.body.event.day;
+    var place_name      = req.body.event.place_name;
+    var details         = req.body.event.details;
+    var status          = req.body.event.status;
+    var itinerary_id    = req.body.event.itinerary_id;
+    var postData ={
+        id          : id,
+        day         : day,
+        place_name  : place_name,
+        details     : details,
+        status      : status,
+        itinerary_id: itinerary_id,
+        token	    : token,
+    }
+   
+    console.log(postData);
+    const options = {
+        method: 'POST',
+        uri: ITINERARIES_DAY_UPDATE_URL,
+        body: postData,
+        json: true,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+        },
+    }
+    request(options)
+	    .then(function (response) {
+	        console.log(response)
+	        res.end(JSON.stringify(response));
+	    })
+	    .catch(function (err) {
+	        console.log(err)
+	})
+});
 
 
 /**************ADD NEW EVENT API Start Here**********************************/
@@ -279,6 +321,42 @@ ItinerariesPortRouter.route('/allitinerarydays').post(function (req, res,next) {
 });
 
 
+
+
+/**************GET getitinerary day DETAILS API Start Here**********************************/
+ItinerariesPortRouter.route('/getitineraryday').post(function (req, res,next) {
+    var token        	= req.body.token;
+    var id              = req.body.id;
+    var postData ={
+        token	    : token,
+        id          : id
+    }
+    const options = {
+            method: 'POST',
+            uri: ITINERARIES_DAY_GET_URL,
+            body: postData,
+            json: true,
+            headers: {
+                'Authorization': 'Bearer ' + token,
+            },
+    }
+    console.log('========================================================');
+    console.log('======================Post Data=========================');
+    console.log(options);
+    console.log('========================================================');
+    
+    request(options)
+	    .then(function (response) {
+            console.log('========================================================');
+            console.log('===================Response Data========================');
+            console.log(response)
+            console.log('========================================================');
+	        res.end(JSON.stringify(response));
+	    })
+	    .catch(function (err) {
+	        console.log(err)
+	})
+});
 
 
 /**************GET EVENT DETAILS API Start Here**********************************/

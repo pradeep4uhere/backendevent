@@ -58,6 +58,7 @@ class EventTimingPage extends React.Component{
         this.deleteForm       = this.deleteForm.bind(this);
         this.handleChange     = this.handleChange.bind(this);
         this.editForm         = this.editForm.bind(this);
+        this.resetForm        = this.resetForm.bind(this);
     }
 
 
@@ -92,6 +93,21 @@ class EventTimingPage extends React.Component{
       });
       $('#status').val(data.status);
 
+
+    }
+
+
+    resetForm(event){
+      event.preventDefault();
+      $('#title').val('');
+      $('#embedUrl').val('');
+      $('#status').val(1);
+      this.setState({
+        id:'',
+        title:'',
+        status:'',
+        url:''
+      });
 
     }
 
@@ -285,7 +301,7 @@ class EventTimingPage extends React.Component{
                 <div class="box-footer">
                 <input type="hidden" id="id"  class="form-control" value={this.state.id}/>
                 <button type="submit" class="btn btn-primary  pull-right">Submit</button>&nbsp;&nbsp;
-                <button type="reset" class="btn btn-danger  pull-right" style={{"margin-right":"5px"}}>Reset</button>&nbsp;&nbsp;
+                <button type="reset" class="btn btn-danger  pull-right" onClick={((e) => this.resetForm(e))} style={{"margin-right":"5px"}}>Reset</button>&nbsp;&nbsp;
                 </div>
                 </form>
                 </div>

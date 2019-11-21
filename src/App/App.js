@@ -20,6 +20,7 @@ import ItinerariesTerms from  '../components/ItinerariesTerms';
 
 import EditItineraries  from '../components/EditItineraries';
 import AddItinerariesDay from '../components/AddItinerariesDay';
+import EditItinerariesDay from '../components/EditItinerariesDay';
 
 
 import AddDestination from '../components/AddDestination';
@@ -126,6 +127,7 @@ render() {
               <Route path="/itinerariesdaysgallery/:id?" component={ItinerariesDayGallery}/>
               <Route path="/depaturetiming/:id?" component={ItinerariesDepatureTiming}/>
               <Route path="/additineraryday/:id?" component={AddItinerariesDay}/>
+              <Route path="/edititinerarieday/:id?" component={EditItinerariesDay}  />
               
 
               <Route path="/setting" component={Setting} exact />

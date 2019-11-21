@@ -23,7 +23,7 @@ class AddItinerariesDayPage extends React.Component{
         return(
                 <div className="content-wrapper">
                 {/* Import Breadcrup component boxes here */}
-                <Breadcrum title="Add Itinerary Day" />
+                <Breadcrum title="Add Travel Experience Day" titleRight={"All Travel Experience"} url={'allitineraries'}/>
                     <section className="content">
                     <div className="row">
                     <div className="col-md-12">

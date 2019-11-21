@@ -1,32 +1,33 @@
 /*
- * @PageName    :: EventAddPage.js
+ * @PageName    :: EditItinerariesDayPage.js
  * @Author      :: Pradeep Kumar
  * @Description :: This component used for add new event 
  * @Created Date:: 09 May 2019
  */
 import React from 'react';
-import ItinerariesForm from '../Itineraries/ItinerariesForm';
+import EditItinerariesDayForm from '../Itineraries/EditItinerariesDayForm';
 import Breadcrum from '../../BreadcrumPage';
-class AddItinerariesPage extends React.Component{
+class EditItinerariesDayPage extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
             isMsg           : false,
             className       : '',
-            message         : ''
-
+            message         : '',
+            id              : this.props.id
         };
     }
     render(){
+        const { id } = this.state
         return(
                 <div className="content-wrapper">
                 {/* Import Breadcrup component boxes here */}
-                <Breadcrum title="Add New Travel Experience " titleRight="All Travel Experience" url={'allitineraries'} />
+                   <Breadcrum title="Edit Itinerary Day" titleRight={'All Itineraries Days'} url={'allitineraries'}/>
                     <section className="content">
                     <div className="row">
-                    <div className="col-md-12">
-                        <ItinerariesForm/>
-                    </div>
+                     <div className="col-md-12">
+                        <EditItinerariesDayForm id={id}/>
+                     </div>
                     </div>
                     </section>
                     {/* /.content */}
@@ -34,4 +35,4 @@ class AddItinerariesPage extends React.Component{
            );
     };
 }
-export default AddItinerariesPage;
+export default EditItinerariesDayPage;

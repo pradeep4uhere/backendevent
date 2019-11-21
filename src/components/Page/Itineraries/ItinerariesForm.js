@@ -129,17 +129,16 @@ class ItinerariesForm extends React.Component{
             <div className="row">
             <div className="col-md-12">
             {this.renderRedirect()}
-            <Message title={MsgClass} Msg={Msg} show={show}/>
             {(isMsg)?(<div className={classstr}>{message}</div>):(<div></div>)}
             <div className="box box-success">
                 <div className="box-header with-border">
-                <h3 className="box-title">Add New Itinerary</h3>
+                <h3 className="box-title">Add New Travel Experience</h3>
                 </div>
                 <div className="box-body">
                 <form role="form" onSubmit={this.handleSubmit} enctype="multipart/form-data" id="form-event">
                     <div className="box-body">
                     <div className={"form-group"+" "+hasTError}>
-                        <dt>Itinerary Title</dt>
+                        <dt>Title</dt>
                         <input type="text" className="form-control" id="title" placeholder="Enter event title" />
                     </div>
                     <div className={"form-group"+" "+hasDesError}>

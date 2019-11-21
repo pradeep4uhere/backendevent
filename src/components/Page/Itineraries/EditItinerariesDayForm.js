@@ -1,18 +1,21 @@
 /*
- * @PageName    :: AddItinerariesDayForm.js
+ * @PageName    :: EditItinerariesForm.js
  * @Author      :: Pradeep Kumar
  * @Description :: This component used for add new event 
- * @Created Date:: 30 Oct 2019
+ * @Created Date:: 18 Oct 2019
  */
 import React from 'react';
 import axios from 'axios';
 import $ from 'jquery';
 import { Redirect } from 'react-router-dom'
 import Constants  from '../../../config/Constants'
-const urlEventStr   = Constants.ITINERARIES_URL;
-const urlStr        = Constants.ITINERARIES_ADD_DAYS_URL;
-const token         = localStorage.getItem('token');
-class AddItinerariesDayForm extends React.Component{
+import Message from '../../../components/Message';
+import CKEditor from 'ckeditor4-react';
+
+const urlDayStr    = Constants.ITINERARIES_DAY_URL;
+const urlStr = Constants.ITINERARY_DAY_UPDATE_URL;
+const token     = localStorage.getItem('token');
+class EditItinerariesDayForm extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
@@ -20,41 +23,45 @@ class AddItinerariesDayForm extends React.Component{
             className       : '',
             message         : '',
             MsgClass        : 'info',
-            Msg             : 'Please Enter all Travel Experience details here',
+            Msg             : 'Please Enter all itinerary day details here',
             show            : true,
             hasTError       : '',
             hasDesError     : '',
             hasDError       : '',
             hasSError       : '',
             latest_id       : '',
+            addon           : '',
+            description     : '',
             redirectUrl     : false,
             id              : this.props.id
         };
         this.handleSubmit   = this.handleSubmit.bind(this);
-        this.getItinerariesDetails =  this.getItinerariesDetails.bind(this);
+        this.getItinerariesDayDetails =  this.getItinerariesDayDetails.bind(this);
+        this.handleChangeDescription= this.handleChangeDescription.bind(this);
+        this.handleChange           = this.handleChange.bind(this);
     }
     /**********Login Form Handle********************/
     handleSubmit(event) {
         event.preventDefault();
-        var day             = event.target.title.value;
-        var place_name      = event.target.place.value;
-        var details         = event.target.description.value;
-        var itinerary_id    = this.state.id;
-        var status          = event.target.status.value;
+        var day         = event.target.day.value;
+        var details     = this.state.details;
+        var	place_name  = this.state.place_name;
+        var status      = event.target.status.value;
+        var id          = this.state.id;
 
         //Validation all the fields here
         if(day==''){
             this.setState({ 
                 isMsg : true, 
                 classstr  : 'alert alert-danger', 
-                message   : 'Please enter title of the travel experience', 
+                message   : 'Please enter title of the day', 
                 hasTError : 'has-error' });
-        }else if(place_name==''){
-            this.setState({ isMsg : true, classstr  : 'alert alert-danger', message   : 'Please enter place of the itinerary', hasDesError : 'has-error' });
         }else if(details==''){
-            this.setState({ isMsg : true, classstr  : 'alert alert-danger', message   : 'Please choose place details of the itinerary', hasDError : 'has-error' });
+            this.setState({ isMsg : true, classstr  : 'alert alert-danger', message   : 'Please enter description of the itinerary day', hasDesError : 'has-error' });
+        }else if(place_name==''){
+            this.setState({ isMsg : true, classstr  : 'alert alert-danger', message   : 'Please choose addon of the itinerary day', hasDError : 'has-error' });
         }else if(status==''){
-            this.setState({ isMsg : true, classstr  : 'alert alert-danger', message   : 'Please select status of the itinerary', hasSError : 'has-error' });
+            this.setState({ isMsg : true, classstr  : 'alert alert-danger', message   : 'Please select status of the itinerary  day', hasSError : 'has-error' });
         }else{
             this.setState({ isMsg : false});
             this.setState({ hasDesError : ''});
@@ -63,14 +70,15 @@ class AddItinerariesDayForm extends React.Component{
             this.setState({ hasTError : ''});
         }
 
-        if(day!='' && details!='' && place_name!=''){
+        if(day!='' && place_name!='' && details!=''){
             const formData = {
                 event        : {
                     day         : day,
                     place_name  : place_name,
                     details     : details,
-                    itinerary_id: itinerary_id,
-                    status      : status
+                    status      : status,
+                    id          : this.state.id,
+                    itinerary_id: ''
                 },
                 token       : token
             }
@@ -108,33 +116,58 @@ class AddItinerariesDayForm extends React.Component{
        
     }
 
+    handleChange(e) {
+        var strid = e.target.id;
+        if(strid=='place_name'){
+            this.setState({
+                  place_name : e.target.value
+                });
+        }
+        if(strid=='day'){
+            this.setState({
+                    day : e.target.value
+            });
+        }
+        if(strid=='status'){
+            this.setState({
+                   status : e.target.value
+            });
+        }
+    }
+
+
     renderRedirect = () => {
         if (this.state.redirectUrl) {
-          return <Redirect to={"/viewitinerariedays?"+this.state.id} />
+          //return <Redirect to={"/viewitinerariedays?"+this.state.itinerary_id} />
         }
       }
 
 
 
-    getItinerariesDetails(){
+    getItinerariesDayDetails(){
         this.setState({
           isOverlay  : true
         });
         var tokenStr = token;
         const formData = {
             token     : tokenStr,
-            event_id  : this.props.id
+            id  : this.props.id
         }
         //alert(formData.event_id);
-        axios.post(urlEventStr, formData)
+        axios.post(urlDayStr, formData)
         .then((response) => {
           if(response.data[0].code==200) {
               this.setState({
-                  event_detail: response.data[0].data,
-                  isOverlay  : false,  
+                  itinerary_day: response.data[0].itinerary_day,
+                  day: response.data[0].itinerary_day.day,
+                  place_name:response.data[0].itinerary_day.place_name,
+                  details:response.data[0].itinerary_day.details,
+                  status:response.data[0].itinerary_day.status,
+                  itinerary_id:response.data[0].itinerary_day.itinerary_id,
+                  itineraryName:response.data[0].itinerary_day.itinerary.title,
+                  
+                  isOverlay   : false,  
               });
-              console.log(this.state.event_detail);
-              $("#titleName").html(this.state.event_detail.title);
               $('.overlay').hide();
           }
           else
@@ -151,9 +184,13 @@ class AddItinerariesDayForm extends React.Component{
     
 
       componentDidMount(){
-        this.getItinerariesDetails();
+        this.getItinerariesDayDetails();
       }
 
+
+       handleChangeDescription(changeEvent) {
+        this.setState({ details: changeEvent.editor.getData() });
+       }
       
     render(){
         const { MsgClass }      = this.state;
@@ -167,10 +204,7 @@ class AddItinerariesDayForm extends React.Component{
         const { classstr }      = this.state;
         const { message }       = this.state;
         const { redirectUrl }   = this.state;
-        // let  itineraryName      =  this.state.event_detail.title; 
-
-        //alert(MsgClass+ show + Msg);
-        console.log(this.state);
+        console.log(this.state.itinerary_day);
         return(
             <div className="row">
             <div className="col-md-12">
@@ -178,27 +212,33 @@ class AddItinerariesDayForm extends React.Component{
             {(isMsg)?(<div className={classstr}>{message}</div>):(<div></div>)}
             <div className="box box-success">
                 <div className="box-header with-border">
-                <h3 className="box-title">Add Day into Travel Experience:: <span id="titleName"></span></h3>
+                <h3 className="box-title">Update Itinerary Day:: {this.state.itineraryName}</h3>
+                <a href={"/viewitinerariedays?"+this.state.itinerary_id} className="pull-right btn btn-info"><i class="fa fa-arrow-circle-left"></i> View All Days</a>
                 </div>
                 <div className="box-body">
-                <form role="form" onSubmit={this.handleSubmit}  id="form-event">
+                <form role="form" onSubmit={this.handleSubmit} enctype="multipart/form-data" id="form-event">
                     <div className="box-body">
                     <div className={"form-group"+" "+hasTError}>
                         <dt>Place Name</dt>
-                        <input type="text" className="form-control" id="title" placeholder="Enter event title" />
+                        <input type="text" className="form-control" id="place_name" placeholder="Enter place title" value={this.state.place_name} onChange = { this.handleChange.bind(this)}/>
                     </div>
                     <div className={"form-group"+" "+hasTError}>
                         <dt>Day Name</dt>
-                        <input type="text" className="form-control" id="place" placeholder="Enter place name" />
+                        <input type="text" className="form-control" id="day" placeholder="Enter Day title" value={this.state.day} onChange = { this.handleChange.bind(this)}/>
                     </div>
                     <div className={"form-group"+" "+hasDesError}>
                         <dt htmlFor="exampleInputPassword1">Place Details</dt>
-                        <textarea  className="form-control" id="description" placeholder="Enter place details" ></textarea>
+                        <CKEditor 
+                            id="details"  
+                            data={this.state.details}  
+                            type="classic"
+                            onChange={this.handleChangeDescription}
+                            
+                        />
                     </div>
-
                     <div className={"form-group"+" "+hasSError}>
                     <dt htmlFor="inputEmail3">Status</dt>
-                            <select className="form-control" id="status">
+                            <select className="form-control" id="status" onChange = { this.handleChange.bind(this)}>
                                 <option value="1">Active</option>
                                 <option value="0">In Active</option>
                             </select>
@@ -206,7 +246,7 @@ class AddItinerariesDayForm extends React.Component{
                     </div>
                     {/* /.box-body */}
                     <div className="box-footer">
-                    <button type="submit" className="btn btn-default">Cancel</button>&nbsp;
+                    <button type="reset" onClick="javascript:history.go(-1)" className="btn btn-danger">Cancel</button>&nbsp;
                     <button type="submit" className="btn btn-primary">Submit</button>
                     </div>
                 </form>
@@ -218,4 +258,4 @@ class AddItinerariesDayForm extends React.Component{
     };
 }
 
-export default AddItinerariesDayForm;
+export default EditItinerariesDayForm;

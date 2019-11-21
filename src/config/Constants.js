@@ -43,6 +43,8 @@ export const Constants = {
 	ITINERARY_DELETE_API		: AppUrl+'/itineraries/itinerariesdelete', 
 	ITINERARIES_DAYS_LIST_URL	: AppUrl+'/itineraries/allitinerarydays',	 
 	ITINERARIES_ADD_DAYS_URL	: AppUrl+'/itineraries/additinerarydays',	
+	ITINERARY_DAY_UPDATE_URL	: AppUrl+'/itineraries/updateitinerarydays',	
+	ITINERARIES_DAY_URL			: AppUrl+'/itineraries/getitineraryday',	
 	ITINERARY_DAY_DELETE_API	: AppUrl+'/itineraries/deleteItinerarydays',
 	ITINERARIES_DAY_IMAGE_UPLOAD: AppUrl+'/itineraries/uploaddayimage',   
 	ITINERARIES_DAY_DEFAULT_IMAGE_API: AppUrl+'/itineraries/defaultdayimage', 
