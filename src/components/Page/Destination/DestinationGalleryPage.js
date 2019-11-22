@@ -32,6 +32,8 @@ class DestinationGalleryPage extends React.Component{
             className       : '',
             message         : '',
             pictures        : [],
+            details         : [],
+            titleText       : '',
             ImageGallery    : [
                                     {
                                             src: "https://c2.staticflickr.com/9/8817/28973449265_07e3aa5d2e_b.jpg",
@@ -113,7 +115,8 @@ class DestinationGalleryPage extends React.Component{
         .then((response) => {
         if(response.data.data.code==200) {
             this.setState({
-                ImageGallery:response.data.data.imagesList
+                ImageGallery:response.data.data.imagesList,
+                titleText    :response.data.data.details.title
             });
         }else{
             this.setState({ 
@@ -245,14 +248,14 @@ class DestinationGalleryPage extends React.Component{
         return(
                 <div className="content-wrapper">
                 {/* Import Breadcrup component boxes here */}
-                <Breadcrum title="Destination Image Gallery" titleRight='All Destination List' url='alldestination' />
+                <Breadcrum title={"Destination Image Gallery"}  titleRight='All Destination List' url='alldestination' />
                     <section className="content">
                     <div className="row">
 
                     <div className="col-md-4">
                     <div className="box box-info">
                     <div className="box-header with-border">
-                    <h3 className="box-title">All Image List</h3>
+                    <h3 className="box-title">{this.state.titleText}:: All Image List</h3>
                     </div>
                     {(isMsg)?(<div className={classstr}>{message}</div>):(<div></div>)}
                     <div className="box-body">
@@ -275,7 +278,7 @@ class DestinationGalleryPage extends React.Component{
                     <div className="col-md-8">
                     <div className="box box-info">
                     <div className="box-header with-border">
-                    <h3 className="box-title">Upload New Image </h3>
+                    <h3 className="box-title">{this.state.titleText}:: Upload New Image </h3>
                     </div>
                     <div className="box-body">
                     <ImageUploader

@@ -30,6 +30,7 @@ class ItinerariesDayGalleryPage extends React.Component{
             eventId         : this.props.id,
             className       : '',
             message         : '',
+            titleText       : '',
             pictures        : [],
             itineraryDay    : {},
             ImageGallery    : [
@@ -114,7 +115,8 @@ class ItinerariesDayGalleryPage extends React.Component{
         if(response.data.data.code==200) {
             this.setState({
                 ImageGallery:response.data.data.imagesList,
-                itineraryDay:response.data.data.itineraryDay
+                itineraryDay:response.data.data.itineraryDay,
+                titleText:response.data.data.itineraryDay.title
             });
             console.log(this.state.itineraryDay);
         }else{
@@ -258,7 +260,7 @@ class ItinerariesDayGalleryPage extends React.Component{
                     <div className="col-md-4">
                     <div className="box box-info">
                     <div className="box-header with-border">
-                    <h3 className="box-title">{dayName} All Image List</h3>
+                    <h3 className="box-title"><b>{dayName}</b>:: All Image List</h3>
                     </div>
                     {(isMsg)?(<div className={classstr}>{message}</div>):(<div></div>)}
                     <div className="box-body">
@@ -281,7 +283,7 @@ class ItinerariesDayGalleryPage extends React.Component{
                     <div className="col-md-8">
                     <div className="box box-info">
                     <div className="box-header with-border">
-                    <h3 className="box-title">{dayName} Upload New Image </h3>
+                    <h3 className="box-title"><b>{dayName}</b>:: Upload New Image </h3>
                     </div>
                     <div className="box-body">
                     <ImageUploader

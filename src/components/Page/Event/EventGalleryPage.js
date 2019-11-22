@@ -29,8 +29,10 @@ class EventGalleryPage extends React.Component{
         this.state = {
             isMsg           : false,
             eventId         : this.props.id,
+            titleText       : '',
             className       : '',
             message         : '',
+            oldPictureFile  : [],
             pictures        : [],
             ImageGallery    : [
                                     {
@@ -56,14 +58,17 @@ class EventGalleryPage extends React.Component{
         this.onDrop         = this.onDrop.bind(this);
         this.getGalleryList = this.getGalleryList.bind(this); 
         this.updateFeatureStatus = this.updateFeatureStatus.bind(this);
+        this.updateContainer    = this.updateContainer.bind(this);
+    }
+    updateContainer(){
+        //$(".uploadPicturesWrapper").html("");
     }
 
-
     onDrop(pictureFiles, pictureDataURLs) {
-		this.setState({
+      // $(".uploadPicturesWrapper").html("");
+       this.setState({
             pictures: this.state.pictures.concat(pictureFiles),
         });
-
         const formData={
             id : this.props.id,
             token:token,
@@ -114,7 +119,8 @@ class EventGalleryPage extends React.Component{
         .then((response) => {
         if(response.data.data.code==200) {
             this.setState({
-                ImageGallery:response.data.data.imagesList
+                ImageGallery:response.data.data.imagesList,
+                titleText:response.data.data.eventArr.title
             });
         }else{
             this.setState({ 
@@ -291,7 +297,7 @@ class EventGalleryPage extends React.Component{
                     <div className="col-md-4">
                     <div className="box box-info">
                     <div className="box-header with-border">
-                    <h3 className="box-title">All Image List</h3>
+                    <h3 className="box-title">{this.state.titleText}:: All Image List</h3>
                     </div>
                     {(isMsg)?(<div className={classstr}>{message}</div>):(<div></div>)}
                     <div className="box-body">
@@ -314,7 +320,7 @@ class EventGalleryPage extends React.Component{
                     <div className="col-md-8">
                     <div className="box box-info">
                     <div className="box-header with-border">
-                    <h3 className="box-title">Upload New Image </h3>
+                    <h3 className="box-title">{this.state.titleText}:: Upload New Image </h3>
                     </div>
                     <div className="box-body">
                     <ImageUploader
@@ -324,6 +330,7 @@ class EventGalleryPage extends React.Component{
                         imgExtension={['.jpg', '.gif', '.png', '.gif', '.jpeg']}
                         maxFileSize={5242880}
                         withPreview={true}
+                        onClick={this.updateContainer()}
                     />
                     <hr/>
                     <Gallery images={ImageGallery}/>

@@ -71,6 +71,7 @@ urlConstant = {
         THEATRE_UPDATE_POST                 :   config.API_HOST_URL+'/updatetheatre',
         THEATRE_UPDATE_SEAT                 :   config.API_HOST_URL+'/updatetheatreseat',
         GET_THEATHRE_API_POST               :   config.API_HOST_URL+'/gettheatrebyid',
+        THEATHRE_DELETE_API_POST            :   config.API_HOST_URL+'/deletetheatrebyid',
 
         ADD_SEAT_API                        :   config.API_HOST_URL+'/addseat',
         GET_SEAT_API                        :   config.API_HOST_URL+'/getseattinglist',

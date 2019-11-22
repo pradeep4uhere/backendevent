@@ -276,6 +276,7 @@ class EventTimingPage extends React.Component{
               <div className="box-header with-border">
                 <i className="fa fa-text-width" />
                 <h3 className="box-title">Add/Update Video</h3>
+                <a href="/allviedos" className={"btn btn-sm btn-danger pull-right"}><i className="fa fa-plus"></i>Add New</a>
               </div>
               {(isMsg)?(<div className={classstr}>{message}</div>):(<div></div>)}
               <form role="form" onSubmit={this.handleSubmit}  id="form-event">

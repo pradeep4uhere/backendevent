@@ -12,8 +12,12 @@ import Message from '../../../components/Message';
 import Moment from 'react-moment';  
 import $ from 'jquery';
 import { MDBDataTable } from 'mdbreact';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+
 //const urlStr1    = Constants.EVENT_LIST_URL;
 const urlStr    = Constants.THEATRE_LIST_URL;
+const urlDeleteStr = Constants.THEATRE_DELETE_LIST_URL;
 const token     = localStorage.getItem('token');
 class AllTheatreList extends React.Component{
     constructor(props) {
@@ -35,7 +39,8 @@ class AllTheatreList extends React.Component{
         this.capitalize         = this.capitalize.bind(this);
 
         this.stripHtml          = this.stripHtml.bind(this);
-        this.handleRouteClick   =   this.handleRouteClick.bind(this);
+        this.handleRouteClick   = this.handleRouteClick.bind(this);
+        this.remove             = this.remove.bind(this);
  
     }
 
@@ -60,6 +65,48 @@ class AllTheatreList extends React.Component{
         
         
     };
+
+    submit = (e,val) => {
+        console.log(val);
+        confirmAlert({
+          title: 'You want to delete theater "'+ val.theater_name+'" ?',
+          message: 'Are you sure to do this.',
+          buttons: [
+            {
+              label: 'Yes',
+              onClick: () => this.remove(val.id) 
+              
+            },
+            {
+              label: 'No',
+              onClick: () =>  false
+            }
+          ]
+        });
+      };
+
+    remove(id){
+        var tokenStr = token;
+        const formData = {
+            token    : tokenStr,
+            id       : id
+        }
+        axios.post(urlDeleteStr, formData)
+        .then((response) => {
+          if(response.data.code==200) {
+                this.getTheatreList();
+                this.setState({
+                });
+            }else{
+                this.setState({isMsg:true});
+                this.setState({className:'error'});
+            }
+        })
+        .catch((err) => {
+            this.setState({isMsg:true});
+            this.setState({className:'error'});
+        })
+    }
    
     /******Get all the user list here********/   
     getTheatreList(){
@@ -81,7 +128,7 @@ class AllTheatreList extends React.Component{
                     
                     var dataStr = <div><a href={"edittheatre?"+val.id} title="Edit Theatre"><i className="fa fa-pencil"></i></a>&nbsp;&nbsp;
                                  <a href={"addseat?"+val.id+'|1'} title="Add Seats"><i className="fa fa-wheelchair"></i></a>&nbsp;&nbsp;
-                                 {/* <a href="#" title="Edit Delete"><i className="fa fa-trash-o"></i></a> */}
+                                 <a href="#" onClick={((e) => this.submit(e,val))} title="Edit Delete"><i className="fa fa-trash-o"></i></a>
                                  </div>;
                     this.state.dataTable.rows[i].action = dataStr;
 

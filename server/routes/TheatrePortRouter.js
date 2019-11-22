@@ -14,6 +14,7 @@ const GET_API_POST   		        = urlConstant.THEATRE_GET_POST;
 const UPDATE_POST                   = urlConstant.THEATRE_UPDATE_POST;
 const THEATRE_UPDATE_SEAT           = urlConstant.THEATRE_UPDATE_SEAT;
 const GET_THEATHRE_API_POST         = urlConstant.GET_THEATHRE_API_POST;
+const GET_THEATHRE_DELETE_API_POST  = urlConstant.THEATHRE_DELETE_API_POST;
 
 
 
@@ -164,6 +165,39 @@ TheatrePortRouter.route('/gettheatrebyid').post(function (req, res,next) {
 	        console.log(err)
 	})
 });
+
+
+
+
+TheatrePortRouter.route('/deletetheatre').post(function (req, res,next) {
+    var token      	= req.body.token;
+    var id        	= req.body.id;
+
+    var postData ={
+        token   : token,
+        id      : id, 
+    }
+    const options = {
+        method: 'POST',
+        uri: GET_THEATHRE_DELETE_API_POST,
+        body: postData,
+        json: true,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+        },
+    }
+    
+    console.log(postData);
+    request(options)
+	    .then(function (response) {
+	        console.log(response)
+	        res.end(JSON.stringify(response));
+	    })
+	    .catch(function (err) {
+	        console.log(err)
+	})
+});
+
 
 
 

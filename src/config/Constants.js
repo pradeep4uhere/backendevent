@@ -77,6 +77,7 @@ export const Constants = {
 	THEATRE_GET_URL				: AppUrl+'/theatreport/gettheatre',
 	THEATRE_URL					: AppUrl+'/theatreport/gettheatrebyid',
 	THEATRE_UPDATE_URL			: AppUrl+'/theatreport/updatetheatre',
+	THEATRE_DELETE_LIST_URL		: AppUrl+'/theatreport/deletetheatre',
 	
 	IMAGE_UPLOAD				: AppUrl+'/eventport/uploadimage',
 	EVENT_BANNER_IMAGE_UPLOAD	: AppUrl+'/eventport/eventbannerupload',

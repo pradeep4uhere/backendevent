@@ -29,6 +29,7 @@ class ItinerariesGalleryPage extends React.Component{
             isMsg           : false,
             eventId         : this.props.id,
             className       : '',
+            titleText       : '',
             message         : '',
             pictures        : [],
             ImageGallery    : [
@@ -111,7 +112,8 @@ class ItinerariesGalleryPage extends React.Component{
         .then((response) => {
         if(response.data.data.code==200) {
             this.setState({
-                ImageGallery:response.data.data.imagesList
+                ImageGallery:response.data.data.imagesList,
+                titleText:response.data.data.details.title
             });
         }else{
             this.setState({ 
@@ -250,7 +252,7 @@ class ItinerariesGalleryPage extends React.Component{
                     <div className="col-md-4">
                     <div className="box box-info">
                     <div className="box-header with-border">
-                    <h3 className="box-title">All Image List</h3>
+                    <h3 className="box-title">{this.state.titleText}:: All Image List</h3>
                     </div>
                     {(isMsg)?(<div className={classstr}>{message}</div>):(<div></div>)}
                     <div className="box-body">
@@ -273,7 +275,7 @@ class ItinerariesGalleryPage extends React.Component{
                     <div className="col-md-8">
                     <div className="box box-info">
                     <div className="box-header with-border">
-                    <h3 className="box-title">Upload New Image For Travel Experience</h3>
+                    <h3 className="box-title">{this.state.titleText}::Upload New Image </h3>
                     </div>
                     <div className="box-body">
                     <ImageUploader

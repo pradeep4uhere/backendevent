@@ -17,7 +17,9 @@ import SittingType from '../../../json/SittingType';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import "react-tabs/style/react-tabs.css";
 import CKEditor from 'ckeditor4-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import 'rc-time-picker/assets/index.css';
+import TimePicker from 'rc-time-picker';
+import moment from 'moment';
 
 var serialize = require('form-serialize');
 
@@ -64,7 +66,8 @@ class EventTimingPage extends React.Component{
           includes : 'Enter includes details here',
           dincludes: 'Enter do not includes details here',
           other    : 'Enter other details here',
-          titleText: 'Add'
+          titleText: 'Add',
+          value: moment(),
         };
         this.getEventDetails  = this.getEventDetails.bind(this);
         this.getTheatreList   = this.getTheatreList.bind(this);
@@ -226,6 +229,12 @@ class EventTimingPage extends React.Component{
         {
           this.setState({isMsg:true});
           this.setState({className:'error'});
+          this.setState({
+              message     : response.message,
+              classstr    : 'alert alert-danger',
+              className   : 'error',
+              isMsg       : true,
+           });
         }
       })
       .catch((err) => {
@@ -536,7 +545,7 @@ class EventTimingPage extends React.Component{
                 <h3 className="box-title">{titleText} Event Timing
                 </h3>
                 <div class="box-tools pull-right">
-                <a href={"/eventtiming?"+this.state.eventId}><span class="label label-default">Add New Timing</span></a>
+                <a href={"/eventtiming?"+this.state.eventId} className="btn btn-danger btn-sm"><i className="fa fa-plus"></i>&nbsp;Add New Timing</a>
                   </div>
               </div>
               {(isMsg)?(<div className={classstr}>{message}</div>):(<div></div>)}
@@ -560,19 +569,34 @@ class EventTimingPage extends React.Component{
                     <dt>Event Start time:</dt>
                     <small>Total durration of the event in minutes only</small>
                     <div className="input-group">
-                      <input type="text" class="form-control timepicker" id="event_start_time" name="event_start_time"/>
+                    <TimePicker 
+                        defaultValue={this.state.value} 
+                        onChange={this.handleValueChange}   
+                        id="event_start_time"
+                        inputReadOnly 
+                        className="form-control"
+                        clearIcon={""}
+                      />
                       <div className="input-group-addon">
-                      <i className="fa fa-clock-o"></i>
+                        <i className="fa fa-clock-o"></i>
+                      </div>
                       </div>
                     </div>
-                    </div>
+                    
                     </div>
                     <div className="bootstrap-timepicker col-md-6">
                     <div className={"form-group"}>
                     <dt>Event End Time:</dt>
                     <small>Total durration of the event in minutes only</small>
                     <div className="input-group">
-                      <input type="text" class="form-control timepicker" id="event_end_time" name="event_end_time"/>
+                      <TimePicker 
+                          defaultValue={this.state.value} 
+                          onChange={this.handleValueChange}   
+                          id="event_end_time"
+                          inputReadOnly 
+                          className="form-control"
+                          clearIcon={""}
+                        />
                       <div className="input-group-addon">
                       <i className="fa fa-clock-o"></i>
                       </div>
@@ -594,10 +618,10 @@ class EventTimingPage extends React.Component{
                     <div className="col-md-12">
                     <div className={"form-group"}>
                     <dt className="pull-right" show={this.state.showRemoveBtn}>
-                    <a href="#" id="removeBtn"  onClick={((e) => this.removeRow(e))}><i className="fa fa-trash"></i>&nbsp;Remove Price</a>
+                    <a href="#" id="removeBtn"  onClick={((e) => this.removeRow(e))} className="btn btn-danger btn-sm"><i className="fa fa-trash"></i>&nbsp;Remove Price</a>
                     </dt>
                     <dt className="pull-left">                      
-                    <a href="#" id="addBtn" onClick={((e) => this.addRow(e))}><i className="fa fa-plus"></i>&nbsp;Add Price</a>
+                    <a href="#" id="addBtn" onClick={((e) => this.addRow(e))} className="btn btn-success btn-sm"><i className="fa fa-plus"></i>&nbsp;Add Price</a>
                     </dt>
                     </div>
                     </div>
@@ -624,6 +648,13 @@ class EventTimingPage extends React.Component{
                               data={this.state.itinerary}  
                               type="classic"
                               onChange={this.handleChangeTextItinerary}
+                              toolbar={{         
+                                toolbar: ['heading', '|', 'bold', 'italic', 'blockQuote', 'link', 'numberedList', 'bulletedList', 'imageUpload', 'insertTable',
+                                  'tableColumn', 'tableRow', 'mergeTableCells', 'mediaEmbed', '|', 'undo', 'redo']
+                              }} 
+                              config={ {
+                                toolbar: [ ['Bold','Italic','Block Quote','Format','NumberedList','BulletedList','Table', 'mergeTableCells','Link','Copy', 'Paste','Undo', 'Redo','Underline,JustifyCenter'] ]
+                            } }
                           />
                           </div>
                         </div>
@@ -633,6 +664,10 @@ class EventTimingPage extends React.Component{
                               data={this.state.includes}  
                               type="classic"
                               onChange={this.handleChangeTextIncludes}
+                              config={ {
+                                toolbar: [ ['Bold','Italic','Block Quote','Format','NumberedList','BulletedList','Table', 'mergeTableCells','Link','Copy', 'Paste','Undo', 'Redo','Underline,JustifyCenter'] ]
+                            } }
+
                               
                           />
                         </div>
@@ -642,6 +677,10 @@ class EventTimingPage extends React.Component{
                                 data={this.state.dincludes}  
                                 type="classic"
                                 onChange={this.handleChangeTextDincludes}
+                                config={ {
+                                  toolbar: [ ['Bold','Italic','Block Quote','Format','NumberedList','BulletedList','Table', 'mergeTableCells','Link','Copy', 'Paste','Undo', 'Redo','Underline,JustifyCenter'] ]
+                              } }
+  
                                 
                             />
                         </div>
@@ -651,6 +690,10 @@ class EventTimingPage extends React.Component{
                                 data={this.state.other}  
                                 type="classic"
                                 onChange={this.handleChangeTextOther}
+                                config={ {
+                                  toolbar: [ ['Bold','Italic','Block Quote','Format','NumberedList','BulletedList','Table', 'mergeTableCells','Link','Copy', 'Paste','Undo', 'Redo','Underline,JustifyCenter'] ]
+                              } }
+  
                                 
                             />
                         </div>
