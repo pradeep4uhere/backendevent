@@ -81,7 +81,8 @@ class AllTheatreList extends React.Component{
                     
                     var dataStr = <div><a href={"edittheatre?"+val.id} title="Edit Theatre"><i className="fa fa-pencil"></i></a>&nbsp;&nbsp;
                                  <a href={"addseat?"+val.id+'|1'} title="Add Seats"><i className="fa fa-wheelchair"></i></a>&nbsp;&nbsp;
-                                 <a href="#" title="Edit Delete"><i className="fa fa-trash-o"></i></a></div>;
+                                 {/* <a href="#" title="Edit Delete"><i className="fa fa-trash-o"></i></a> */}
+                                 </div>;
                     this.state.dataTable.rows[i].action = dataStr;
 
                     var statusStr = (val.status==1)?(<span className='badge bg-green' title="Active Itinerary" >Active</span>):(<span className='badge bg-red' title="InActive Itinerary">InActive</span>)
@@ -139,24 +140,6 @@ class AllTheatreList extends React.Component{
        const { redirectPage }       =  this.state;
        const { dataTable }          =  this.state;
        console.log("theatreList==============="+this.state.theatreList);
-
-    //    let optionItems = theatreList.map((val,i) =>
-    //     <tr>
-    //         <td>{val.id}</td>
-    //         <td>{val.theater_name}</td>
-    //         <td>{val.address}</td>
-    //         <td>{val.company_name}</td>
-    //         <td>{val.contact_number}</td>
-    //         <td>{val.email_address}</td>
-    //         <td>{(val.status==1)?(<span className='label label-success'>Active</span>):(<span className='label label-danger'>In Active</span>)}</td>
-    //         <td><Moment format="DD-MMM-YYYY">{val.created_at}</Moment></td>
-    //         <td>
-               
-    //             <a href={"edittheatre?"+val.id} title="Edit Theatre"><i className="fa fa-pencil"></i></a>&nbsp;&nbsp;
-    //             <a href={"addseat?"+val.id+'|1'} title="Add Seats"><i className="fa fa-wheelchair"></i></a>&nbsp;&nbsp;
-    //             <a href="#" title="Edit Delete"><i className="fa fa-trash-o"></i></a></td>
-    //     </tr>
-    //     );
         if (redirectToReferrer === true) {
             return <Redirect to={"/"+redirectPage}/>;
         }
