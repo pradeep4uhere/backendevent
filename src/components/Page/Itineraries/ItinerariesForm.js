@@ -8,6 +8,7 @@ import React from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom'
 import Constants  from '../../../config/Constants'
+import CKEditor from 'ckeditor4-react';
 import Message from '../../../components/Message';
 const urlStr = Constants.ITINERARIES_ADD_URL;
 const token     = localStorage.getItem('token');
@@ -26,16 +27,18 @@ class ItinerariesForm extends React.Component{
             hasDError       : '',
             hasSError       : '',
             latest_id       : '',
+            description     : '',
             redirectUrl     : false
         };
         this.handleSubmit   = this.handleSubmit.bind(this);
+        this.handleChangeAddOn  = this.handleChangeAddOn.bind(this);
     }
     /**********Login Form Handle********************/
     handleSubmit(event) {
         event.preventDefault();
         var title       = event.target.title.value;
-        var description = event.target.description.value;
-        var addon       = event.target.addon.value;
+        var description = this.state.description;
+        var trip_type       = event.target.trip_type.value;
         var status      = event.target.status.value;
 
         //Validation all the fields here
@@ -47,8 +50,6 @@ class ItinerariesForm extends React.Component{
                 hasTError : 'has-error' });
         }else if(description==''){
             this.setState({ isMsg : true, classstr  : 'alert alert-danger', message   : 'Please enter description of the itinerary', hasDesError : 'has-error' });
-        }else if(addon==''){
-            this.setState({ isMsg : true, classstr  : 'alert alert-danger', message   : 'Please choose addon of the itinerary', hasDError : 'has-error' });
         }else if(status==''){
             this.setState({ isMsg : true, classstr  : 'alert alert-danger', message   : 'Please select status of the itinerary', hasSError : 'has-error' });
         }else{
@@ -59,12 +60,12 @@ class ItinerariesForm extends React.Component{
             this.setState({ hasTError : ''});
         }
 
-        if(title!='' && description!='' && addon!=''){
+        if(title!='' && description!=''){
             const formData = {
                 event        : {
                     title       : title,
-                    description : description,
-                    addon       : addon,
+                    description : this.state.description,
+                    addon       : trip_type,
                     status      : status
                 },
                 token       : token
@@ -109,6 +110,10 @@ class ItinerariesForm extends React.Component{
         }
       }
     
+
+    handleChangeAddOn(changeEvent) {
+    this.setState({ description: changeEvent.editor.getData() });
+    }
     render(){
         const { MsgClass }      = this.state;
         const { Msg }           = this.state;
@@ -143,15 +148,22 @@ class ItinerariesForm extends React.Component{
                     </div>
                     <div className={"form-group"+" "+hasDesError}>
                         <dt htmlFor="exampleInputPassword1">Description</dt>
-                        <textarea id="description" name="description" rows="10" cols="80"  className="form-control">
-                           
-                        </textarea>
+                        <CKEditor 
+                            id="description"  
+                            data={this.state.description}  
+                            type="classic"
+                            onChange={this.handleChangeAddOn}
+                            
+                        />
                     </div>
 
-                    <div className={"form-group"+" "+hasDesError}>
-                        <dt htmlFor="exampleInputPassword1">Add On</dt>
-                        <textarea id="addon" name="addon" rows="10" cols="80"  className="form-control"></textarea>
-                    </div>
+                    <div className={"form-group"+" "+hasSError}>
+                    <dt htmlFor="inputEmail3">Trip Type</dt>
+                            <select className="form-control" id="trip_type">
+                                <option value="Short Trip">Short Trip</option>
+                                <option value="Long Trip">Long Trip</option>
+                            </select>
+                     </div>
 
                     
                     <div className={"form-group"+" "+hasSError}>

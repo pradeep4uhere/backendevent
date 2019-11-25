@@ -162,6 +162,9 @@ ItinerariesPortRouter.route('/updatetineraryaddon').post(function (req, res,next
     var token        	= req.body.token;
     var title        	= req.body.title;
     var description     = req.body.description;
+    var addon_descriptions  = req.body.addon_descriptions;
+    var addon_includes  = req.body.addon_includes;
+    var description     = req.body.description;
     var type            = req.body.type;
     var status          = req.body.status;
     var id              = req.body.id;
@@ -170,6 +173,8 @@ ItinerariesPortRouter.route('/updatetineraryaddon').post(function (req, res,next
         id          : id,
         title       : title,
         description : description,
+        addon_descriptions:addon_descriptions,
+        addon_includes:addon_includes,
         status      : status,
         token	    : token,
         type        : type,

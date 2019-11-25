@@ -225,29 +225,7 @@ class AllLatestDestinationList extends React.Component{
        const { classstr }      = this.state;
        const { message }       = this.state;
        const { dataTable }     = this.state;
-
-    //    let optionItems = eventList.map((val,i) =>
-    //     <tr>
-    //         <td><a href="#">{val.id}</a></td>
-    //         <td><a href="#" title="Click to Add Details" onClick={this.handleRouteClick} id={val.id+'|details'}>{val.title}</a></td>
-    //         <td><a data-tip={this.stripHtml(val.descriptions)}>{this.stripHtml(val.descriptions).substring(0,50)}</a>
-    //             {/* <ReactTooltip className='extraClass'  delayHide={500} type="success" effect="solid"/> */}
-    //         </td>
-    //         <td>{val.altitude}</td>
-    //         <td>{val.climate}</td>
-    //         <td>{val.population}</td>
-    //         <td>{this.stripHtml(val.shopping).substring(0,50)}</td>
-    //         <td>{this.stripHtml(val.cuisine).substring(0,50)}</td>
-    //         <td>{(val.status==1)?(<span className='label label-success'>Active</span>):(<span className='label label-danger'>In Active</span>)}</td>
-            
-    //         <td>
-    //             <a title="View Destination Page" href={Constants.APP_FRONT+"destinationdetails/"+val.id} target="_blank"><i className="fa fa-eye"></i></a>&nbsp;&nbsp;
-    //             <a title="Destination Gallery" href={"destinationgallery?"+val.id}><i className="fa fa-image"></i></a>&nbsp;&nbsp;
-    //             <a title="Edit Destination Page" href={"editdestination?"+val.id}><i className="fa fa-pencil"></i></a>&nbsp;&nbsp; 
-    //             <a title="Delete Destination Page" href="#" onClick={(e) => this.deletedestination(val.id)} id={val.id}><i className="fa fa-trash"></i></a></td>
-    //     </tr>
-    //     );
-        if (redirectToReferrer === true) {
+       if (redirectToReferrer === true) {
             return <Redirect to={"/"+redirectPage}/>;
         }
         return(
@@ -273,29 +251,6 @@ class AllLatestDestinationList extends React.Component{
                 data={dataTable}
                 exportToCSV={true}
                 />
-                <div className="table-responsive">
-                
-                {/* <table id="example1" class="table table-bordered table-striped" style={{"font-size":"12px"}}>
-                    <thead>
-                    <tr>
-                        <th>SN</th>
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th>Altitude</th>
-                        <th>Climate</th>
-                        <th>Population</th>
-                        <th>Shopping</th>
-                        <th>Cuisine</th>
-                        <th>Status</th>
-                        
-                        <th nowrap="nowrap" style={{"width":"95px"}}>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {optionItems}
-                    </tbody>
-                </table> */}
-                </div>
                 {/* /.table-responsive */}
                 </div>
               

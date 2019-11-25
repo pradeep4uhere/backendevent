@@ -45,7 +45,7 @@ class EditItinerariesForm extends React.Component{
         event.preventDefault();
         var title       = event.target.title.value;
         var description = this.state.description;
-        var addon       = this.state.addon;
+        var trip_type   = event.target.trip_type.value;
         var status      = event.target.status.value;
         var id          = this.state.id;
 
@@ -58,8 +58,6 @@ class EditItinerariesForm extends React.Component{
                 hasTError : 'has-error' });
         }else if(description==''){
             this.setState({ isMsg : true, classstr  : 'alert alert-danger', message   : 'Please enter description of the itinerary', hasDesError : 'has-error' });
-        }else if(addon==''){
-            this.setState({ isMsg : true, classstr  : 'alert alert-danger', message   : 'Please choose addon of the itinerary', hasDError : 'has-error' });
         }else if(status==''){
             this.setState({ isMsg : true, classstr  : 'alert alert-danger', message   : 'Please select status of the itinerary', hasSError : 'has-error' });
         }else{
@@ -70,12 +68,12 @@ class EditItinerariesForm extends React.Component{
             this.setState({ hasTError : ''});
         }
 
-        if(title!='' && description!='' && addon!=''){
+        if(title!='' && description!=''){
             const formData = {
                 event        : {
                     title       : title,
                     description : description,
-                    addon       : addon,
+                    addon   : trip_type,
                     status      : status,
                     id          : this.state.id
                 },
@@ -138,14 +136,14 @@ class EditItinerariesForm extends React.Component{
           if(response.data[0].code==200) {
               this.setState({
                   event_detail: response.data[0].data,
-                  addon       : response.data[0].data.addon,
+                  trip_type   : response.data[0].data.trip_type,
                   description : response.data[0].data.description,
                   isOverlay   : false,  
               });
               console.log(this.state.event_detail);
               $("#title").val(this.state.event_detail.title);
               $("#description").val(this.state.description);
-              $("#addon").val(this.state.addon);
+              $("#trip_type").val(this.state.trip_type);
               $("#status").val(this.state.event_detail.status);
               $('.overlay').hide();
           }
@@ -221,16 +219,13 @@ class EditItinerariesForm extends React.Component{
                         />
                     </div>
 
-                    <div className={"form-group"+" "+hasDesError}>
-                        <dt htmlFor="exampleInputPassword1">Add On</dt>
-                        <CKEditor 
-                            id="addon"  
-                            data={this.state.addon}  
-                            type="classic"
-                            onChange={this.handleChangeAddOn}
-                            
-                        />
-                    </div>
+                    <div className={"form-group"+" "+hasSError}>
+                    <dt htmlFor="inputEmail3">Trip Type</dt>
+                            <select className="form-control" id="trip_type">
+                                <option value="Short Trip">Short Trip</option>
+                                <option value="Long Trip">Long Trip</option>
+                            </select>
+                     </div>
 
                     
                     <div className={"form-group"+" "+hasSError}>

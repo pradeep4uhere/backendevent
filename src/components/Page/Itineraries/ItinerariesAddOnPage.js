@@ -48,7 +48,10 @@ class ItinerariesAddOnPage extends React.Component{
           sAImg:DoneImg,
           showCancelButton:true,
           confirmButtonColor:'#FF0000',
-          showRemoveBtn:false
+          showRemoveBtn:false,
+          addon_descriptions:'',
+          addon_includes: ''
+
         };
         this.getItinerariesDetails  = this.getItinerariesDetails.bind(this);
         this.handleSubmit     = this.handleSubmit.bind(this);
@@ -57,6 +60,9 @@ class ItinerariesAddOnPage extends React.Component{
         this.DeleteNow        = this.DeleteNow.bind(this);
         this.handleChange     = this.handleChange.bind(this);
         this.handleChangeAddOn= this.handleChangeAddOn.bind(this);
+        this.handleChangeIncludes= this.handleChangeIncludes.bind(this);
+        this.handleChangeDestination= this.handleChangeDestination.bind(this);
+
         
     }
 
@@ -97,6 +103,7 @@ class ItinerariesAddOnPage extends React.Component{
                 isOverlay  : false,
 
             });
+            console.log(response.data[0].data.itinerary_addon);
             $('.overlay').hide();
         }
         else
@@ -119,21 +126,25 @@ class ItinerariesAddOnPage extends React.Component{
     handleSubmit(event){
       var tokenStr = token;
       event.preventDefault();
-      var id              = event.target.id.value;;
-      var itinerary_id    = event.target.itinerary_id.value;
-      var title           = event.target.title.value;
-      var descriptions    = this.state.addon;
-      var status          = event.target.status.value;
+      var id                = event.target.id.value;;
+      var itinerary_id      = event.target.itinerary_id.value;
+      var title             = event.target.title.value;
+      var descriptions      = this.state.addon;
+      var addon_descriptions = this.state.addon_descriptions;
+      var addon_includes    = this.state.includes;
+      var status            = event.target.status.value;
       const form = event.currentTarget
       const body = serialize(form, {hash: true,empty:true})
       const formData = {
-          token           : tokenStr,
-          itinerary_id    : itinerary_id,
-          title           : title,
-          description     : this.state.addon,
-          status          : status,
-          id              : id,
-          body            : body
+          token               : tokenStr,
+          itinerary_id        : itinerary_id,
+          title               : title,
+          description         : this.state.addon,
+          addon_descriptions   :addon_descriptions,
+          addon_includes      :addon_includes,
+          status              : status,
+          id                  : id,
+          body                : body
       }
       axios.post(urlItineraryUpdate, formData)
       .then((response) => {
@@ -174,6 +185,8 @@ class ItinerariesAddOnPage extends React.Component{
       $('#id').val(obj.id);
       $('#title').val(obj.title);
       this.setState({addon:obj.descriptions});
+      this.setState({addon_descriptions:obj.addon_description});
+      this.setState({includes:obj.addon_includes});
       $('#status').val(obj.status);
       $('#id').val(obj.id);
     }
@@ -249,6 +262,13 @@ class ItinerariesAddOnPage extends React.Component{
     handleChangeAddOn(changeEvent) {
       this.setState({ addon: changeEvent.editor.getData() });
      }
+     handleChangeDestination(changeEvent) {
+      this.setState({ addon_descriptions: changeEvent.editor.getData() });
+     }
+     handleChangeIncludes(changeEvent) {
+      this.setState({ includes: changeEvent.editor.getData() });
+     }
+     
     
     render(){
       const { event } = this.state;
@@ -328,6 +348,7 @@ class ItinerariesAddOnPage extends React.Component{
               <div className="box-header with-border">
                 <i className="fa fa-pencil" />
                 <h3 className="box-title">Add/Update Itinerary Addon</h3>
+                <a className="btn btn-danger btn-sm pull-right" href={'itinerariesaddon?'+this.state.itinerariesId}><i className="fa fa-plus"></i> Add New Addon</a>
               </div>
               {(isMsg)?(<div className={classstr}>{message}</div>):(<div></div>)}
               <form role="form" onSubmit={this.handleSubmit}  id="form-event">
@@ -344,6 +365,35 @@ class ItinerariesAddOnPage extends React.Component{
                             data={this.state.addon}  
                             type="classic"
                             onChange={this.handleChangeAddOn}
+                            config={ {
+                              toolbar: [ ['Bold','Italic','Block Quote','Format','NumberedList','BulletedList','Table', 'mergeTableCells','Link','Copy', 'Paste','Undo', 'Redo','Underline,JustifyCenter'] ]
+                          } }
+                            
+                        />
+                    </div>
+                    <div className={"form-group col-md-12"}>
+                        <dt>Destination</dt>
+                        <CKEditor 
+                            id="destination"  
+                            data={this.state.addon_descriptions}  
+                            type="classic"
+                            onChange={this.handleChangeDestination}
+                            config={ {
+                              toolbar: [ ['Bold','Italic','Block Quote','Format','NumberedList','BulletedList','Table', 'mergeTableCells','Link','Copy', 'Paste','Undo', 'Redo','Underline,JustifyCenter'] ]
+                          } }
+                            
+                        />
+                    </div>
+                    <div className={"form-group col-md-12"}>
+                        <dt>Includes</dt>
+                        <CKEditor 
+                            id="includes"  
+                            data={this.state.includes}  
+                            type="classic"
+                            onChange={this.handleChangeIncludes}
+                            config={ {
+                              toolbar: [ ['Bold','Italic','Block Quote','Format','NumberedList','BulletedList','Table', 'mergeTableCells','Link','Copy', 'Paste','Undo', 'Redo','Underline,JustifyCenter'] ]
+                          } }
                             
                         />
                     </div>
