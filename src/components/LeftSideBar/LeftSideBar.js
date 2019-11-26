@@ -203,7 +203,7 @@ class LeftSideBar extends React.Component{
           
             <li>
               <a href="allviedos">
-                <i className="glyphicon glyphicon-calendar" /> <span>Review Viedos</span>
+                <i className="glyphicon glyphicon-calendar" /> <span>Review Videos</span>
                 <span className="pull-right-container">
                   <small className="label pull-right bg-green"></small>
                 </span>

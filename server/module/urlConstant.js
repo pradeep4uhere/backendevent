@@ -86,6 +86,11 @@ urlConstant = {
         DELETE_VIEDO_API                    :   config.API_HOST_URL+'/deleteviedos',
 
         MEMBERSHIP_PLAN_LIST_API            :   config.API_HOST_URL+'/getmembership',
+        MEMBERSHIP_PLAN_UPDATE_API          :   config.API_HOST_URL+'/updatemembership',
+        MEMBERSHIP_PLAN_DELETE_API          :   config.API_HOST_URL+'/deletemembership',
+        MEMBERSHIP_PLAN_PRICE_UPDATE_API    :   config.API_HOST_URL+'/updatemembershipprice',
+
+
         DASHBOARD_DATA                      :   config.API_HOST_URL+'/getalldashboard',
 
         ADD_DESTINATION_URL                 :   config.API_HOST_URL+'/adddestination',

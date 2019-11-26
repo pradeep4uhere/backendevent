@@ -34,10 +34,10 @@ class LocationPage extends React.Component{
             hasDesError     : '',
             hasDError       : '',
             hasSError       : '',
-            country_id      : '',
-            state_id        : '',
-            city_id         : '',
-            language_id     : '',
+            country_id      : '1',
+            state_id        : '1',
+            city_id         : '1',
+            language_id     : '1',
             event_id        : this.props.id
         };
         this.handleSubmit   = this.handleSubmit.bind(this);
@@ -204,26 +204,26 @@ class LocationPage extends React.Component{
                   <form role="form" onSubmit={this.handleSubmit}  id="form-event">
                     <dl>
                     <dt>Language</dt>
-                      <select className="form-control" id="language" name="language">
+                      <select className="form-control" id="language" name="language" value={this.state.language_id}>
                         <option value="">Choose Language</option>
                           <option value="1">Hindi</option>
                           <option value="2">English</option>
                       </select>
                     <br/>
                     <dt>Country</dt>
-                    <select className="form-control" id="country" name="country">
+                    <select className="form-control" id="country" name="country" value={this.state.country_id}>
                         <option value="">Choose Country</option>
                           {countryListOption}
                       </select>
                     <br/>
                     <dt>State</dt>
-                    <select className="form-control" id="state" name="state">
+                    <select className="form-control" id="state" name="state" value={this.state.state_id}>
                         <option value="">Choose State</option>
                           {stateListOption}
                       </select>
                     <br/>
                     <dt>City</dt>
-                    <select className="form-control" id="city" name="city">
+                    <select className="form-control" id="city" name="city"  value={this.state.city_id}>
                         <option value="">Choose City</option>
                           {cityListOption}
                       </select>

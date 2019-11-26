@@ -48,6 +48,8 @@ import PageListPage         from '../components/Page/PageListPage';
 import EditPagePage         from '../components/Page/StaticPage/EditPagePage';
 import ViedoListPage        from '../components/Page/ViedoListPage';
 import MembershipListPage   from '../components/Page/MembershipListPage';
+import MembershipListEditPage from '../components/Page/MembershipListEditPage';
+
 import EventBookingPage     from '../components/Page/EventBookingPage'; 
 import TravelBookingPage    from '../components/Page/TravelBookingPage'; 
 
@@ -115,6 +117,7 @@ class DashboardLayout extends React.Component{
               'EditPagePage'      : <EditPagePage id={id}/>,
               'ViedoListPage'     : <ViedoListPage/>, 
               'MembershipListPage': <MembershipListPage/>,
+              'MembershipListEditPage':<MembershipListEditPage id={id}/>,
               'EventBookingPage'  : <EventBookingPage/>,
               'TravelBookingPage' : <TravelBookingPage/>,
               'OrderDetailsPage'  : <OrderDetailsPage/>,

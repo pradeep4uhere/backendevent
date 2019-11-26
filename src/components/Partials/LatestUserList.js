@@ -100,17 +100,13 @@ class LatestMemberList extends React.Component{
     }
 
     capitalize(str) {
-        // var strVal = '';
-        // str = str.split('');
-        // for (var chr = 0; chr < str.length; chr++) {
-        //   strVal += str[chr].substring(0, 1).toUpperCase() + str[chr].substring(1, str[chr].length) + ' '
-        // }
         return str;
     }
 
 
     //Open Modle box for user Either we can view or edit the user details here
     openModal(e) {
+        e.preventDefault();
         var strId = e.target.id;
         var array   = strId.split("|");
         var userId  = array[0];
@@ -146,28 +142,6 @@ class LatestMemberList extends React.Component{
        const { userDetails }    =  this.state;
        const { actiontype  }    =  this.state;
        const { dataTable }     = this.state;
-    //    let optionItems = userList.map((val,i) =>
-    //     <tr>
-    //         <td><a href="#">{val.id}</a></td>
-    //         <td>{this.capitalize(val.first_name)}&nbsp;{this.capitalize(val.last_name)}</td>
-    //         <td>{this.capitalize(val.username)}</td>
-    //         <td>{val.email}</td>
-    //         <td>{val.phone}</td>
-    //         <td>{val.street_address}</td>
-    //         <td>{val.city}</td>
-    //         <td>{val.postcode}</td>
-    //         <td>{(val.status==1)?(<span className='label label-success'>Active</span>):(<span className='label label-danger'>In Active</span>)}</td>
-    //         <td><Moment format="DD-MMM-YYYY">{val.created_at}</Moment></td>
-    //         <td>
-    //             <a href={"/userorder?"+val.id} title="View User Booking"><i className="fa fa-shopping-cart"></i></a> &nbsp; 
-    //             <a href="#" onClick={this.openModal} id={val.id+'|view'} title="View User Detail"><i className="fa fa-eye"></i></a> &nbsp; 
-    //             <a title="Edit User" href="#" onClick={this.openModal} id={val.id+'|'+'edit'}><i className="fa fa-pencil"></i></a>  &nbsp; 
-    //             <a href="#" title="Delete User"><i className="fa fa-trash"></i></a>
-    //         </td>
-    //     </tr>
-    //     );
-
-        
         return(
             <div className="row">
               <div className="col-md-12">
@@ -206,28 +180,7 @@ class LatestMemberList extends React.Component{
                 data={dataTable}
                 exportToCSV={true}
                 />
-                {/* <table id="example1" class="table table-bordered table-striped">
-                    <thead>
-                    <tr>
-                        <th>SN</th>
-                        <th>Name</th>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Address</th>
-                        <th>City</th>>
-                        <th>Pincode</th>
-                        <th>Status</th>
-                        <th>Created On</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {optionItems}
-                    </tbody>
-                </table> */}
                 </div>
-                {/* /.table-responsive */}
                 </div>
                
                 </div>

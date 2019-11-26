@@ -20,7 +20,7 @@ const urlEventStr    = Constants.ITINERARIES_URL;
 const urlItineraryUpdate = Constants.ITINERARIES_UPDATE_URL;
 const urlTimeDelete = Constants.ITINERARy_DEPARTURE_DELETE_URL;
 const token     = localStorage.getItem('token');
-class ItinerariesDepatureTimingPage extends React.Component{
+class MembershipListEditPage extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
@@ -400,4 +400,4 @@ class ItinerariesDepatureTimingPage extends React.Component{
     
 }
 
-export default ItinerariesDepatureTimingPage;
+export default MembershipListEditPage;

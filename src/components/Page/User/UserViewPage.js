@@ -20,16 +20,17 @@ class UserViewPage extends React.Component{
 
     capitalize(str) {
         var strVal = '';
-        str = str.split(' ');
-        for (var chr = 0; chr < str.length; chr++) {
-          strVal += str[chr].substring(0, 1).toUpperCase() + str[chr].substring(1, str[chr].length) + ' '
-        }
-        return strVal
+        // str = str.split(' ');
+        // for (var chr = 0; chr < str.length; chr++) {
+        //   strVal += str[chr].substring(0, 1).toUpperCase() + str[chr].substring(1, str[chr].length) + ' '
+        // }
+        return str
     }
 
     
     render(){
         const { userDetails } = this.state;
+        console.log(userDetails);
         return(
             <div class="panel panel-primary">
             <div class="panel-heading">User Details</div>

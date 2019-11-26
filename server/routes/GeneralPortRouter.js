@@ -22,6 +22,10 @@ const UPDATE_VIEDO_API          = urlConstant.UPDATE_VIEDO_API;
 const GET_VIEDO_API             = urlConstant.GET_VIEDO_API;
 const DELETE_VIEDO_API          = urlConstant.DELETE_VIEDO_API;
 const MEMBERSHIP_PLAN_LIST_API  = urlConstant.MEMBERSHIP_PLAN_LIST_API;
+const MEMBERSHIP_PLAN_UPDATE_API= urlConstant.MEMBERSHIP_PLAN_UPDATE_API;
+const MEMBERSHIP_PLAN_DELETE_API= urlConstant.MEMBERSHIP_PLAN_DELETE_API;
+const MEMBERSHIP_PLAN_PRICE_UPDATE_API =  urlConstant.MEMBERSHIP_PLAN_PRICE_UPDATE_API;
+
 const DASHBOARD_DATA            = urlConstant.DASHBOARD_DATA;
 
 
@@ -502,6 +506,115 @@ GeneralPortRouter.route('/deleteviedo').post(function (req, res,next) {
 	})
 });
 
+
+
+
+
+
+GeneralPortRouter.route('/membershipplanpriceupdate').post(function (req, res,next) {
+    var token               = req.body.token;
+    var id                  = req.body.id;
+    var name                = req.body.name;
+    var monthly_price       = req.body.monthly_price;
+    var yearly_price        = req.body.yearly_price;
+    var quarterly_price     = req.body.quarterly_price;
+    var status              = req.body.status;
+
+
+    var postData ={
+            token	            : token,
+            id  	            : id,
+            name  	            : name,
+            monthly_price       : monthly_price,
+            yearly_price        : yearly_price,
+            quarterly_price     : quarterly_price,
+            status	            : status,
+    }
+    const options = {
+        method: 'POST',
+        uri: MEMBERSHIP_PLAN_PRICE_UPDATE_API,
+        body: postData,
+        json: true,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+        },
+    }
+    
+    console.log(postData);
+    request(options)
+	    .then(function (response) {
+	        console.log(response)
+	        res.end(JSON.stringify(response));
+	    })
+	    .catch(function (err) {
+	        console.log(err)
+	})
+});
+
+
+GeneralPortRouter.route('/membershipplandelete').post(function (req, res,next) {
+    var token               = req.body.token;
+    var id                  = req.body.id;
+    var postData ={
+            token	            : token,
+            id  	            : id,
+    }
+    const options = {
+        method: 'POST',
+        uri: MEMBERSHIP_PLAN_DELETE_API,
+        body: postData,
+        json: true,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+        },
+    }
+    
+    console.log(postData);
+    request(options)
+	    .then(function (response) {
+	        console.log(response)
+	        res.end(JSON.stringify(response));
+	    })
+	    .catch(function (err) {
+	        console.log(err)
+	})
+});
+
+
+
+GeneralPortRouter.route('/membershipplanupdate').post(function (req, res,next) {
+    var token               = req.body.token;
+    var id                  = req.body.id;
+    var membership_plan_id  = req.body.membership_plan_id;
+    var feature_title       = req.body.feature_title;
+    var status              = req.body.status;
+    var postData ={
+            token	            : token,
+            id  	            : id,
+            membership_plan_id  : membership_plan_id,
+            feature_title       : feature_title,
+            status              : status
+    }
+    const options = {
+        method: 'POST',
+        uri: MEMBERSHIP_PLAN_UPDATE_API,
+        body: postData,
+        json: true,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+        },
+    }
+    
+    console.log(postData);
+    request(options)
+	    .then(function (response) {
+	        console.log(response)
+	        res.end(JSON.stringify(response));
+	    })
+	    .catch(function (err) {
+	        console.log(err)
+	})
+});
 
 
 

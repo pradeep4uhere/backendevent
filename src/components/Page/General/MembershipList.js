@@ -174,7 +174,7 @@ class MembershipList extends React.Component{
                       )
                      }
                     </ul>
-                    <div class="box-footer text-center"><a href="javascript:void(0)" class="uppercase"><strong> <i className="fa fa-pencil"></i> Update</strong></a></div>
+                    <div class="box-footer text-center"><a href={"membershipedit?"+val.id} class="uppercase"><strong> <i className="fa fa-pencil"></i> Update</strong></a></div>
                 </div>
                 
                 </div>

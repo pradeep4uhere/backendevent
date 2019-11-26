@@ -30,6 +30,7 @@ const urlStr = Constants.THEATRE_LIST_URL;
 const urlEventTimeUpdate = Constants.EVENT_TIME_UPDATE_URL;
 const urlEventTimeDelete = Constants.EVENT_TIME_DELETE_URL;
 const token     = localStorage.getItem('token');
+const APP_FRONT =Constants.APP_FRONT;
 class EventTimingPage extends React.Component{
     constructor(props) {
         super(props);
@@ -431,6 +432,7 @@ class EventTimingPage extends React.Component{
               <td>{key.event_start_time}</td>
               <td>{key.event_end_time}</td>
               <td>{(key.status==1)?(<span className="badge bg-green">Active</span>):(<span className="badge bg-red">In Active</span>)}</td>
+              <td><a  target="_parent"  href={APP_FRONT+"day-exp-detail/"+val.event_id+'-'+val.event_timing[0].id} className="btn btn-sm btn-info">View Event</a></td>
               <td>
                 <a href="#"><i className="fa fa-pencil" onClick={((e) => this.EditTime(e, key))}></i></a>&nbsp;&nbsp;
                 <a href="#"><i className="fa fa-trash" onClick={this.DeleteTime} id={key.id}></i></a>
@@ -529,6 +531,7 @@ class EventTimingPage extends React.Component{
                   <th>Sitting Type / Price</th>
                   <th style={{'white-space':'nowrap'}}>Start Time</th>
                   <th style={{'white-space':'nowrap'}}>End Time</th>
+                  <th>View</th>
                   <th>Status</th>
                   <th>Action</th>
                 </tr>

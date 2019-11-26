@@ -106,8 +106,8 @@ class LatestEventList extends React.Component{
                  /************datatable Strat*************/
                  this.state.dataTable.rows.map((val,i) =>{
                     
-                    var dataStr = <div><a title="View Event Detail" href={Constants.APP_FRONT+'day-exp-detail/31-156'} target="_blank"><i className="fa fa-eye"></i></a>&nbsp;&nbsp;
-                    <a title="View Event Location" href={"eventlocation?"+val.id}><i className="fa fa-map"></i></a>&nbsp;&nbsp;
+                    var dataStr = <div>
+                    <a title="View Event Language/Location" href={"eventlocation?"+val.id}><i className="fa fa-map"></i></a>&nbsp;&nbsp;
                     <a title="View Event Gallery" href={"eventgallery?"+val.id}><i className="fa fa-image"></i></a>&nbsp;&nbsp;
                     <a title="View Event Timing" href={"eventtiming?"+val.id}><i className="fa fa-clock-o"></i></a>&nbsp;&nbsp;
                     <a title="Edit Event" href={"editevent?"+val.id}><i className="fa fa-pencil"></i></a>&nbsp;&nbsp; 
@@ -262,9 +262,7 @@ class LatestEventList extends React.Component{
                 <div className="box-header with-border">
                 <h3 className="box-title">Latest Event List</h3>
                 <div className="box-tools pull-right">
-                <button type="button" className="btn btn-box-tool" data-widget="collapse"><i className="fa fa-minus" />
-                </button>
-                <button type="button" className="btn btn-box-tool" data-widget="remove"><i className="fa fa-times" /></button>
+                <a href="/addevent" className="btn btn-sm btn-danger"><i className="fa fa-plus" />&nbsp;Add New Event</a>
                 </div>
                 </div>
                 {/* /.box-header */}
@@ -277,23 +275,6 @@ class LatestEventList extends React.Component{
                 data={dataTable}
                 exportToCSV={true}
                 />
-                {/* <table id="example1" class="table table-bordered table-striped" style={{"font-size":"12px"}}>
-                    <thead>
-                    <tr>
-                        <th>SN</th>
-                        <th>Event Name</th>
-                        <th>Durration</th>
-                        <th>Description</th>
-                        <th>Status</th>
-                        <th>Feature</th>
-                        <th>Created On</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {optionItems}
-                    </tbody>
-                </table> */}
                 </div>
                 {/* /.table-responsive */}
                 </div>

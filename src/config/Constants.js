@@ -98,7 +98,10 @@ export const Constants = {
 	VIEDO_UPDATE_URL			: AppUrl+'/general/viedoupdate',
 	VIEDO_DELETE_URL			: AppUrl+'/general/deleteviedo'	,    
 
-	MEMBERSHIP_PLAN_LIST		: AppUrl+'/general/membershipplanlist'	,    
+	MEMBERSHIP_PLAN_LIST		: AppUrl+'/general/membershipplanlist'	,  
+	MEMBERSHIP_PLAN_UPDATE_URL	: AppUrl+'/general/membershipplanupdate',
+	MEMBERSHIP_PLAN_DELETE_URL	: AppUrl+'/general/membershipplandelete',
+	MEMBERSHIP_PLAN_PRICE_UPDATE_URL	: AppUrl+'/general/membershipplanpriceupdate',
 
 	DASHBOARD_DATA				: AppUrl+'/general/getalldashboard'	,  
 	TRAVELL_BOOKING_DATA		: AppUrl+'/general/travellorderdata'	,   

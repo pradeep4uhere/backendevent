@@ -47,6 +47,7 @@ import SittingEdit    from '../components/SittingEdit';
 
 import ViedoList      from '../components/ViedoList';
 import MembershipList from '../components/MembershipList';
+import MembershipListEdit from '../components/MembershipListEdit';
 
 import EventBooking   from '../components/EventBooking';
 import TravelBooking   from '../components/TravelBooking';
@@ -135,6 +136,7 @@ render() {
               <Route path="/hello" render={() => <div>Hello</div>} />
               <Route path="/memberlist" render={() => <MemberList/>} />
               <Route path="/membership" component={MembershipList}  />
+              <Route path="/membershipedit/:id?" component={MembershipListEdit}/>
               
               <Route path="/memberlist/{:page}" component={MemberList}  />
 
