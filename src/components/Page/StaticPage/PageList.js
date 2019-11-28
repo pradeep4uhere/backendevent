@@ -141,12 +141,10 @@ class PageList extends React.Component{
        const { redirectPage }       =  this.state;
        let optionItems = list.map((val,i) =>
         <tr>
-            <td><a href="#">{val.id}</a></td>
-            <td><a href="#" title="Click to Add Details" onClick={this.handleRouteClick} id={val.id+'|details'}>{val.title}</a></td>
-            <td><a data-tip={this.stripHtml(val.description)}>{this.stripHtml(val.description).substring(0,100)}</a>
-                {/* <ReactTooltip className='extraClass'  delayHide={500} type="success" effect="solid"/> */}
-            </td>
-            <td>{val.description}</td>
+            <td>{val.id}</td>
+            <td>{val.title}</td>
+            <td>{this.stripHtml(val.description).substring(0,10)}</td>
+            <td>{(this.stripHtml(val.description)).substring(0,100)}</td>
             <td>{(val.status==1)?(<span className='label label-success'>Active</span>):(<span className='label label-danger'>In Active</span>)}</td>
             <td>
                 <a href={"/editpage?"+val.id} title="Edit Page"><i className="fa fa-pencil"></i></a>&nbsp;&nbsp; 
@@ -162,16 +160,11 @@ class PageList extends React.Component{
                 <div className="box box-info">
                 <div className="box-header with-border">
                 <h3 className="box-title">All Page List</h3>
-                <div className="box-tools pull-right">
-                <button type="button" className="btn btn-box-tool" data-widget="collapse"><i className="fa fa-minus" />
-                </button>
-                <button type="button" className="btn btn-box-tool" data-widget="remove"><i className="fa fa-times" /></button>
-                </div>
                 </div>
                 {/* /.box-header */}
                 <div className="box-body">
                 <div className="table-responsive">
-                <table id="example1" class="table table-bordered table-striped" style={{"font-size":"12px"}}>
+                <table id="example11" class="table table-bordered table-striped" style={{"font-size":"12px"}}>
                     <thead>
                     <tr>
                         <th>SN</th>

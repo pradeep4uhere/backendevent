@@ -22,7 +22,7 @@ class EditPagePage extends React.Component{
         return(
                 <div className="content-wrapper">
                 {/* Import Breadcrup component boxes here */}
-                <Breadcrum title="Edit Page" titleRight='All Page List' url='pagelist' />
+                <Breadcrum title="Edit Page" titleRight='All Page List' url='allpagelist' />
                     <section className="content">
                     <div className="row">
                     <div className="col-md-12">

@@ -119,11 +119,6 @@ class TravelBookingList extends React.Component{
                 <div className="box box-info">
                 <div className="box-header with-border">
                 <h3 className="box-title">Latest Travel Booking Orders</h3>
-                <div className="box-tools pull-right">
-                <button type="button" className="btn btn-box-tool" data-widget="collapse"><i className="fa fa-minus" />
-                </button>
-                <button type="button" className="btn btn-box-tool" data-widget="remove"><i className="fa fa-times" /></button>
-                </div>
                 </div>
                 {/* /.box-header */}
                 <div className="box-body">
@@ -135,40 +130,10 @@ class TravelBookingList extends React.Component{
                 data={dataTable}
                 exportToCSV={true}
                 />
-                {/* <table id="example1" class="table table-bordered table-striped">
-                    <thead>
-                    <tr>
-                        <th>Order ID</th>
-                        <th>Order Date</th>
-                        <th>Name</th>
-                        <th>Email Address</th>
-                        <th>Contact Number</th>
-                        <th>Status</th>
-                        <th>Total Amount</th>
-                        <th>Created Date</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        {orderList}
-                    
-                    </tbody>
-                </table> */}
                 </div>
-                {/* /.table-responsive */}
                 </div>
-                {/* /.box-body */}
-                {/* <div className="box-footer clearfix">
-                <a href="javascript:void(0)" className="btn btn-sm btn-info btn-flat pull-left">Place New Order</a>
-                <a href="javascript:void(0)" className="btn btn-sm btn-default btn-flat pull-right">View All Orders</a>
-                </div> */}
-                {/* /.box-footer */}
                 </div>
-                {/* /.box */}
-
-
                 </div>
-                {/* /.col */}
-
                 </div>
           );
     };
