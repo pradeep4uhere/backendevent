@@ -488,6 +488,7 @@ ItinerariesPortRouter.route('/itinerariesdepartureupdate').post(function (req, r
     var id        	    = req.body.id;
     var itinerary_id    = req.body.itinerary_id;
     var price        	= req.body.price;
+    var price_in_doller = req.body.price_in_doller;
     var start_date      = req.body.start_date;
     var end_date        = req.body.end_date;
     var status          = req.body.status;
@@ -498,6 +499,7 @@ ItinerariesPortRouter.route('/itinerariesdepartureupdate').post(function (req, r
             end_date        : end_date,
             status          : status,
             itinerary_id    : itinerary_id,
+            price_in_doller : price_in_doller,
             token	        : token,
     }
     const options = {

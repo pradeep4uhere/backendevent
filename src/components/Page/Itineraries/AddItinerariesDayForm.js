@@ -9,9 +9,11 @@ import axios from 'axios';
 import $ from 'jquery';
 import { Redirect } from 'react-router-dom'
 import Constants  from '../../../config/Constants'
+import CKEditor from 'ckeditor4-react';
 const urlEventStr   = Constants.ITINERARIES_URL;
 const urlStr        = Constants.ITINERARIES_ADD_DAYS_URL;
 const token         = localStorage.getItem('token');
+
 class AddItinerariesDayForm extends React.Component{
     constructor(props) {
         super(props);
@@ -28,29 +30,36 @@ class AddItinerariesDayForm extends React.Component{
             hasSError       : '',
             latest_id       : '',
             redirectUrl     : false,
+            description     : '',
             id              : this.props.id
         };
         this.handleSubmit   = this.handleSubmit.bind(this);
         this.getItinerariesDetails =  this.getItinerariesDetails.bind(this);
+        this.handleChangeDescription= this.handleChangeDescription.bind(this);
     }
+
+    handleChangeDescription(changeEvent) {
+        this.setState({ description: changeEvent.editor.getData() });
+       }
+
     /**********Login Form Handle********************/
     handleSubmit(event) {
         event.preventDefault();
         var day             = event.target.title.value;
         var place_name      = event.target.place.value;
-        var details         = event.target.description.value;
+        var details         = this.state.description;
         var itinerary_id    = this.state.id;
         var status          = event.target.status.value;
 
         //Validation all the fields here
-        if(day==''){
+        if(place_name==''){
+            this.setState({ isMsg : true, classstr  : 'alert alert-danger', message   : 'Please enter place of the itinerary', hasDesError : 'has-error' });
+        }else if(day==''){
             this.setState({ 
                 isMsg : true, 
                 classstr  : 'alert alert-danger', 
-                message   : 'Please enter title of the travel experience', 
+                message   : 'Please enter day of the travel experience', 
                 hasTError : 'has-error' });
-        }else if(place_name==''){
-            this.setState({ isMsg : true, classstr  : 'alert alert-danger', message   : 'Please enter place of the itinerary', hasDesError : 'has-error' });
         }else if(details==''){
             this.setState({ isMsg : true, classstr  : 'alert alert-danger', message   : 'Please choose place details of the itinerary', hasDError : 'has-error' });
         }else if(status==''){
@@ -185,15 +194,22 @@ class AddItinerariesDayForm extends React.Component{
                     <div className="box-body">
                     <div className={"form-group"+" "+hasTError}>
                         <dt>Place Name</dt>
-                        <input type="text" className="form-control" id="title" placeholder="Enter event title" />
+                        <input type="text" className="form-control" id="place" placeholder="Enter place name" /> 
                     </div>
                     <div className={"form-group"+" "+hasTError}>
                         <dt>Day Name</dt>
-                        <input type="text" className="form-control" id="place" placeholder="Enter place name" />
+                        <input type="text" className="form-control" id="title" placeholder="Enter event title" />
+                        
                     </div>
                     <div className={"form-group"+" "+hasDesError}>
                         <dt htmlFor="exampleInputPassword1">Place Details</dt>
-                        <textarea  className="form-control" id="description" placeholder="Enter place details" ></textarea>
+                        <CKEditor 
+                            id="description"  
+                            data={this.state.description}  
+                            type="classic"
+                            onChange={this.handleChangeDescription}
+                            
+                        />
                     </div>
 
                     <div className={"form-group"+" "+hasSError}>

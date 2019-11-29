@@ -121,6 +121,7 @@ class ItinerariesDepatureTimingPage extends React.Component{
       var end_date        = event.target.end_date.value;
       var price           = event.target.price.value;
       var status          = event.target.status.value;
+      var price_in_doller = event.target.price_in_doller.value;
       const form = event.currentTarget
       const body = serialize(form, {hash: true,empty:true})
       const formData = {
@@ -131,6 +132,7 @@ class ItinerariesDepatureTimingPage extends React.Component{
           price           : price,
           status          : status,
           id              : id,
+          price_in_doller : price_in_doller,
           body            : body
       }
       axios.post(urlItineraryUpdate, formData)
@@ -267,6 +269,7 @@ class ItinerariesDepatureTimingPage extends React.Component{
               <td><Moment format="DD-MMM-YYYY">{key.start_date}</Moment></td>
               <td><Moment format="DD-MMM-YYYY">{key.end_date}</Moment></td>
               <td width="20%">{setting[14].options_value}{key.price}</td>
+              <td width="20%">{(key.price_in_doller>0)?'$'+key.price_in_doller:'-NA-'}</td>
               
               <td>{(key.expire==1)?(<span className="badge bg-red">Expire</span>):(<span className="badge bg-green">Active</span>)}</td>
               <td>{(key.status==1)?(<span className="badge bg-green">Active</span>):(<span className="badge bg-red">In Active</span>)}</td>
@@ -316,6 +319,7 @@ class ItinerariesDepatureTimingPage extends React.Component{
                   <th style={{'white-space':'nowrap'}}>Start Date</th>
                   <th style={{'white-space':'nowrap'}}>End Date</th>
                   <th>Price</th>
+                  <th>Price($)</th>
                   <th>Date Status</th>
                   <th>Status</th>
                   <th>Action</th>
@@ -340,10 +344,15 @@ class ItinerariesDepatureTimingPage extends React.Component{
                         <input type="text" id="itinerary_name" className="form-control" value={this.state.itinerariesName} readOnly="readonly"/>
                         <input type="hidden" id="itinerary_id" className="form-control" value={this.state.itinerariesId} />
                     </div>
-                    <div className={"form-group col-md-12"}>
+                    <div className={"form-group col-md-6"}>
                         <dt>Travel Experience Price</dt>
                         <input type="text" id="price" className="form-control" />
                     </div>
+                    <div className={"form-group col-md-6"}>
+                        <dt>Travel Experience Price($)</dt>
+                        <input type="text" id="price_in_doller" className="form-control" />
+                    </div>
+
                     <div className="bootstrap-timepicker col-md-6">
                     <div className={"form-group"}>
                     <dt>Travel Experience Start Date:</dt>
