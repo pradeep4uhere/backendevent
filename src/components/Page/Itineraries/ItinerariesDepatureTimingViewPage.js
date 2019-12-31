@@ -288,7 +288,7 @@ class ItinerariesDepatureTimingViewPage extends React.Component{
              <div className="col-md-12">
             <div className="box box-danger">
             <div className="overlay" show={isOverlay}><i className="fa fa-refresh fa-spin"></i></div>
-              <div className="box-body no-padding">
+              <div className="box-body table-responsive no-padding">
               <table className="table table-striped" style={{'font-size':'12px'}}>
                 <tbody><tr>
                   <th>#</th>

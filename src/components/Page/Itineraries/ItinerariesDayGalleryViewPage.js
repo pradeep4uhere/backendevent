@@ -149,7 +149,7 @@ class ItinerariesDayGalleryViewPage extends React.Component{
         //console.log("ImageGallery",ImageGallery);
         let optionItems = eventList.map((val,i) =>
             <li className={(i==0)?("active"):('')}> 
-                <a href={"#tab_"+i+1} className={(i==0)?("active"):('')} data-toggle="tab" aria-expanded="true">{val.place_name}-({val.day})</a>
+                <a href={"#tab_"+i+1} className={(i==0)?("active"):('')} data-toggle="tab" aria-expanded="true"><b>{val.place_name}&nbsp;::&nbsp;{val.day}</b></a>
             </li>                
         );
 
@@ -161,6 +161,7 @@ class ItinerariesDayGalleryViewPage extends React.Component{
         );
         return(
             <div className="col-md-12">
+                <div className="box-body box-info">
                 <div className="nav-tabs-custom">
                 <ul className="nav nav-tabs">
                     {optionItems}
@@ -168,7 +169,8 @@ class ItinerariesDayGalleryViewPage extends React.Component{
                 <div className="tab-content">
                     {dayTab}
                 </div>
-                </div>
+            </div>
+            </div>
             </div>
            );
     };

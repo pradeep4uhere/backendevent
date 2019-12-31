@@ -24,7 +24,7 @@ class AddTheatrePage extends React.Component{
                 <Breadcrum title="Add Theatre" titleRight='All Theatre List' url='alltheatre' />
                     <section className="content">
                     <div className="row">
-                    <div className="col-md-12">
+                    <div className="col-md-6">
                         <AddTheatreForm/>
                     </div>
                     </div>

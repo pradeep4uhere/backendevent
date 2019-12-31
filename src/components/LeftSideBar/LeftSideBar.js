@@ -117,7 +117,7 @@ class LeftSideBar extends React.Component{
               </a>
               <ul className="treeview-menu">
               <li className={(this.getUrlParams('setting')?("active"):"")}><a href={"/setting"}><i className="fa fa-gear" /><span>General Setting</span></a></li>
-              <li className={(this.getUrlParams('sittingtype')?("active"):"")}><a href={"/sittingtype"}><i className="fa fa-wheelchair"/>Sitting Type</a></li>
+              <li className={(this.getUrlParams('sittingtype')?("active"):"")}><a href={"/sittingtype"}><i className="fa fa-wheelchair"/>Seatting Type</a></li>
               <li className={(this.getUrlParams('homepagebanner')?("active"):"")}><a href={"/homepagebanner"}><i className="fa fa-image"/>Banner Management</a></li>
                 {/* <li><a href="#"><i className="fa fa-scissors"/>Offers Type</a></li> */}
                 {/* <li><a href="#"><i className="fa fa-globe"/>Tax Type</a></li> */}
