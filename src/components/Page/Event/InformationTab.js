@@ -15,6 +15,7 @@ class InformationTab extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
+          id:this.props.id,
           event : {
             event_detail: [],
           }
@@ -51,6 +52,8 @@ class InformationTab extends React.Component{
     }
 
     componentDidMount(){
+      
+      $('.overlay').show();
       this.getEventDetails();
     }
 
@@ -111,9 +114,9 @@ class InformationTab extends React.Component{
             <div className="row">
             <div className="col-md-12">
             <div className="box box-solid">
-            <div class="overlay">
+            {/* <div class="overlay">
                       <i class="fa fa-refresh fa-spin"></i>
-            </div>
+            </div> */}
               <div className="box-header with-border">
                 <i className="fa fa-film" />
                 <h3 className="box-title">Event Details</h3>

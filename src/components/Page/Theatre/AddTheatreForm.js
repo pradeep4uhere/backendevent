@@ -235,7 +235,7 @@ class AddTheatreForm extends React.Component{
                 
                     <div className={"form-group"+" "+hasConError}>
                     <dt>Contact Number:</dt>
-                     <input type="text" className="form-control" id="contact_number" name="contact_number" placeholder="Enter conatc number"/>
+                     <input type="text" className="form-control" id="contact_number" name="contact_number" placeholder="Enter contact number"/>
                     </div>  
 
                     <div className={"form-group"+" "+hasEmailError}>

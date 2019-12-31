@@ -165,12 +165,12 @@ class SittingEditForm extends React.Component{
         
         return(
             <div className="row">
-            <div className="col-md-12">
-            <Message title={MsgClass} Msg={Msg} show={show}/>
+            <div className="col-md-6">
+            {/* <Message title={MsgClass} Msg={Msg} show={show}/> */}
             {(isMsg)?(<div className={classstr}>{message}</div>):(<div></div>)}
-            <div className="box box-success">
+            <div className="box box-success col-md-12">
                 <div className="box-header with-border">
-                <h3 className="box-title">Update Sitting Type</h3>
+                <h3 className="box-title">Update Seating Type</h3>
                 </div>
                 <div className="box-body">
                 <form role="form" onSubmit={this.handleSubmit} id="form-event">

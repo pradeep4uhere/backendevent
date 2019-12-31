@@ -20,8 +20,7 @@ class SittingTypePage extends React.Component{
     render(){
         return(
                 <div className="content-wrapper">
-                {/* Import Breadcrup component boxes here */}
-                <Breadcrum title="Sitting Type Managment" titleRight="All Seating List" url="sittinglist" />
+               <Breadcrum title="Seat Type Managment" titleRight="All Seating List" url="sittinglist" />
                     <section className="content">
                     <div className="row">
                     <div className="col-md-4">

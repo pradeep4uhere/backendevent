@@ -8,6 +8,7 @@ import EventAdd       from '../components/EventAdd';
 import EventEdit      from '../components/EditEvent';
 import EventDetail    from '../components/EventDetail';
 import EventGallery   from '../components/EventGallery';
+import EventView      from '../components/EventView';
 
 import AddItineraries from '../components/AddItineraries';
 import AllItineraries from '../components/ItinerariesList';
@@ -21,6 +22,7 @@ import ItinerariesTerms from  '../components/ItinerariesTerms';
 import EditItineraries  from '../components/EditItineraries';
 import AddItinerariesDay from '../components/AddItinerariesDay';
 import EditItinerariesDay from '../components/EditItinerariesDay';
+import ItinerariesViewPage from '../components/ItinerariesViewPage';
 
 
 import AddDestination from '../components/AddDestination';
@@ -95,8 +97,6 @@ componentDidMount() {
         this.setState({ isLoggedIn: false });    
     }
     $('#ipl-progress-indicator').hide();
-    
-
 }
 
 render() {
@@ -123,6 +123,7 @@ render() {
               <Route path="/itinerariesgallery/:id?" component={ItinerariesGallery}/>
               <Route path="/itinerariesaddon/:id?" component={ItinerariesAddOns}/>
               <Route path="/itinerariestrems/:id?" component={ItinerariesTerms}/>
+              <Route path="/traveldetails/:id?" component={ItinerariesViewPage}/>
               
               
               <Route path="/itinerariesdaysgallery/:id?" component={ItinerariesDayGallery}/>
@@ -137,6 +138,8 @@ render() {
               <Route path="/memberlist" render={() => <MemberList/>} />
               <Route path="/membership" component={MembershipList}  />
               <Route path="/membershipedit/:id?" component={MembershipListEdit}/>
+              <Route path="/eventview/:id?" component={EventView}/>
+              
               
               <Route path="/memberlist/{:page}" component={MemberList}  />
 
@@ -146,7 +149,7 @@ render() {
 
               <Route path="/eventlist" component={EventList}  />
               <Route path="/addevent" component={EventAdd}  />
-              <Route path="/eventdetails" component={EventDetail}/>
+              <Route path="/eventdetails/:id?" component={EventDetail}/>
               <Route path="/eventgallery/:id?" component={EventGallery}/>
               
 

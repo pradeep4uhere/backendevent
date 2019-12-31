@@ -14,7 +14,7 @@ import Modal from 'react-modal';
 import EventViewPage from '../../Page/Event/EventViewPage';
 import UserEditPage from '../../Page/User/UserEditPage';
 import Moment from 'react-moment';  
-import { MDBDataTable } from 'mdbreact';
+import { MDBTable, MDBTableBody, MDBTableHead, MDBDataTable  } from 'mdbreact';
 
 // import ReactTooltip from 'react-tooltip'
 const urlStr    = Constants.EVENT_LIST_URL;
@@ -100,13 +100,14 @@ class LatestEventList extends React.Component{
           if(response.data.data.code==200) {
                 this.setState({
                     eventList    : response.data.data.event.data,
-                    event       : response.data.data.event,
-                    dataTable   : response.data.data.dataTable,
+                    event        : response.data.data.event,
+                    dataTable    : response.data.data.dataTable,
                 });
                  /************datatable Strat*************/
                  this.state.dataTable.rows.map((val,i) =>{
                     
                     var dataStr = <div>
+                    <a title="View Event Detail" href={"eventview?"+val.id}><i className="fa fa-eye"></i></a>&nbsp;&nbsp;
                     <a title="View Event Language/Location" href={"eventlocation?"+val.id}><i className="fa fa-map"></i></a>&nbsp;&nbsp;
                     <a title="View Event Gallery" href={"eventgallery?"+val.id}><i className="fa fa-image"></i></a>&nbsp;&nbsp;
                     <a title="View Event Timing" href={"eventtiming?"+val.id}><i className="fa fa-clock-o"></i></a>&nbsp;&nbsp;
@@ -268,6 +269,14 @@ class LatestEventList extends React.Component{
                 {/* /.box-header */}
                 <div className="box-body">
                 <div className="table-responsive">
+                {/* <MDBTable 
+                    responsive  
+                    striped
+                    small
+                >
+                    <MDBTableHead columns={dataTable.columns}/>
+                    <MDBTableBody rows={dataTable.rows} />
+                </MDBTable> */}
                 <MDBDataTable
                 striped
                 bordered
@@ -275,6 +284,7 @@ class LatestEventList extends React.Component{
                 data={dataTable}
                 exportToCSV={true}
                 />
+               
                 </div>
                 {/* /.table-responsive */}
                 </div>

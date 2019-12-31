@@ -9,6 +9,8 @@ import axios from 'axios'
 import Constants  from '../../../config/Constants'
 import Message from '../../../components/Message';
 import $ from 'jquery';
+import Moment from 'react-moment';  
+
 const urlStr    = Constants.SEATING_TYPE_LIST;
 const token     = localStorage.getItem('token');
 class SittingList extends React.Component{
@@ -82,13 +84,13 @@ class SittingList extends React.Component{
        const { sittingList }        =  this.state; 
        let optionItems = sittingList.map((val,i) =>
         <tr>
-            <td>{val.id}</td>
-            <td><a href="#">{this.capitalize(val.sitting_type_name)}</a></td>
+            <td>{i+1}</td>
+            <td>{this.capitalize(val.sitting_type_name)}</td>
             <td>{(val.status==1)?(<span className='label label-success'>Active</span>):(<span className='label label-danger'>In Active</span>)}</td>
-            <td>{val.created_at}</td>
+            <td><Moment format="DD-MMM-YYYY">{val.created_at}</Moment></td>
             <td>
-                <a href={"editsitting?"+val.id}><i className="fa fa-pencil"></i></a>&nbsp;&nbsp; 
-                <a href="#"><i className="fa fa-trash"></i></a></td>
+                <a href={"editsitting?"+val.id}><i className="fa fa-pencil"></i></a>&nbsp;
+            </td> 
         </tr>
         );
         return(
@@ -98,11 +100,6 @@ class SittingList extends React.Component{
                 <div className="box box-info">
                 <div className="box-header with-border">
                 <h3 className="box-title">All Seating List</h3>
-                <div className="box-tools pull-right">
-                <button type="button" className="btn btn-box-tool" data-widget="collapse"><i className="fa fa-minus" />
-                </button>
-                <button type="button" className="btn btn-box-tool" data-widget="remove"><i className="fa fa-times" /></button>
-                </div>
                 </div>
                 {/* /.box-header */}
                 <div className="box-body">

@@ -99,7 +99,7 @@ class TravelBookingList extends React.Component{
           console.log("this is new ",this.state.dahsboardList.orderList);  
            orderList = this.state.dahsboardList.orderList.map((val,i) =>
             <tr>
-                <td><a href={"eorderinvoice?"+val.orderID}>{val.orderID}</a></td>
+                <td><a href={"eorderinvoice?"+val.orderID}>{i}</a></td>
                 <td><Moment format="LLL">{val.order_date}</Moment></td>
                 <td>{val.shipping_fname}&nbsp;{val.shipping_lname}</td>
                 <td>{val.email_address}</td>

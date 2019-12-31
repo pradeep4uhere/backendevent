@@ -19,6 +19,7 @@ import ItinerariesDaysListPage from '../components/Page/Itineraries/ItinerariesD
 import  AddItinerariesDayPage from '../components/Page/Itineraries/AddItinerariesDayPage';
 import EditItinerariesDayPage from '../components/Page/Itineraries/EditItinerariesDayPage';
 import ItinerariesDayGalleryPage from '../components/Page/Itineraries/ItinerariesDayGalleryPage';
+import ItinerariesViewPage  from '../components/Page/Itineraries/ItinerariesViewPage';
 
 
 
@@ -49,6 +50,7 @@ import EditPagePage         from '../components/Page/StaticPage/EditPagePage';
 import ViedoListPage        from '../components/Page/ViedoListPage';
 import MembershipListPage   from '../components/Page/MembershipListPage';
 import MembershipListEditPage from '../components/Page/MembershipListEditPage';
+import EventViewPage          from '../components/Page/EventViewPage';
 
 import EventBookingPage     from '../components/Page/EventBookingPage'; 
 import TravelBookingPage    from '../components/Page/TravelBookingPage'; 
@@ -58,15 +60,7 @@ import UserOrderDetailsPage from '../components/Page/UserOrderDetailsPage';
 import OrderInvoicePage     from '../components/Page/OrderInvoicePage';   
 import TravelOrderInvoicePage   from '../components/Page/TravelOrderInvoicePage';   
 
-
-
-
 import HomeBannerGalleryPage from '../components/Page/General/HomeBannerGalleryPage';
-
-
-
-
-
 class DashboardLayout extends React.Component{
     constructor(props) {
         super(props);
@@ -78,7 +72,6 @@ class DashboardLayout extends React.Component{
   
    render(){
     const { id } = this.state;
-    console.log(this.props.component)
     return(
           <div className="hold-transition skin-blue sidebar-mini">
           <Navigation/> 
@@ -100,8 +93,9 @@ class DashboardLayout extends React.Component{
               'ItinerariesDaysListPage':<ItinerariesDaysListPage id={id}/>,
               'AddItinerariesDayPage':<AddItinerariesDayPage id={id}/>,
               'EditItinerariesDayPage':<EditItinerariesDayPage id={id}/>,
+              'ItinerariesViewPage':<ItinerariesViewPage id={id}/>,
               'EventAddPage'      : <EventAddPage   /> ,
-              'EventDetailPage'   : <EventDetailPage/> ,
+              'EventDetailPage'   : <EventDetailPage id={id}/> ,
               'EventGalleryPage'  : <EventGalleryPage id={id}/> ,
               'TheatrePage'       : <TheatrePage/> ,
               'AddTheatrePage'    : <AddTheatrePage/> ,
@@ -118,6 +112,7 @@ class DashboardLayout extends React.Component{
               'ViedoListPage'     : <ViedoListPage/>, 
               'MembershipListPage': <MembershipListPage/>,
               'MembershipListEditPage':<MembershipListEditPage id={id}/>,
+              'EventViewPage':<EventViewPage id={id}/>,
               'EventBookingPage'  : <EventBookingPage/>,
               'TravelBookingPage' : <TravelBookingPage/>,
               'OrderDetailsPage'  : <OrderDetailsPage/>,

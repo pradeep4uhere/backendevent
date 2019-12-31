@@ -50,6 +50,9 @@
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
   </head>
   <style>
+.table-foot{
+  display: none !important;
+}
 .rc-time-picker-clear-icon{
   display: none !important;
 }
@@ -484,6 +487,7 @@ input[type=checkbox]:checked:before {
     <script src="%PUBLIC_URL%/rudra/js/main.js"></script>
 <script>
  $(function () {
+  $('table>thead[data-test="table-foot"]').hide(); 
     CKEDITOR.replace('itinerary')
  });
  $(function () {

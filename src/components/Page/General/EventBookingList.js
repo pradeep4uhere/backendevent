@@ -100,7 +100,7 @@ class EventBookingList extends React.Component{
           console.log("this is new ",this.state.dahsboardList.orderList);  
            orderList = this.state.dahsboardList.orderList.map((val,i) =>
                 <tr>
-                    <td><a href={"orderinvoice?"+val.orderID}>{val.orderID}</a></td>
+                    <td><a href={"orderinvoice?"+val.orderID}>{val.SN}</a></td>
                     <td><Moment format="LLL">{val.order_date}</Moment></td>
                     <td>{val.shipping_fname}&nbsp;{val.shipping_lname}</td>
                     <td>{val.email_address}</td>
@@ -129,7 +129,9 @@ class EventBookingList extends React.Component{
                 bordered
                 hover
                 data={dataTable}
-                exportToCSV={true}
+                exportToCSV={false}
+                footer
+                reverse={false}
                 />
                 </div>
                 </div>

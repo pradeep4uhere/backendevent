@@ -100,18 +100,18 @@ class SittingForm extends React.Component{
         return(
             <div className="row">
             <div className="col-md-12">
-            <Message title={MsgClass} Msg={Msg} show={show}/>
+            {/* <Message title={MsgClass} Msg={Msg} show={show}/> */}
             {(isMsg)?(<div className={classstr}>{message}</div>):(<div></div>)}
             <div className="box box-success">
                 <div className="box-header with-border">
-                <h3 className="box-title">Add Sitting Type</h3>
+                <h3 className="box-title">Add Seat Type</h3>
                 </div>
                 <div className="box-body">
                 <form role="form" onSubmit={this.handleSubmit} id="form-event">
                     <div className="box-body">
                     <div className={"form-group"+" "+hasTError}>
                         <dt>Seating Type Name</dt>
-                        <input type="text" className="form-control" id="title" placeholder="Enter seating title" />
+                        <input type="text" className="form-control" id="title" placeholder="Enter Seat Type" />
                     </div>
                     <div className={"form-group"+" "+hasSError}>
                     <dt htmlFor="inputEmail3">Status</dt>

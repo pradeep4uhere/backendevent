@@ -38,11 +38,41 @@ class LocationPage extends React.Component{
             state_id        : '1',
             city_id         : '1',
             language_id     : '1',
-            event_id        : this.props.id
+            event_id        : this.props.id,
+            eventTitle      : '',
         };
         this.handleSubmit   = this.handleSubmit.bind(this);
         this.getEventLocationDetails = this.getEventLocationDetails.bind(this);
+        this.handleChange   = this.handleChange.bind(this);
     }
+
+    handleChange(e) {
+      var strid = e.target.id;
+      if(strid=='language'){
+          this.setState({
+            language_id : e.target.value
+              });
+      }
+    
+      if(strid=='country'){
+          this.setState({
+            country_id : e.target.value
+          });
+      }
+
+      if(strid=='state'){
+          this.setState({
+            state_id : e.target.value
+          });
+      }
+
+      
+      if(strid=='city'){
+          this.setState({
+            city_id : e.target.value
+          });
+      }
+  }
 
 
     /**********Login Form Handle********************/
@@ -128,21 +158,24 @@ class LocationPage extends React.Component{
         var tokenStr = token;
         const formData = {
             token     : tokenStr,
-            event_id  : event_id
+            event_id  : this.state.event_id
         }
         axios.post(urlLocationStr, formData)
         .then((response) => {
           var response = response.data[0];          
           if(response.code==200) {
-            console.log(response.data[0].city_id);
+            //console.log(response.data[0].event.title);
                 this.setState({
-                    event       : response.data,
+                    event       : response.data[0],
                     country_id  : response.data[0].country_id,
                     state_id    : response.data[0].state_id,
                     city_id     : response.data[0].city_id,
-                    language_id : response.data[0].language_id
+                    language_id : response.data[0].language_id,
+                    eventTitle  : response.data[0].event.title
                 });
                 $('.overlay').hide();
+                console.log("Here is is",response.data[0].event[0]);
+
           }
           else
           {
@@ -171,6 +204,7 @@ class LocationPage extends React.Component{
       const { state_id }      = this.state;
       const { city_id }       = this.state;
       const { language_id }   = this.state;
+      const {eventTitle}      = this.state;
 
       let stateListOption = state.map((val,i) =>
         <option value={val.id}>{val.state_name}</option>
@@ -186,44 +220,45 @@ class LocationPage extends React.Component{
       $('#country').val(country_id).attr('selected','selected');
       $('#state').val(state_id).attr('selected','selected');
       $('#city').val(city_id).attr('selected','selected');
+      //console.log(this.state.eventTitle);
       return(
             <div className="content-wrapper">
-            <Breadcrum title="Edit Theatre" titleRight='All Event List' url='eventlist' />
+            <Breadcrum title={"Add Location & Language For Event"} titleRight='All Event List' url='eventlist' />
             <section className="content">
             <div className="row">
             {/* <Message title={MsgClass} Msg={Msg} show={show}/> */}
             
-            <div className="col-md-12">
+            <div className="col-md-4">
             <div>{(isMsg)?(<div className={classstr}>{message}</div>):(<div></div>)}</div>
             <div className="box box-solid">
               <div className="box-header with-border">
                 <i className="fa fa-map" />
-                <h3 className="box-title">Location Details</h3>
+                <h3 className="box-title">Location & Language Details::&nbsp;{eventTitle}</h3>
               </div>
                 <div className="box-body">  
                   <form role="form" onSubmit={this.handleSubmit}  id="form-event">
                     <dl>
                     <dt>Language</dt>
-                      <select className="form-control" id="language" name="language" value={this.state.language_id}>
+                      <select className="form-control" id="language" name="language" value={this.state.language_id} onChange={this.handleChange}>
                         <option value="">Choose Language</option>
                           <option value="1">Hindi</option>
                           <option value="2">English</option>
                       </select>
                     <br/>
                     <dt>Country</dt>
-                    <select className="form-control" id="country" name="country" value={this.state.country_id}>
+                    <select className="form-control" id="country" name="country" value={this.state.country_id} onChange={this.handleChange}>
                         <option value="">Choose Country</option>
                           {countryListOption}
                       </select>
                     <br/>
                     <dt>State</dt>
-                    <select className="form-control" id="state" name="state" value={this.state.state_id}>
+                    <select className="form-control" id="state" name="state" value={this.state.state_id} onChange={this.handleChange}>
                         <option value="">Choose State</option>
                           {stateListOption}
                       </select>
                     <br/>
                     <dt>City</dt>
-                    <select className="form-control" id="city" name="city"  value={this.state.city_id}>
+                    <select className="form-control" id="city" name="city"  value={this.state.city_id} onChange={this.handleChange}>
                         <option value="">Choose City</option>
                           {cityListOption}
                       </select>

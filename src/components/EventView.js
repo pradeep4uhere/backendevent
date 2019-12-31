@@ -2,8 +2,7 @@ import React from 'react';
 import {Redirect } from 'react-router-dom';
 import $ from 'jquery';
 import DashboardLayout from '../layouts/DashboardLayout'
-
-class EventDetail extends React.Component{
+class EventView extends React.Component{
     constructor(props) {
         super(props);
         const id = props.location.search.slice(1);
@@ -11,6 +10,7 @@ class EventDetail extends React.Component{
             clicked: false,
             id:id
         };
+        
     }
 
 
@@ -32,9 +32,11 @@ class EventDetail extends React.Component{
     }
     return(
           <div>  
-           <DashboardLayout component='EventDetailPage' id={id}/>
+           <DashboardLayout component='EventViewPage' id={id}/>
           </div>
         );
     };
 }
-export default EventDetail;
+export default EventView;
+
+

@@ -23,7 +23,7 @@ class SettingPage extends React.Component{
      return(
       <div className="content-wrapper">
         {/* Content Header (Page header) */}
-        <section className="content-header">
+        <section className="content-header ">
           <h1>{this.state.title}
             <small>{this.state.subtitle}</small>
           </h1>
@@ -33,7 +33,7 @@ class SettingPage extends React.Component{
           </ol>
         </section>
         {/* Main content */}
-        <section className="content">
+        <section className="content ">
           {/* Default box */}
           <div className="box box-warning">
             <div className="box-header with-border">
@@ -44,7 +44,7 @@ class SettingPage extends React.Component{
             <div className="box-body">
 
           
-            <div class="col-md-12">
+            <div class="col-md-9">
               <SettingForm/>
               </div>
             </div>

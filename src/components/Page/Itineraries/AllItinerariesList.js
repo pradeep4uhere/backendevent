@@ -102,7 +102,7 @@ class AllItinerariesList extends React.Component{
                 /************datatable Strat*************/
                 this.state.dataTable.rows.map((val,i) =>{
                     
-                    var dataStr = <div><a title="View Travel Experience Detail" href={Constants.APP_FRONT+'destinationexpdetails/'+val.id} target="_blank" ><i className="fa fa-eye"></i></a>&nbsp;&nbsp;
+                    var dataStr = <div><a title="View Travel Experience Detail" href={'traveldetails?'+val.id} target="_blank" ><i className="fa fa-eye"></i></a>&nbsp;&nbsp;
                     <a title="View Travel Experience Days" href={"viewitinerariedays?"+val.id}><i className="fa fa-map"></i></a>&nbsp;&nbsp;
                     <a title="Add Travel Experience Addon" href={"itinerariesaddon?"+val.id}><i className="fa fa-file"></i></a>&nbsp;&nbsp;
                     <a title="Add Travel Experience Terms & Conditions" href={"itinerariestrems?"+val.id}><i className="fa fa-gear"></i></a>&nbsp;&nbsp;

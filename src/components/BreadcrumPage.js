@@ -16,10 +16,10 @@ class Bradecrum extends React.Component{
         <section className="content-header">
         <h1>
             {this.props.title}
-            <small>{appName}{appTag}</small>
+            {/* <small>{appName}{appTag}</small> */}
         </h1>
         <ol className="breadcrumb">
-            <li><a href="#"><i className="fa fa-dashboard" /> Home</a></li>
+            <li><a href="/dashboard"><i className="fa fa-dashboard" /> Home</a></li>
             <li className="active"><a href={this.props.url}>{this.props.titleRight}</a></li>
         </ol>
         </section>

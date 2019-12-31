@@ -5,6 +5,7 @@
  * @Created Date:: 09 May 2019
  */
 import React from 'react';
+import queryString from 'query-string';
 import axios from 'axios'
 import $ from 'jquery';
 import Constants  from '../../../config/Constants'
@@ -17,13 +18,16 @@ const urlStr    = Constants.EVENT_DETAILS_URL;
 const token     = localStorage.getItem('token');
 const event_id  = localStorage.getItem('event_id');
 class EventDetailTab extends React.Component{
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
+            id : this.props.id,
             event_id  : '',
             event : {},
             isTabOn : false
         };
+        // let params = queryString.parse(location.search)
+        // console.log(params)
         this.getEventDetails    = this.getEventDetails.bind(this);
     }
     getEventDetails(){
@@ -71,17 +75,16 @@ class EventDetailTab extends React.Component{
 
 
     render(){
-        const { event } =  this.state;
-        const { isTabOn } =  this.state;
-        console.log(event.event_detail);
-
+        const { event }     =   this.state;
+        const { isTabOn }   =   this.state;
+        const {id}          =   this.state;
         return(
             <section className="content">
                 <div className="row">
                 <div className="tab_container ">
                     <input id="tab1" type="radio" name="tabs" defaultChecked />
                     <section id="content1" className="tab-content">
-                    <InformationTab/>
+                    <InformationTab id={id}/>
                     </section>
                 </div>
             </div>
