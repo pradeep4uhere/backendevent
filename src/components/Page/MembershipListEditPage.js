@@ -145,7 +145,7 @@ class MembershipListEditPage extends React.Component{
             this.setState({isMsg:true});
             this.setState({className:'error'});
             this.setState({
-              message     : response.message,
+              message     : response.data.message,
               classstr    : 'alert alert-danger',
               className   : 'error',
               isMsg       : true,
@@ -194,7 +194,7 @@ class MembershipListEditPage extends React.Component{
           this.setState({isMsg:true});
           this.setState({className:'error'});
           this.setState({
-            message     : response.message,
+            message     : response.data.message,
             classstr    : 'alert alert-danger',
             className   : 'error',
             isMsg       : true,
@@ -392,7 +392,7 @@ class MembershipListEditPage extends React.Component{
                         <input type="hidden" id="membership_plan_id" className="form-control" value={this.state.id} />
                     </div>
                     <div className={"form-group col-md-12"}>
-                        <dt>Feature Title</dt>
+                        <dt>Feature Title<sup>*</sup></dt>
                         <input type="text" id="feature_title" className="form-control" />
                     </div>
                     <div className={"form-group col-md-12"}>
@@ -416,7 +416,7 @@ class MembershipListEditPage extends React.Component{
             <div className="overlay" show={isOverlay}><i className="fa fa-refresh fa-spin"></i></div>
               <div className="box-header with-border bg-warning">
               <i className="glyphicon glyphicon-bookmark"></i>
-                <h3 className="box-title box-widget">{membership.name} Membership Price</h3>
+                <h3 className="box-title box-widget">{membership.name} Membership Price<sup>*</sup></h3>
               </div>
               <div className="box-body no-padding">
               <table className="table table-striped" style={{'font-size':'12px'}}>
@@ -455,19 +455,19 @@ class MembershipListEditPage extends React.Component{
               <form role="form" onSubmit={this.handleSubmitPrice}  id="form-event_price">
                 <div className="box-body">
                     <div className={"form-group col-md-12"}>
-                        <dt>Monthly Price</dt>
+                        <dt>Plan Name<sup>*</sup></dt>
                         <input type="text" id="name" className="form-control" />
                     </div>
                     <div className={"form-group col-md-6"}>
-                        <dt>Monthly Price</dt>
+                        <dt>Monthly Price<sup>*</sup></dt>
                         <input type="text" id="monthly_price" className="form-control" />
                     </div>
                     <div className={"form-group col-md-6"}>
-                        <dt>Quarterly Price </dt>
+                        <dt>Quarterly Price<sup>*</sup> </dt>
                         <input type="text" id="quarterly_price" className="form-control" />
                     </div>
                     <div className={"form-group col-md-6"}>
-                        <dt>Yearly Price </dt>
+                        <dt>Yearly Price<sup>*</sup> </dt>
                         <input type="text" id="yearly_price" className="form-control"  />
                     </div>
                     <div className={"form-group col-md-6"}>

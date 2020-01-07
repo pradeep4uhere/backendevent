@@ -26,7 +26,7 @@ class EditTheatrePage extends React.Component{
                 <Breadcrum title="Edit Theatre" titleRight='All Theatre List' url='alltheatre' />
                     <section className="content">
                     <div className="row">
-                    <div className="col-md-12">
+                    <div className="col-md-6">
                         <EditTheatreForm theatre_id={theatre_id}/>
                     </div>
                     </div>

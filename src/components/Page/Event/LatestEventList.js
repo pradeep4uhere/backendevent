@@ -36,6 +36,7 @@ class LatestEventList extends React.Component{
             actiontype  : 'view',
             redirectToReferrer  : false,
             redirectPage        : ''
+            
         }
         this.getEventList       = this.getEventList.bind(this);
         this.handleClick        = this.handleClick.bind(this);
@@ -70,7 +71,7 @@ class LatestEventList extends React.Component{
         }
         if(str=='deleteevent'){
             localStorage.setItem('event_id',id);
-            alert(665);
+            //alert(665);
         }
         
         
@@ -207,7 +208,7 @@ class LatestEventList extends React.Component{
                 classstr    : 'alert alert-success',
                 isMsg       : true,
             });
-            this.getGalleryList();
+            this.getEventList();
         }else{
             this.setState({ 
                 message:response.data.data.message,
