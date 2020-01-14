@@ -25,7 +25,7 @@ class EditPagePage extends React.Component{
                 <Breadcrum title="Edit Page" titleRight='All Page List' url='allpagelist' />
                     <section className="content">
                     <div className="row">
-                    <div className="col-md-12">
+                    <div className="col-md-6">
                         <PageEditForm id={this.props.id}/>
                     </div>
                     </div>

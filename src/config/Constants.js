@@ -102,6 +102,9 @@ export const Constants = {
 	MEMBERSHIP_PLAN_UPDATE_URL	: AppUrl+'/general/membershipplanupdate',
 	MEMBERSHIP_PLAN_DELETE_URL	: AppUrl+'/general/membershipplandelete',
 	MEMBERSHIP_PLAN_PRICE_UPDATE_URL	: AppUrl+'/general/membershipplanpriceupdate',
+	TAX_LIST					: AppUrl+'/general/getalltax',
+	TAXTYPE_UPDATE_URL			: AppUrl+'/general/updategetalltax',
+	TAXTYPE_DELETE_URL			: AppUrl+'/general/deletetaxtype',
 
 	DASHBOARD_DATA				: AppUrl+'/general/getalldashboard'	,  
 	TRAVELL_BOOKING_DATA		: AppUrl+'/general/travellorderdata'	,   

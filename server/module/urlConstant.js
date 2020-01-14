@@ -89,7 +89,9 @@ urlConstant = {
         MEMBERSHIP_PLAN_UPDATE_API          :   config.API_HOST_URL+'/updatemembership',
         MEMBERSHIP_PLAN_DELETE_API          :   config.API_HOST_URL+'/deletemembership',
         MEMBERSHIP_PLAN_PRICE_UPDATE_API    :   config.API_HOST_URL+'/updatemembershipprice',
-
+        GET_TAX_URL                         :   config.API_HOST_URL+'/gettaxlist',
+        GET_TAX_TYPE_UPDATE_API             :   config.API_HOST_URL+'/gettaxupdate',
+        TAX_TYPE_DELETE_API                 :   config.API_HOST_URL+'/gettaxdelete',
 
         DASHBOARD_DATA                      :   config.API_HOST_URL+'/getalldashboard',
 

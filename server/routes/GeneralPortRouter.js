@@ -34,6 +34,10 @@ const BANNER_IAMGE_DELETE_API_POST   = urlConstant.BANNER_IAMGE_DELETE_API_POST;
 const BANNER_IAMGE_DEFAULT_API_POST  = urlConstant.BANNER_IAMGE_DEFAULT_API_POST;
 const BANNER_IAMGE_STATUS_API_POST   = urlConstant.BANNER_IAMGE_STATUS_API_POST;
 const GET_TRAVEL_ORDER_LIST		     = urlConstant.GET_TRAVEL_ORDER_URL;
+const GET_TAX_API                    = urlConstant.GET_TAX_URL;
+const GET_TAX_TYPE_UPDATE_API        = urlConstant.GET_TAX_TYPE_UPDATE_API;
+const DELETE_TAXTYPE_API             = urlConstant.TAX_TYPE_DELETE_API;
+
 
 
 
@@ -188,6 +192,68 @@ GeneralPortRouter.route('/addseating').post(function (req, res,next) {
 	    .catch(function (err) {
 	        console.log(err)
 	})
+});
+
+
+GeneralPortRouter.route('/updategetalltax').post(function (req, res,next) {
+    var token       = req.body.token;
+    var id          = req.body.id;
+    var tax_type    = req.body.tax_type;
+    var value       = req.body.value;
+    var status      = req.body.status;
+    var postData ={
+        token	    : token,
+        id  	    : id,
+        tax_type    : tax_type,
+        value  	    : value,
+        status 	    : status,
+    }
+    const options = {
+        method: 'POST',
+        uri: GET_TAX_TYPE_UPDATE_API,
+        body: postData,
+        json: true,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+        },
+    }
+
+    console.log(postData);
+    request(options)
+        .then(function (response) {
+            console.log(response)
+            res.end(JSON.stringify(response));
+        })
+        .catch(function (err) {
+            console.log(err)
+        })
+});
+
+
+GeneralPortRouter.route('/getalltax').post(function (req, res,next) {
+    var token       = req.body.token;
+    var postData ={
+        token	    : token,
+    }
+    const options = {
+        method: 'POST',
+        uri: GET_TAX_API,
+        body: postData,
+        json: true,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+        },
+    }
+
+    console.log(postData);
+    request(options)
+        .then(function (response) {
+            console.log(response)
+            res.end(JSON.stringify(response));
+        })
+        .catch(function (err) {
+            console.log(err)
+        })
 });
 
 
@@ -476,6 +542,35 @@ GeneralPortRouter.route('/getviedos').post(function (req, res,next) {
 });
 
 
+
+
+GeneralPortRouter.route('/deletetaxtype').post(function (req, res,next) {
+    var token       = req.body.token;
+    var id          = req.body.id;
+    var postData ={
+        token	    : token,
+        id  	    : id,
+    }
+    const options = {
+        method: 'POST',
+        uri: DELETE_TAXTYPE_API,
+        body: postData,
+        json: true,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+        },
+    }
+
+    console.log(postData);
+    request(options)
+        .then(function (response) {
+            console.log(response)
+            res.end(JSON.stringify(response));
+        })
+        .catch(function (err) {
+            console.log(err)
+        })
+});
 
 
 GeneralPortRouter.route('/deleteviedo').post(function (req, res,next) {

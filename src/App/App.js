@@ -51,6 +51,8 @@ import ViedoList      from '../components/ViedoList';
 import MembershipList from '../components/MembershipList';
 import MembershipListEdit from '../components/MembershipListEdit';
 
+import TaxEdit from '../components/TaxEdit';
+
 import EventBooking   from '../components/EventBooking';
 import TravelBooking   from '../components/TravelBooking';
 import OrderDetails   from '../components/OrderDetails';
@@ -138,6 +140,7 @@ render() {
               <Route path="/memberlist" render={() => <MemberList/>} />
               <Route path="/membership" component={MembershipList}  />
               <Route path="/membershipedit/:id?" component={MembershipListEdit}/>
+              <Route path="/taxedit" component={TaxEdit}/>
               <Route path="/eventview/:id?" component={EventView}/>
               
               

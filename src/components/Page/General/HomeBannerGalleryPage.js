@@ -245,7 +245,7 @@ class HomeBannerGalleryPage extends React.Component{
                 
                 <div className="content-wrapper">
                 {/* Import Breadcrup component boxes here */}
-                <Breadcrum title="Event Image Gallery" titleRight='All Event List' url='eventlist' />
+                <Breadcrum title="Homepage Banner Image Gallery" titleRight='All Banner List' url='eventlist' />
                     <section className="content">
                     <div className="row">
                     
