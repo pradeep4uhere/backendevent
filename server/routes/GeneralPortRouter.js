@@ -38,6 +38,9 @@ const GET_TAX_API                    = urlConstant.GET_TAX_URL;
 const GET_TAX_TYPE_UPDATE_API        = urlConstant.GET_TAX_TYPE_UPDATE_API;
 const DELETE_TAXTYPE_API             = urlConstant.TAX_TYPE_DELETE_API;
 
+const GET_OFFER_API                  = urlConstant.GET_OFFER_API;
+const GET_OFFER_TYPE_UPDATE_API      = urlConstant.GET_OFFER_TYPE_UPDATE_API;
+const DELETE_OFFER_API               = urlConstant.DELETE_OFFER_TYPE_API;
 
 
 
@@ -195,6 +198,51 @@ GeneralPortRouter.route('/addseating').post(function (req, res,next) {
 });
 
 
+
+GeneralPortRouter.route('/updategetalloffer').post(function (req, res,next) {
+    var token       = req.body.token;
+    var id          = req.body.id;
+    var offer_name  = req.body.offer_name;
+    var offer_code  = req.body.offer_code;
+    var offer_type  = req.body.offer_type;
+    var offer_value = req.body.offer_value;
+    var valid_from  = req.body.valid_from;
+    var valid_untill= req.body.valid_untill;
+    var status      = req.body.status;
+    var postData ={
+            token	    : token,
+            id  	    : id,
+            offer_name  : offer_name,
+            offer_code  : offer_code,
+            offer_type  : offer_type,
+            offer_value : offer_value,
+            valid_from  : valid_from,
+            valid_untill: valid_untill,
+            status 	    : status,
+    }
+    const options = {
+        method: 'POST',
+        uri: GET_OFFER_TYPE_UPDATE_API,
+        body: postData,
+        json: true,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+        },
+    }
+
+    console.log(postData);
+    request(options)
+        .then(function (response) {
+            console.log(response)
+            res.end(JSON.stringify(response));
+        })
+        .catch(function (err) {
+            console.log(err)
+        })
+});
+
+
+
 GeneralPortRouter.route('/updategetalltax').post(function (req, res,next) {
     var token       = req.body.token;
     var id          = req.body.id;
@@ -256,6 +304,61 @@ GeneralPortRouter.route('/getalltax').post(function (req, res,next) {
         })
 });
 
+
+GeneralPortRouter.route('/deleteoffer').post(function (req, res,next) {
+    var token       = req.body.token;
+    var id          = req.body.id;
+    var postData ={
+            token	    : token,
+            id  	    : id,
+    }
+    const options = {
+        method: 'POST',
+        uri: DELETE_OFFER_API,
+        body: postData,
+        json: true,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+        },
+    }
+    
+    console.log(postData);
+    request(options)
+	    .then(function (response) {
+	        console.log(response)
+	        res.end(JSON.stringify(response));
+	    })
+	    .catch(function (err) {
+	        console.log(err)
+	})
+});
+
+
+GeneralPortRouter.route('/getallofferlist').post(function (req, res,next) {
+    var token       = req.body.token;
+    var postData ={
+        token	    : token,
+    }
+    const options = {
+        method: 'POST',
+        uri: GET_OFFER_API,
+        body: postData,
+        json: true,
+        headers: {
+            'Authorization': 'Bearer ' + token,
+        },
+    }
+
+    console.log(postData);
+    request(options)
+        .then(function (response) {
+            console.log(response)
+            res.end(JSON.stringify(response));
+        })
+        .catch(function (err) {
+            console.log(err)
+        })
+});
 
 
 

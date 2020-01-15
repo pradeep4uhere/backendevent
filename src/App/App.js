@@ -52,6 +52,8 @@ import MembershipList from '../components/MembershipList';
 import MembershipListEdit from '../components/MembershipListEdit';
 
 import TaxEdit from '../components/TaxEdit';
+import OfferManage from '../components/OfferManage';
+
 
 import EventBooking   from '../components/EventBooking';
 import TravelBooking   from '../components/TravelBooking';
@@ -142,6 +144,7 @@ render() {
               <Route path="/membershipedit/:id?" component={MembershipListEdit}/>
               <Route path="/taxedit" component={TaxEdit}/>
               <Route path="/eventview/:id?" component={EventView}/>
+              <Route path="/offer" component={OfferManage}/>
               
               
               <Route path="/memberlist/{:page}" component={MemberList}  />

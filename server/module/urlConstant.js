@@ -93,6 +93,10 @@ urlConstant = {
         GET_TAX_TYPE_UPDATE_API             :   config.API_HOST_URL+'/gettaxupdate',
         TAX_TYPE_DELETE_API                 :   config.API_HOST_URL+'/gettaxdelete',
 
+        GET_OFFER_API                       :   config.API_HOST_URL+'/getofferlist',
+        GET_OFFER_TYPE_UPDATE_API           :   config.API_HOST_URL+'/offerupdate',
+        DELETE_OFFER_TYPE_API               :   config.API_HOST_URL+'/offerdelete',
+
         DASHBOARD_DATA                      :   config.API_HOST_URL+'/getalldashboard',
 
         ADD_DESTINATION_URL                 :   config.API_HOST_URL+'/adddestination',

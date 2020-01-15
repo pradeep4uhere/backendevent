@@ -106,6 +106,10 @@ export const Constants = {
 	TAXTYPE_UPDATE_URL			: AppUrl+'/general/updategetalltax',
 	TAXTYPE_DELETE_URL			: AppUrl+'/general/deletetaxtype',
 
+	OFFER_LIST					: AppUrl+'/general/getallofferlist',
+	OFFER_UPDATE_URL			: AppUrl+'/general/updategetalloffer',
+	OFFER_DELETE_URL			: AppUrl+'/general/deleteoffer',
+
 	DASHBOARD_DATA				: AppUrl+'/general/getalldashboard'	,  
 	TRAVELL_BOOKING_DATA		: AppUrl+'/general/travellorderdata'	,   
 

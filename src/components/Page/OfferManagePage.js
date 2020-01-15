@@ -1,8 +1,8 @@
 /*
- * @PageName    :: ItinerariesDepatureTimingPage.js
+ * @PageName    :: OfferManagePage.js
  * @Author      :: Pradeep Kumar
  * @Description :: This component used for add details on events
- * @Created Date:: 18 Oct 2019
+ * @Created Date:: 15 JAN 2019
  */
 import React from 'react';
 import axios from 'axios'
@@ -14,13 +14,15 @@ import 'sweetalert/dist/sweetalert.css';
 import DeleteImg from '../../theme/dist/img/recycle.png';
 import DoneImg from '../../theme/dist/img/done.png';
 import "react-tabs/style/react-tabs.css";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import Moment from 'react-moment';  
 var serialize = require('form-serialize');
-const urlEventStr    = Constants.TAX_LIST;
-const urlMembershipUpdate = Constants.TAXTYPE_UPDATE_URL;
-const urlTimeDelete = Constants.TAXTYPE_DELETE_URL;
+const urlEventStr    = Constants.OFFER_LIST;
+const urlMembershipUpdate = Constants.OFFER_UPDATE_URL;
+const urlTimeDelete = Constants.OFFER_DELETE_URL;
 const token     = localStorage.getItem('token');
-class TaxEditPage extends React.Component{
+class OfferManagePage extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
@@ -52,8 +54,22 @@ class TaxEditPage extends React.Component{
         this.DeleteTime       = this.DeleteTime.bind(this);
         this.DeleteNow        = this.DeleteNow.bind(this);
         this.handleChange     = this.handleChange.bind(this);
-        this.EditPrice        = this.EditPrice.bind(this);
+        this.handleChange1    = this.handleChange1.bind(this);
+        this.handleChange2    = this.handleChange2.bind(this);
+
     }
+
+    handleChange1 = date => {
+        this.setState({
+            startDate: date
+        });
+    };
+
+    handleChange2 = date => {
+        this.setState({
+            endDate: date
+        });
+    };
 
     handleChange(e) {
       let data = this.state.priceRow;
@@ -82,7 +98,7 @@ class TaxEditPage extends React.Component{
         if(response.data.code==200) {
             //console.log(response.data.membership);
             this.setState({
-                taxList : response.data.taxList,
+                taxList : response.data.offerList,
                 isOverlay  : false,
             });
             $('.overlay').hide();
@@ -109,15 +125,23 @@ class TaxEditPage extends React.Component{
       var tokenStr = token;
       event.preventDefault();
       var id                = $('#id').val();
-      var tax_type          = event.target.tax_type.value;
-      var value             = event.target.value.value;
+      var offer_name        = event.target.offer_name.value;
+      var offer_code        = event.target.offer_code.value;
+      var offer_type        = event.target.offer_type.value;
+      var offer_value       = event.target.offer_value.value;
+      var valid_from        = event.target.valid_from.value;
+      var valid_untill      = event.target.valid_untill.value;
       var status            = event.target.status.value;
       const form = event.currentTarget
       const body = serialize(form, {hash: true,empty:true})
       const formData = {
           token             : tokenStr,
-          tax_type          : tax_type,
-          value             : value,
+          offer_name        : offer_name,
+          offer_code        : offer_code,
+          offer_type        : offer_type,
+          offer_value       : offer_value,
+          valid_from        : valid_from,
+          valid_untill      : valid_untill,
           status            : status,
           id                : id,
       }
@@ -156,26 +180,18 @@ class TaxEditPage extends React.Component{
 
     //Open Modle box for user Either we can view or edit the user details here
     EditTime(e,obj) {
-      $('#id').val(obj.id);
-      $('#tax_type').val(obj.tax_type);
-      $('#value').val(obj.value);
-      $('#status').val(obj.status);
-      $('#id').val(obj.id);
-    }
-
-    //Open Modle box for user Either we can view or edit the user details here
-    EditPrice(e,obj) {
-        console.log(obj.monthly_price);
         $('#id').val(obj.id);
-        $('#name').val(obj.name);
-        $('#monthly_price').val(obj.monthly_price);
-        $('#yearly_price').val(obj.yearly_price);
-        $('#quarterly_price').val(obj.quarterly_price);
+        $('#offer_name').val(obj.offer_name);
+        $('#offer_code').val(obj.offer_code);
+        $('#offer_type').val(obj.offer_type);
+        $('#offer_value').val(obj.offer_value);
+        $('#valid_from').val(obj.valid_from);
+        $('#valid_untill').val(obj.valid_untill);
         $('#status').val(obj.status);
         $('#id').val(obj.id);
-      }
+    }
 
-    
+  
 
 
     DeleteTime(e){
@@ -189,7 +205,7 @@ class TaxEditPage extends React.Component{
       this.setState({
           sATitle : 'Are you sure ?',
           sAClass : 'error',
-          sAText  : 'You want to delete tax type',
+          sAText  : 'You want to delete Offer type',
           show    : true,
           sAImg   : DeleteImg,
           membership_feature_id:membership_feature_id,
@@ -221,7 +237,7 @@ class TaxEditPage extends React.Component{
           this.setState({ 
             sATitle : 'Deleted !',
             sAClass : 'Success',
-            sAText  : 'Travel Experience departure Timing Deleted!',
+            sAText  : 'Offer Type Deleted!',
             sAImg   : DoneImg,
             show    : true,
             event_detail_id:'',
@@ -258,8 +274,13 @@ class TaxEditPage extends React.Component{
         membershipFeatureStr = taxList.map((key,k) =>
             <tr>
               <td width="1%">{k+1}</td>
-              <td>{key.tax_type}</td>
-              <td>{key.value}%</td>
+              <td>{key.offer_name}</td>
+              <td>{key.offer_code}</td>
+              <td>{key.offer_type}</td>
+              <td>{key.offer_value}</td>
+              <td><Moment format="DD-MMM-YYYY">{key.valid_from}</Moment></td>
+              <td><Moment format="DD-MMM-YYYY">{key.valid_untill}</Moment></td>
+              <td>{(key.expire=='Active')?(<span className="badge bg-green">Active</span>):(<span className="badge bg-red">Expire</span>)}</td>
               <td>{(key.status==1)?(<span className="badge bg-green">Active</span>):(<span className="badge bg-red">In Active</span>)}</td>
               <td>
                 <a href="#"><i className="fa fa-pencil" onClick={((e) => this.EditTime(e, key))}></i></a>&nbsp;&nbsp;
@@ -286,7 +307,7 @@ class TaxEditPage extends React.Component{
       return(
 
             <div className="content-wrapper">
-            <Breadcrum title="Edit Tax Type" titleRight='Dashboard' url='/dashboard' />
+            <Breadcrum title="Coupon Type" titleRight='Dashboard' url='/dashboard' />
             <SweetAlert
               dangerMode={true}
               showCancelButton={this.state.showCancelButton}
@@ -307,15 +328,20 @@ class TaxEditPage extends React.Component{
             <div className="box box-solid">
             <div className="overlay" show={isOverlay}><i className="fa fa-refresh fa-spin"></i></div>
               <div className="box-header with-border bg-warning">
-              <i className="fa fa-inr"></i>
-                <h3 className="box-title box-widget">Tax Type</h3>
+              <i className="fa fa-gift"></i>
+                <h3 className="box-title box-widget">Coupon Type List</h3>
               </div>
               <div className="box-body no-padding">
               <table className="table table-striped" style={{'font-size':'12px'}}>
                 <tbody><tr>
                   <th>#</th>
-                  <th style={{'white-space':'nowrap'}}>Tax Type</th>
-                  <th>Value</th>
+                  <th style={{'white-space':'nowrap'}}>Offer Name</th>
+                  <th>Coupon Code</th>
+                  <th>Coupon Type</th>
+                  <th>Coupon Value</th>
+                  <th>Valid From</th>
+                  <th>Valid End</th>
+                  <th>Offer Status</th>
                   <th>Status</th>
                   <th>Action</th>
                 </tr>
@@ -329,21 +355,47 @@ class TaxEditPage extends React.Component{
             <div className="box box-solid">
               <div className="box-header with-border">
                 <i className="fa fa-pencil" />
-                <h3 className="box-title">Add/Update Tax Type</h3>
-                <a href={"/taxedit"} className="pull-right btn btn-sm btn-danger"><i className="fa fa-plus"></i>&nbsp;Add New TaxType</a>
+                <h3 className="box-title">Add/Update Coupon Type</h3>
+                <a href={"/offer"} className="pull-right btn btn-sm btn-danger"><i className="fa fa-plus"></i>&nbsp;Add New Coupon</a>
               </div>
               {(isMsg)?(<div className={classstr}>{message}</div>):(<div></div>)}
               <form role="form" onSubmit={this.handleSubmit}  id="form-event">
                 <div className="box-body">
                     <div className={"form-group col-md-12"}>
-                        <dt>Tax Type Name</dt>
-                        <input type="text" id="tax_type" className="form-control"/>
+                        <dt>Coupon Name</dt>
+                        <input type="text" id="offer_name" className="form-control"/>
                         <input type="hidden" id="id" className="form-control"/>
                     </div>
                     <div className={"form-group col-md-12"}>
-                        <dt>Value (in %)<sup>*</sup></dt>
-                        <input type="number" id="value" className="form-control" />
+                        <dt>Coupon Code<sup>*</sup></dt>
+                        <input type="text" id="offer_code" className="form-control" />
                     </div>
+                    <div className={"form-group col-md-12"}>
+                        <dt>Offer Type</dt>
+                        <select className="form-control" id="offer_type">
+                        <option value="FLAT">FLAT</option>
+                        <option value="PERCENTAGE" selected="selected">PERCENTAGE</option>
+                        </select>
+                    </div>  
+                    <div className={"form-group col-md-12"}>
+                        <dt>Offer Value</dt>
+                        <input type="number" id="offer_value" className="form-control" />
+                    </div>  
+                    <div className={"form-group col-md-12"}>
+                        <dt>Offer Start Date</dt>
+                        <DatePicker id="valid_from"
+                            selected={this.state.startDate}
+                            onChange={this.handleChange1}
+                            style={{'border':'solid 1px #CCC'}}
+                        />
+                    </div>  
+                    <div className={"form-group col-md-12"}>
+                        <dt>Offer End Date</dt>
+                        <DatePicker id="valid_untill"
+                            selected={this.state.endDate}
+                            onChange={this.handleChange2}
+                        />
+                    </div>  
                     <div className={"form-group col-md-12"}>
                         <dt>Status</dt>
                         <select className="form-control" id="status">
@@ -376,4 +428,4 @@ class TaxEditPage extends React.Component{
     
 }
 
-export default TaxEditPage;
+export default OfferManagePage;
