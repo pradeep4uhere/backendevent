@@ -1,23 +1,31 @@
 {
   "files": {
-    "main.css": "/static/css/main.e2e5a450.chunk.css",
-    "main.js": "/static/js/main.70556ced.chunk.js",
-    "main.js.map": "/static/js/main.70556ced.chunk.js.map",
-    "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
-    "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
-    "static/css/2.9fd3dd7b.chunk.css": "/static/css/2.9fd3dd7b.chunk.css",
-    "static/js/2.70db21c3.chunk.js": "/static/js/2.70db21c3.chunk.js",
-    "static/js/2.70db21c3.chunk.js.map": "/static/js/2.70db21c3.chunk.js.map",
+    "main.css": "/static/css/main.f447d6ef.chunk.css",
+    "main.js": "/static/js/main.3132de58.chunk.js",
+    "main.js.map": "/static/js/main.3132de58.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.3e5d3667.js",
+    "runtime-main.js.map": "/static/js/runtime-main.3e5d3667.js.map",
+    "static/css/2.a74bab23.chunk.css": "/static/css/2.a74bab23.chunk.css",
+    "static/js/2.097a023a.chunk.js": "/static/js/2.097a023a.chunk.js",
+    "static/js/2.097a023a.chunk.js.map": "/static/js/2.097a023a.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.8c7e3f7da7750f278292762284f7d8b3.js": "/precache-manifest.8c7e3f7da7750f278292762284f7d8b3.js",
+    "precache-manifest.0b79215a41d44b06bb0b58a397e63580.js": "/precache-manifest.0b79215a41d44b06bb0b58a397e63580.js",
     "service-worker.js": "/service-worker.js",
-    "static/css/2.9fd3dd7b.chunk.css.map": "/static/css/2.9fd3dd7b.chunk.css.map",
-    "static/css/main.e2e5a450.chunk.css.map": "/static/css/main.e2e5a450.chunk.css.map",
+    "static/css/2.a74bab23.chunk.css.map": "/static/css/2.a74bab23.chunk.css.map",
+    "static/css/main.f447d6ef.chunk.css.map": "/static/css/main.f447d6ef.chunk.css.map",
+    "static/js/2.097a023a.chunk.js.LICENSE": "/static/js/2.097a023a.chunk.js.LICENSE",
     "static/media/UploadIcon.svg": "/static/media/UploadIcon.1cedb6e9.svg",
     "static/media/done.png": "/static/media/done.b546dfe6.png",
     "static/media/font-awesome.min.css": "/static/media/fontawesome-webfont.fee66e71.woff",
     "static/media/bootstrap.min.css": "/static/media/glyphicons-halflings-regular.fa277232.woff",
     "static/media/home.png": "/static/media/home.0d45ce66.png",
     "static/media/ionicons.min.css": "/static/media/ionicons.621bd386.svg"
-  }
+  },
+  "entrypoints": [
+    "static/js/runtime-main.3e5d3667.js",
+    "static/css/2.a74bab23.chunk.css",
+    "static/js/2.097a023a.chunk.js",
+    "static/css/main.f447d6ef.chunk.css",
+    "static/js/main.3132de58.chunk.js"
+  ]
 }

@@ -8,6 +8,7 @@ import React from 'react';
 import axios from 'axios'
 import Constants  from '../../../config/Constants'
 import Message from '../../../components/Message';
+import CKEditor from 'ckeditor4-react';
 import {$} from 'jquery';
 const urlStr = Constants.DESTINATION_ADD_URL;
 const token     = localStorage.getItem('token');
@@ -24,15 +25,21 @@ class AddDestinationForm extends React.Component{
             hasTError       : '',
             hasDesError     : '',
             hasDError       : '',
-            hasSError       : ''
+            hasSError       : '',
+            description     : '',
         };
         this.handleSubmit   = this.handleSubmit.bind(this);
+        this.handleChangeDescription  = this.handleChangeDescription.bind(this);
+    }
+
+    handleChangeDescription(changeEvent) {
+        this.setState({ description: changeEvent.editor.getData() });
     }
     /**********Login Form Handle********************/
     handleSubmit(event) {
         event.preventDefault();
         var title           = event.target.title.value;
-        var description     = event.target.description.value;
+        var description     = this.state.description;
         var altitude        = event.target.altitude.value;
         var climate         = event.target.climate.value;
         var population      = event.target.population.value;
@@ -157,9 +164,16 @@ class AddDestinationForm extends React.Component{
                     </div>
                     <div className={"form-group"+" "+hasDesError}>
                         <dt htmlFor="exampleInputPassword1">Description</dt>
-                        <textarea id="description" name="description" rows="10" cols="80"  className="form-control" placeholder="Enter Description of the destination">
+                        <CKEditor 
+                            id="description"  
+                            data={this.state.description}  
+                            type="classic"
+                            onChange={this.handleChangeDescription}
                             
-                        </textarea>
+                        />
+                        {/* <textarea id="description" name="description" rows="10" cols="80"  className="form-control" placeholder="Enter Description of the destination">
+                            
+                        </textarea> */}
                     </div>
                       {/* <div className="form-group">
                         <dt htmlFor="exampleInputFile">Destination Banner</dt>

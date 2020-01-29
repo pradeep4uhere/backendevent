@@ -25,7 +25,7 @@ class EditDestinationPage extends React.Component{
                 <Breadcrum title="Edit Destination" titleRight='All Destination List' url='alldestination' />
                     <section className="content">
                     <div className="row">
-                    <div className="col-md-12">
+                    <div className="col-md-6">
                         <DestinationEditForm id={this.props.id}/>
                     </div>
                     </div>

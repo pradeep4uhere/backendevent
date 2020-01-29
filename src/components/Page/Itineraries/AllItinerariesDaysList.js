@@ -173,9 +173,9 @@ class AllItinerariesDaysList extends React.Component{
                 {(isMsg)?(<div className={classstr}>{message}</div>):(<div></div>)}    
                 <div className="box box-info">
                 <div className="box-header with-border">
-                <h3 className="box-title">{titleName} Itinerary Days List</h3>
+                <h3 className="box-title">{titleName} Travel Days List</h3>
                 <div className="box-tools pull-right">
-                <a href={'/additineraryday?'+id} className="btn btn-box-tool btn-danger"><i className="fa fa-plus" />&nbsp;Add New Itinerary Day</a>
+                <a href={'/additineraryday?'+id} className="btn btn-box-tool btn-danger"><i className="fa fa-plus" />&nbsp;Add New Travel Day</a>
                 </div>
                 </div>
                 {/* /.box-header */}
@@ -186,8 +186,8 @@ class AllItinerariesDaysList extends React.Component{
                     <tr>
                         <th>SN</th>
                         <th>Itinerary Name</th>
-                        <th>Day</th>
                         <th>Place Name</th>
+                        <th>Day</th>
                         <th>Details</th>
                         <th>Days Image</th>
                         <th>Status</th>

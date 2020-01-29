@@ -88,6 +88,7 @@ class EventGalleryPage extends React.Component{
                 pictures: [],
                 ImageGallery:response.data.data.imagesList
             });
+            window.location.reload(); 
         }
         else
         {

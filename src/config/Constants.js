@@ -5,6 +5,7 @@ export const Constants = {
 	APP_SALT					: 'MdtKyGbnrGT3wzxgkCPRO+wwfBGrlhMwGuOHX6xyFE0=',
 	APP_FRONT					: 'http://192.168.0.181:5000/',
 	GENERAL_SETTING_URL			: AppUrl+'/general/setting',	
+	USER_TYPE_GET				: AppUrl+'/general/userdetailsview',	
 	GENERAL_SETTING_UPDATE_URL	: AppUrl+'/general/settingupdate',	
 	
 	//All API URL GOES HERE

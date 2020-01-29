@@ -347,7 +347,7 @@ class ItinerariesAddOnPage extends React.Component{
             <div className="box box-solid">
               <div className="box-header with-border">
                 <i className="fa fa-pencil" />
-                <h3 className="box-title">Add/Update Itinerary Addon</h3>
+                <h3 className="box-title">Add/Update Travel Addon</h3>
                 <a className="btn btn-danger btn-sm pull-right" href={'itinerariesaddon?'+this.state.itinerariesId}><i className="fa fa-plus"></i> Add New Addon</a>
               </div>
               {(isMsg)?(<div className={classstr}>{message}</div>):(<div></div>)}

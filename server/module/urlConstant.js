@@ -33,6 +33,7 @@ urlConstant = {
         EVENT_IAMGE_STATUS_API_POST         :   config.API_HOST_URL+'/updateeventstatusimage',
         EVENT_FEATURE_IAMGE_STATUS_API_POST :   config.API_HOST_URL+'/updateeventstatusfeatureimage',
         EVENT_DELETE_API_POST               :   config.API_HOST_URL+'/deleteevent',
+        USER_DETAILS_API                    :   config.API_HOST_URL+'/userdetailsview',
         
 
 

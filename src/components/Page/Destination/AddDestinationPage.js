@@ -24,7 +24,7 @@ class AddDestinationPage extends React.Component{
                 <Breadcrum title="Add Destination" titleRight="All Destination" url="alldestination" />
                     <section className="content">
                     <div className="row">
-                    <div className="col-md-12">
+                    <div className="col-md-6">
                         <AddDestinationForm/>
                     </div>
                     </div>

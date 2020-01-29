@@ -44,6 +44,7 @@ import EventTimingPage      from '../components/Page/Event/EventTimingPage';
 import SittingTypePage      from '../components/Page/SittingType/SittingTypePage';
 import SittingListPage      from '../components/Page/SittingType/SittingListPage';
 import SittingEditPage      from '../components/Page/SittingType/SittingEditPage';
+import UserEditPage         from '../components/Page/SittingType/UserEditPage';
 
 import PageListPage         from '../components/Page/PageListPage';
 import EditPagePage         from '../components/Page/StaticPage/EditPagePage';
@@ -110,6 +111,7 @@ class DashboardLayout extends React.Component{
               'SittingType'       : <SittingTypePage/>,
               'SittingList'       : <SittingListPage/>,
               'SittingEdit'       : <SittingEditPage id={id}/>,
+              'UserEditPage'      : <UserEditPage  id={id}/>,
               'PageList'          : <PageListPage/>,
               'EditPagePage'      : <EditPagePage id={id}/>,
               'ViedoListPage'     : <ViedoListPage/>, 

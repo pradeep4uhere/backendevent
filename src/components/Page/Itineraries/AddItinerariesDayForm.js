@@ -193,12 +193,13 @@ class AddItinerariesDayForm extends React.Component{
                 <form role="form" onSubmit={this.handleSubmit}  id="form-event">
                     <div className="box-body">
                     <div className={"form-group"+" "+hasTError}>
-                        <dt>Place Name</dt>
+                    <dt>Place Name</dt>
                         <input type="text" className="form-control" id="place" placeholder="Enter place name" /> 
                     </div>
                     <div className={"form-group"+" "+hasTError}>
+                        
                         <dt>Day Name</dt>
-                        <input type="text" className="form-control" id="title" placeholder="Enter event title" />
+                        <input type="text" className="form-control" id="title" placeholder="Enter day name" />
                         
                     </div>
                     <div className={"form-group"+" "+hasDesError}>

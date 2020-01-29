@@ -73,7 +73,7 @@ class LatestMemberList extends React.Component{
                     
                     var dataStr = <div><a href={"/userorder?"+val.id} title="View User Booking"><i className="fa fa-shopping-cart"></i></a> &nbsp; 
                     <a href="#" onClick={this.openModal} id={val.id+'|view'} title="View User Detail"><i className="fa fa-eye"></i></a> &nbsp; 
-                    <a title="Edit User" href="#" onClick={this.openModal} id={val.id+'|'+'edit'}><i className="fa fa-pencil"></i></a>  &nbsp; 
+                    <a title="Edit User" href={"/useredit?"+val.id} id={val.id+'|'+'edit'}><i className="fa fa-pencil"></i></a>&nbsp;
                     <a href="#" title="Delete User"><i className="fa fa-trash"></i></a></div>;
                     this.state.dataTable.rows[i].action = dataStr;
                     var statusStr = (val.status==1)?(<span className='badge bg-green' title="Active Itinerary" >Active</span>):(<span className='badge bg-red' title="InActive Itinerary">InActive</span>)
@@ -114,7 +114,6 @@ class LatestMemberList extends React.Component{
         this.setState({
               actiontype  : type
         });
-
         let optionItems = this.state.userList.map((val,i) =>{
                 if(val.id==userId){
                     this.setState({

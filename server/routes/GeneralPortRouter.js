@@ -41,6 +41,37 @@ const DELETE_TAXTYPE_API             = urlConstant.TAX_TYPE_DELETE_API;
 const GET_OFFER_API                  = urlConstant.GET_OFFER_API;
 const GET_OFFER_TYPE_UPDATE_API      = urlConstant.GET_OFFER_TYPE_UPDATE_API;
 const DELETE_OFFER_API               = urlConstant.DELETE_OFFER_TYPE_API;
+const GET_USER_LIST                  = urlConstant.USER_DETAILS_API;
+
+
+
+GeneralPortRouter.route('/userdetailsview').post(function (req, res) {
+    var token        	= req.body.token;
+    var id        	    = req.body.id;
+    var postData 		={
+        token		 : token,
+        id           : id
+    }
+    console.log(req.body); 
+    const options = {
+					    method: 'POST',
+					    uri: GET_USER_LIST,
+					    body: postData,
+						json: true,
+				        headers: {
+			            'Authorization': 'Bearer ' + token,
+				        },
+				    }
+    request(options)
+	    .then(function (response) {
+	        console.log(response)
+	        res.end(JSON.stringify(response));
+	    })
+	    .catch(function (err) {
+	        console.log(err)
+	})
+});
+
 
 
 

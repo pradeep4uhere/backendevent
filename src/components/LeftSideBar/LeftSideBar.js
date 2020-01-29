@@ -108,7 +108,7 @@ class LeftSideBar extends React.Component{
            
             
            
-            <li className={(((this.getUrlParams('setting') || this.getUrlParams('sittingtype') || this.getUrlParams('homepagebanner')))?("treeview active menu-open"):"treeview")}>
+            <li className={(((this.getUrlParams('setting') || this.getUrlParams('taxedit') || this.getUrlParams('offer') || this.getUrlParams('sittingtype') || this.getUrlParams('homepagebanner')))?("treeview active menu-open"):"treeview")}>
               <a href="#">
                 <i className="fa fa-gear" /> <span>Global Managment</span>
                 <span className="pull-right-container">

@@ -46,6 +46,7 @@ import EventTimingTab from '../components/EventTimingTab';
 import SittingType    from '../components/SittingType';
 import SittingList    from '../components/SittingList';
 import SittingEdit    from '../components/SittingEdit';
+import UserEdit       from '../components/UserEdit';
 
 import ViedoList      from '../components/ViedoList';
 import MembershipList from '../components/MembershipList';
@@ -152,6 +153,7 @@ render() {
               <Route path="/sittingtype" component={SittingType}  />
               <Route path="/sittinglist" component={SittingList}  />
               <Route path="/editsitting/:id?" component={SittingEdit}/>
+              <Route path="/useredit/:id?" component={UserEdit}/>
 
               <Route path="/eventlist" component={EventList}  />
               <Route path="/addevent" component={EventAdd}  />
